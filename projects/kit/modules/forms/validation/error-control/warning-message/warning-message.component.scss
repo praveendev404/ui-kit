@@ -1,0 +1,15 @@
+@use 'mixins' as *;
+
+.warning-message-container {
+    color: cssvar(color-2-normal);
+    margin-top: 7px;
+}
+
+.info-message-container {
+    color: cssvar(primary-text);
+    margin-top: 7px;
+
+    ::ng-deep svg {
+        stroke: cssvar(brand-base) !important;
+    }
+}

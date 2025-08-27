@@ -1,0 +1,17 @@
+<div class="row no-gutters w-100 my-2">
+    <lib-dropdown class="col" [(ngModel)]="selected" [items]="items" [placeholder]="'Select Fruit'" [clearable]="true"
+        label="Fruit" [multiple]="true" appendTo="body" groupBy="group" [labelRemovable]="true">
+    </lib-dropdown>
+</div>
+
+<pre>{{selected | json}}</pre>
+
+<h2>Grouped Dropdown with disabled state</h2>
+<div class="row no-gutters w-100 my-2">
+    <lib-dropdown class="col" [(ngModel)]="selected1" [items]="itemsWithDisableState" [placeholder]="'Select Fruit'"
+        [clearable]="true" label="Fruit" [multiple]="true" appendTo="body" groupBy="group" [labelRemovable]="true">
+    </lib-dropdown>
+</div>
+
+
+<pre>{{selected1 | json}}</pre>

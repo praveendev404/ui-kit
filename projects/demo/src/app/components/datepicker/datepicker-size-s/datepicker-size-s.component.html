@@ -1,0 +1,16 @@
+<div class="d-flex w-100" [formGroup]="formGroup">
+    <lib-datepicker
+        [dateWithTime]="true"
+        class="mr-25px mt-5px size-s"
+        [placeholder]="'Start date/time'"
+        formControlName="date"
+    >
+    </lib-datepicker>
+</div>
+<h3>Inline single</h3>
+<lib-datepicker
+    mode="inline-single"
+    [formControl]="date"
+    [withoutMaxDate]="true"
+>
+</lib-datepicker>

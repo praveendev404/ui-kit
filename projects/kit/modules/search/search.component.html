@@ -1,0 +1,25 @@
+<div
+    class="input-group search-box"
+    [style.width]="width + 'px !important'"
+    [style.float]="align"
+    [style.height]="height + 'px !important'"
+    (focusin)="isFocused = !isFocused"
+    (focusout)="setFocusWidthWithHover(false); isFocused = !isFocused"
+    (mouseover)="setFocusWidthWithHover(false)"
+    (mouseout)="setFocusWidthWithHover(true)"
+>
+    <span class="input-group-text" [style.height.px]="height">
+        <fa-icon icon="search" class="search-icon"></fa-icon>
+    </span>
+    <input
+        class="form-control border-left-0 border input"
+        type="search"
+        [placeholder]="placeholder"
+        [ngbTypeahead]="search"
+        [value]="value || ''"
+        (keyup)="onKeyUp($event)"
+        [style.height.px]="height"
+        [attr.data-test-id]="id"
+        [id]="id"
+    />
+</div>

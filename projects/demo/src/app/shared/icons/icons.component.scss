@@ -1,0 +1,34 @@
+.icon-item {
+    padding: 2px 8px;
+    font-size: 24px;
+    width: 42px;
+    color: #878787;
+}
+
+fa-icon {
+    color: #878787;
+}
+
+fa-icon.github {
+    background: currentColor;
+}
+
+.search-block {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+}
+
+.code {
+    padding-top: 6px;
+    width: 450px;
+    background-color: #f5f2f0;
+}
+
+.icon--dots {
+    font-size: 3px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

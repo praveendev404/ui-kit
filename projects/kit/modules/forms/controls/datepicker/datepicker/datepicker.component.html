@@ -1,0 +1,161 @@
+<label *ngIf="label" class="label" [class.disabled]="disabled"
+    >{{ label }}
+    <span *ngIf="isRequired" class="mandatory">*</span>
+</label>
+<div class="datepicker-wrapper" *ngIf="mode !== 'inline-range' && mode !== 'inline-single'">
+    <div
+        class="input-group custom-datepicker-group"
+        [class.disabled]="disabled"
+        [class.pristine]="pristine"
+    >
+        <input
+            #inputEl
+            [placeholder]="placeholder"
+            [readOnly]="!!rangeInputFormatter"
+            [ngClass]="ngControl?.valid ? 'ng-valid' : 'ng-invalid'"
+            class="form-control control"
+            [value]="
+                mode === 'single'
+                    ? dateString != ''
+                        ? (dateString | date: inputDatetimeFormat)
+                        : ''
+                    : rangeString
+            "
+            (change)="mode === 'single' && onInputChange($event)"
+            (input)="
+                mode === 'range' && inputRangeChanged($any($event.target).value)
+            "
+            [disabled]="disabled"
+        />
+        <div class="input-group-append" [style.height]="height">
+            <button
+                *ngIf="inputEl.value"
+                class="btn btn-link"
+                (click)="inputEl.value = ''; clearRange()"
+            >
+                <fa-icon class="fa icons font-13px" icon="times"></fa-icon>
+            </button>
+            <button
+                #datepickerButton
+                class="btn btn-link control mt-auto mb-auto"
+                [ngClass]="{ 'mr-5px': !dateWithTime }"
+                type="button"
+                #popover="ngbPopover"
+                [autoClose]="'outside'"
+                [container]="container"
+                popoverClass="datepicker-popover"
+                [ngbPopover]="mode === 'single' ? datepicker : dateRangePicker"
+                [animation]="false"
+                [placement]="mode === 'single' ? 'bottom' : 'auto'"
+                (hidden)="onPopoverHidden()"
+                (shown)="onPopoverShown()"
+            >
+                <fa-icon class="fa icons font-13px" icon="calendar"></fa-icon>
+            </button>
+            <button
+                *ngIf="dateWithTime"
+                class="btn btn-link control my-auto"
+                type="button"
+                [disabled]="_disabled"
+                #timePickerPopover="ngbPopover"
+                popoverClass="timepicker-popover"
+                [autoClose]="'outside'"
+                [container]="container"
+                [popoverTitle]="timepickerPopoverTitle"
+                [ngbPopover]="timepicker"
+                (hidden)="onPopoverHidden()"
+                (shown)="onPopoverShown()"
+            >
+                <fa-icon
+                    class="fa icons icon-clock font-12px"
+                    icon="clock"
+                    [class.disabled]="_disabled"
+                ></fa-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="mode ==='inline-range'" class="datepicker-popover">
+    <ng-template [ngTemplateOutlet]="dateRangePicker"></ng-template>
+</div>
+<div *ngIf="mode ==='inline-single'" class="datepicker-popover">
+    <ng-template [ngTemplateOutlet]="datepicker"></ng-template>
+</div>
+<ng-template #datepicker>
+    <ngb-datepicker
+        [startDate]="this.startDate || getTodayNgbDate()"
+        [navigation]="'arrows'"
+        [maxDate]="!withoutMaxDate ? getTodayNgbDate() : null"
+        [ngModel]="datetime"
+        (navigate)="handleNavigate($event)"
+        (ngModelChange)="onDateChange($event)"
+    >
+    </ngb-datepicker>
+</ng-template>
+<ng-template #dateRangePicker>
+    <ngb-datepicker
+        #dp
+        class="date-range-picker-popup"
+        [startDate]="range.fromDate || getTodayNgbDate()"
+        [navigation]="'none'"
+        [ngModel]="datetime"
+        [dayTemplate]="dayTmpl"
+        [displayMonths]="2"
+        (dateSelect)="handleDateRangeSelect($event)"
+    >
+        <ng-template ngbDatepickerContent>
+            <lib-datepicker-range-dialog
+                [dp]="dp"
+                class="d-flex"
+                [leftTemplate]="
+                    leftRangeContent ? leftRangeContent.templateRef : null
+                "
+                [rightTemplate]="
+                    rightRangeContent ? rightRangeContent.templateRef : null
+                "
+            ></lib-datepicker-range-dialog>
+        </ng-template>
+    </ngb-datepicker>
+    <ng-template
+        #dayTmpl
+        let-date
+        let-focused="focused"
+        let-selected="selected"
+    >
+        <div
+            class="custom-day"
+            [class.text-white]="selected"
+            [class.focused]="focused"
+            [class.range]="range.isRange(date)"
+            [class.from-date]="range.isFrom(date)"
+            [class.to-date]="range.isTo(date)"
+            [class.need-hover]="range.needHover()"
+            [class.outside]="range.isOutside(date, dp)"
+            [class.faded]="range.isHovered(date) || range.isInside(date)"
+            (mouseenter)="range.hoveredDate = date"
+            (mouseleave)="range.hoveredDate = null"
+        >
+            {{ date.day }}
+        </div>
+    </ng-template>
+</ng-template>
+
+<ng-template #timepicker>
+    <ngb-timepicker
+        [seconds]="seconds"
+        [meridian]="meridian"
+        [hourStep]="hourStep"
+        [minuteStep]="minuteStep"
+        [secondStep]="secondStep"
+        [ngModel]="datetime"
+        (ngModelChange)="onTimeChange($event)"
+    >
+    </ngb-timepicker>
+</ng-template>
+
+<ng-template #timepickerPopoverTitle>
+    <div class="timepicker-popover-title">
+        TIME
+    </div>
+</ng-template>

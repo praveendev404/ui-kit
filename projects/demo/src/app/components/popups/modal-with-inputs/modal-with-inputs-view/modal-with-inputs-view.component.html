@@ -1,0 +1,36 @@
+<div class="modal-main-container d-block">
+    <lib-modal-header>
+        <span>Modal With Inputs</span>
+    </lib-modal-header>
+
+    <div class="modal-body font-12px">
+        <lib-input
+            class="mb-20px"
+            [label]="'Name'"
+            [placeholder]="'Enter Your Name'"
+            [value]="''"
+        ></lib-input>
+
+        <lib-input
+            class="mb-20px"
+            [label]="'Email'"
+            [value]="''"
+            [placeholder]="'Enter Your Email'"
+        ></lib-input>
+    </div>
+
+    <div class="modal-footer">
+        <button
+            class="btn btn-secondary font-11px"
+            (click)="activeModal.dismiss()"
+        >
+            Cancel
+        </button>
+        <button
+            class="btn btn-primary font-11px ml-25px"
+            (click)="activeModal.dismiss()"
+        >
+            Confirm
+        </button>
+    </div>
+</div>

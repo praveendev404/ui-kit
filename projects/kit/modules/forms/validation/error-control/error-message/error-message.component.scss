@@ -1,0 +1,10 @@
+@use 'mixins' as *;
+
+.error-message-container {
+    color: var(--da-error-base);
+    margin-top: 3px;
+    margin-bottom: 3px;
+    font-size: 10px;
+    line-height: 14px;
+    font-style: italic;
+}

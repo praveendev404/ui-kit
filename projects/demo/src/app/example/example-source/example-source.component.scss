@@ -1,0 +1,52 @@
+@use 'mixins' as *;
+
+.nav {
+    font-size: 80%;
+    padding: 0.5rem 1.25rem 0 0;
+
+    .nav-link {
+        padding-left: 0;
+        padding-right: 0;
+        margin-right: 30px;
+
+        &.active {
+            color: cssvar(primary-text);
+            background-color: transparent;
+            border-bottom: none;
+        }
+
+        &:not(.active) {
+            color: cssvar(secondary-text-and-icons);
+            &:hover {
+                color: cssvar(primary-text);
+            }
+        }
+    }
+}
+
+.source-container {
+    display: flex;
+    padding-bottom: 0.25rem;
+    //margin-bottom: 1rem;
+
+    span {
+        flex-grow: 1;
+    }
+
+    .toggle-code svg {
+        vertical-align: middle;
+        fill: #28a745;
+    }
+
+    &:hover {
+        & > .title-fragment {
+            opacity: 1;
+        }
+    }
+}
+
+.card {
+    border: none;
+    min-width: fit-content;
+    width: 100%;
+}

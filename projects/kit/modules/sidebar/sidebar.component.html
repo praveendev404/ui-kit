@@ -1,0 +1,20 @@
+<div class="content-wrapper">
+    <section>
+        <ng-content></ng-content>
+    </section>
+</div>
+<div>
+    <div class="resize-button-wrapper">
+        <button
+            #button
+            class="resize-button btn btn-secondary"
+            (click)="expanded.set(!expanded()); button.blur()"
+            [ngbTooltip]="tooltipText()"
+            placement="right"
+            tooltipClass="sidebar-resize-tooltip"
+        >
+            <fa-icon icon="open"></fa-icon>
+            <span class="resize-button-zone"></span>
+        </button>
+    </div>
+</div>

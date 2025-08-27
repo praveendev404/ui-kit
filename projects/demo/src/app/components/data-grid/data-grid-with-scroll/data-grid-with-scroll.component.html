@@ -1,0 +1,15 @@
+<lib-data-grid
+    [dataSource]="gridData"
+    [columns]="gridColumns"
+    [bodyHeight]="'200px'"
+    [sticky]="true"
+    [usePerfectScrollbar]="true"
+>
+    >
+    <ng-template rowTemplate let-data="item">
+        <td [style.width]="gridColumns[0].width">
+            {{ data.headerName }}
+        </td>
+        <td [style.width]="gridColumns[1].width">{{ data.value }}</td>
+    </ng-template>
+</lib-data-grid>

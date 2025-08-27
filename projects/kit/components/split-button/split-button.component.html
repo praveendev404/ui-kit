@@ -1,0 +1,84 @@
+<div #containerEl>
+    <button
+        class="btn"
+        [ngClass]="{
+            'btn-primary': isPrimary && !isLink,
+            'btn-secondary': !isPrimary && !isLink,
+            'btn-link py-0': isLink,
+            'size-s': sizeS,
+            'size-l': sizeL
+        }"
+        *ngIf="items?.length === 1 && !dropdownMode"
+        (click)="itemClick.emit(items[0])"
+        [disabled]="items[0].disabled || disabled"
+    >
+        <ng-container
+            *ngTemplateOutlet="
+                itemTemplate || defaultItem;
+                context: { item: items[0], items: items }
+            "
+        ></ng-container>
+    </button>
+    <div
+        #element
+        #dropdown="ngbDropdown"
+        *ngIf="dropdownMode || items?.length > 1"
+        ngbDropdown
+        [placement]="placement"
+        display="dynamic"
+        (openChange)="handleOpen(element, dropdown)"
+        [container]="container"
+    >
+        <button
+            #toggle
+            ngbDropdownToggle
+            [disabled]="!items || !items.length || disabled"
+            class="btn"
+            [ngClass]="{
+                'btn-primary': isPrimary && !isLink,
+                'btn-secondary': !isPrimary && !isLink,
+                'btn-link py-0': isLink,
+                'size-s': sizeS,
+                'size-l': sizeL,
+                'btn-icon': isIcon
+            }"
+            (click)="toggle.blur()"
+        >
+            <span *ngIf="buttonText && !isIcon" class="button-text">{{ buttonText }}</span>
+            <fa-icon
+                *ngIf="buttonIcon && !isIcon"
+                class="fa chevron-icon"
+                [icon]="buttonIcon"
+            ></fa-icon>
+            <fa-icon
+                class="fa chevron-icon"
+                [class.chevron-icon-along]="isIcon"
+                [icon]="isIcon ? buttonIcon : dropdown.isOpen() ? 'chevron-up' : 'chevron-down'"
+            ></fa-icon>
+        </button>
+        <ul class="pt-0 pb-0 dropdown-list" ngbDropdownMenu>
+            <ng-content></ng-content>
+            <li
+                class="cursor-pointer dropdown-item split-button-item body1 pt-2 pb-2 pl-3 pr-3"
+                *ngFor="let item of items"
+                [class.disabled]="!!item.disabled"
+                (click)="handleClick(item)"
+            >
+                <ng-container
+                    *ngTemplateOutlet="
+                        itemTemplate || defaultItem;
+                        context: { item: item, items: items }
+                    "
+                ></ng-container>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<ng-template #defaultItem let-item="item">
+    <fa-icon *ngIf="item.icon"
+        class="fa mr-5px"
+        [icon]="item.icon"
+    ></fa-icon>
+    {{ item.label }}
+</ng-template>

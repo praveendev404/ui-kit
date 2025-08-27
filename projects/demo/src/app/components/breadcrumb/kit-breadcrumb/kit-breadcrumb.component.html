@@ -1,0 +1,40 @@
+<lib-dropdown
+    class="d-block mb-2"
+    label="Breadcrumb mode"
+    [(ngModel)]="mode"
+    [items]="[
+        { label: 'arrow', value: 'arrow' },
+        { label: 'bootstrap', value: 'bootstrap' },
+        { label: 'pace', value: 'pace' },
+    ]"
+>
+</lib-dropdown>
+
+<lib-breadcrumb [mode]="$any(mode)">
+    <ng-template libBreadcrumb (breadcrumbClick)="handleClick()">
+        Element with handler
+    </ng-template>
+    <ng-template libBreadcrumb link="/components/buttons">
+        Buttons
+    </ng-template>
+    <ng-template libBreadcrumb link="/components/cards">
+        Cards
+    </ng-template>
+    <ng-template libBreadcrumb link="/components/breadcrumb">
+        Breadcrumb
+    </ng-template>
+</lib-breadcrumb>
+
+<h3>Without router</h3>
+
+<lib-breadcrumb [mode]="$any(mode)">
+    <ng-template libBreadcrumb link="/components/buttons">
+        Buttons
+    </ng-template>
+    <ng-template libBreadcrumb>
+        Dummy element
+    </ng-template>
+    <ng-template libBreadcrumb active="true">
+        Without router (active)
+    </ng-template>
+</lib-breadcrumb>

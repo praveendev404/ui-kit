@@ -1,0 +1,21 @@
+<nav *ngIf="itemsVm?.length">
+    <a
+        *ngFor="let item of itemsVm; let i = index"
+        [class.switch-active-item]="viewSelector === i"
+        class="text-truncate"
+        [ngbTooltip]="item.title"
+        container="body"
+        [ngStyle]="{ width: item.widthPercent + '%' }"
+        (click)="changeView(i)"
+    >
+        {{ item.title }}
+    </a>
+    <div
+        class="slider"
+        [ngStyle]="{
+            width:
+                'calc(' + itemsVm[viewSelector].widthPercent + '%' + ' + 2px)',
+            left: itemsVm[viewSelector].leftPositionPercent + '%'
+        }"
+    ></div>
+</nav>

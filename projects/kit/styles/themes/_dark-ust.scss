@@ -1,0 +1,32 @@
+@include cssvars(
+    (
+        body-color: #fff,
+        title: #fff,
+        primary-text: #dedede,
+        secondary-text-and-icons: #b2b1b1,
+        disable: #4f4c4d,
+        border-and-dividers: #3e3a3b,
+        blackout: rgba(0, 0, 0, 0.3),
+        background: #231f20,
+        cards-and-blocks: #2c2829,
+        table-header: #343131,
+        table-header-new: #343131,
+        checkbox-background: rgba(0, 0, 0, 0.3),
+        checkbox-background-disabled: #2c2829,
+        checkbox-blackout: #2c2829,
+        radio-disable: #4f4c4d,
+        toggle-off-background: rgba(0, 0, 0, 0.3),
+        toggle-off-circle: #4f4c4d,
+        brand-12: rgba(0, 151, 171, 0.12),
+        brand-20: rgba(0, 151, 171, 0.2),
+        brand-disabled: #4cb6c4,
+        brand-base: #0097ab,
+        brand-hover: #038da0,
+        brand-active: #077f8f,
+        critical-base: #ab644f,
+        tile-gray: rgba(0, 0, 0, 0.3),
+        tile-white: rgba(255, 255, 255, 0.12),
+        grid-no-rows-layout-data: #ffffff
+    ),
+    "dark-ust"
+);

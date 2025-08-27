@@ -1,0 +1,9 @@
+:host {
+    display: block;
+    height: 100%;
+    position: relative;
+    background: var(--da-background);
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: transform, margin-left, margin-right;
+}

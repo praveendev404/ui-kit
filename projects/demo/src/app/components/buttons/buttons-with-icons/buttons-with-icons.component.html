@@ -1,0 +1,73 @@
+<div class="d-flex flex-wrap">
+    <button class="btn btn-primary mr-20px">
+        <fa-icon icon="plus" class="fa mr-5px"></fa-icon>
+        Add Action
+    </button>
+
+    <lib-split-button
+        class="mr-20px"
+        buttonText="Actions"
+        [items]="buttonActions"
+        [container]="'body'"
+    >
+    </lib-split-button>
+
+    <lib-split-button
+        class="mr-20px"
+        [buttonIcon]="cogIcon"
+        [items]="buttonActions"
+        [container]="'body'"
+    >
+    </lib-split-button>
+
+    <lib-split-button
+        class="mr-20px"
+        [buttonIcon]="cogIcon"
+        [items]="buttonActions"
+        [container]="'body'"
+    >
+        <div class="h3 m-2">Additional content</div>
+        <ng-template let-item="item">
+            <div>{{ item.label }}</div>
+        </ng-template>
+    </lib-split-button>
+
+    <button type="button" class="btn btn-primary cluster-button mr-20px">
+        <fa-icon icon="facOpenFolderO" class="fa mr-1"></fa-icon>
+        Browse
+    </button>
+
+    <button class="btn btn-primary mr-20px">
+        Add Action
+        <fa-icon icon="plus" class="fa ml-5px"></fa-icon>
+    </button>
+
+    <button class="btn btn-secondary mr-20px">
+        <fa-icon icon="plus" class="fa mr-5px"></fa-icon>
+        Add Action
+    </button>
+
+    <lib-split-button
+        class="mr-20px"
+        buttonText="Actions"
+        [items]="buttonActions"
+        [isPrimary]="false"
+        [container]="'body'"
+    >
+    </lib-split-button>
+
+    <button class="btn btn-link mr-20px">
+        <fa-icon class="font-12px mr-5px" icon="plus"></fa-icon>
+        Add New
+    </button>
+
+    <button class="btn btn-success btn-icon mr-20px">
+        <fa-icon icon="plusCircle"></fa-icon>
+    </button>
+    <button class="btn btn-success btn-icon mr-20px">
+        <fa-icon icon="check"></fa-icon>
+    </button>
+    <button class="btn btn-danger btn-icon">
+        <fa-icon icon="minusCircle"></fa-icon>
+    </button>
+</div>

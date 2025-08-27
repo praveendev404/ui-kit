@@ -1,0 +1,51 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.three-dot-btn {
+    width: 32px;
+}
+
+.return-button {
+    background-color: cssvar(brand-12);
+    cursor: pointer;
+}
+
+.hide-divider {
+    border-top: 0 !important;
+    margin: 0;
+}
+
+.first-group {
+    cursor: default !important;
+}
+
+.group-name {
+    line-height: 16px;
+    padding: 0.75rem 0;
+}
+
+.dropdown-item {
+    font-size: 12px;
+    padding-left: 0;
+    line-height: 16px;
+    color: cssvar(primary-text);
+}
+
+.dropdown-item.disabled {
+    color: cssvar(disable) !important;
+}
+
+::ng-deep .treelike-menu-scrollbar .ps-content {
+    padding: 0.5rem 0;
+}
+
+.return-button,
+.dropdown-item {
+    &:active {
+        background: cssvar(brand-20);
+    }
+}

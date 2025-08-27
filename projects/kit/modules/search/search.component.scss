@@ -1,0 +1,104 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.search-box {
+    background-color: cssvar(cards-and-blocks);
+    height: inherit;
+
+    .input-group-text,
+    .border {
+        border-color: cssvar(border-and-dividers) !important;
+    }
+
+    .input-group-text,
+    .form-control {
+        background-color: cssvar(cards-and-blocks);
+        color: cssvar(primary-text);
+    }
+
+    .input-group-text {
+        height: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        padding: 0 4px 0 10px;
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+.btn-group .btn:not(:last-child) {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 0 15px 0 15px;
+    height: 1.6rem;
+}
+
+.btn-group > .btn:not(:first-child) {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 0 15px 0 15px;
+    height: 1.6rem;
+}
+
+.search-icon {
+    color: cssvar(brand-base);
+}
+
+.input {
+    height: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 0 10px 0 4px;
+
+    &:focus,
+    &:active {
+        outline: 0;
+        box-shadow: none;
+    }
+    &::placeholder {
+        color: #c8c8c8;
+    }
+
+    &::-webkit-search-cancel-button {
+        opacity: 0.7;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+.input-group {
+    border-radius: 4px;
+    &:focus-within {
+        border: $control-focus-border-size solid cssvar(brand-20);
+        margin: 0 -#{$control-focus-border-size - $control-normal-border-size};
+        width: calc(
+            100% + 2 * #{$control-focus-border-size -
+                $control-normal-border-size}
+        );
+    }
+
+    &:focus-within,
+    &:active,
+    &:hover {
+        .input-group-text,
+        .form-control {
+            height: calc(
+                100% - #{$control-normal-border-size +
+                    $control-normal-border-size}
+            ) !important;
+            border: 0 transparent !important;
+            margin-top: $control-normal-border-size; // fix jumping icons;
+        }
+    }
+
+    &:active,
+    &:hover {
+        margin: 0 !important;
+        width: 100% !important;
+        border: $control-normal-border-size cssvar(brand-base) solid !important;
+    }
+}

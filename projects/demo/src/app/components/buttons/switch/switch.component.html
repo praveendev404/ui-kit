@@ -1,0 +1,26 @@
+<div class="switch-button">
+    <nav class="mt-4 mb-20px">
+        <a
+            (click)="changeSwitchView(1)"
+            [class.switch-active-item]="switchViewSelector == 1"
+        >
+            1 Option
+        </a>
+        <a
+            (click)="changeSwitchView(2)"
+            [class.switch-active-item]="switchViewSelector == 2"
+        >
+            2 Option
+        </a>
+        <div
+            [ngClass]="
+                'slider ' +
+                (switchViewSelector == 1
+                    ? 'slider-option1'
+                    : switchViewSelector == 2
+                    ? 'slider-option2'
+                    : '')
+            "
+        ></div>
+    </nav>
+</div>

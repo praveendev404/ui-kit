@@ -1,0 +1,18 @@
+<ng-container *ngIf="obsWithReload$ | obsWithStatus | async as dataStream">
+    <div *ngIf="dataStream.loading" [ngClass]="cssClass" class="h-100 flex-grow-1 align-items-center justify-content-center">
+        <ng-container *ngTemplateOutlet="loader ? loader.template : defaultLoader"></ng-container>
+    </div>
+    <ng-container *ngIf="dataStream.value">
+        <ng-container *ngTemplateOutlet="content.template; context: { data: dataStream.value }"> </ng-container>
+    </ng-container>
+    <div *ngIf="dataStream.error" class="h-100 d-flex justify-content-center align-items-center flex-column" [ngClass]="errorCssClass">
+        <span class="error-text">
+            {{ isBoolean(dataStream.error) ? errorText : dataStream.error || errorText }}
+        </span>
+        <button class="btn btn-sm btn-primary mt-3" (click)="handleReload()">Reload</button>
+    </div>
+</ng-container>
+
+<ng-template #defaultLoader>
+    <lib-spinner></lib-spinner>
+</ng-template>

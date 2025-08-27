@@ -1,0 +1,35 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "baseUrl": "./",
+      "outDir": "./dist/out-tsc",
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "declaration": false,
+      "experimentalDecorators": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "importHelpers": true,
+      "target": "ES2022",
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "lib": [
+        "ES2022",
+        "dom"
+      ],
+      "paths": {
+        "@dagility-ui/kit": [
+          "projects/kit/index"
+        ],
+        "@dagility-ui/kit/icons": [
+          "projects/kit/icons/index"
+        ]
+      },
+      "useDefineForClassFields": false
+    },
+    "angularCompilerOptions": {
+        "fullTemplateTypeCheck": true,
+        "strictInjectionParameters": true
+    }
+}

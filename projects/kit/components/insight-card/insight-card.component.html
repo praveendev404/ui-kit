@@ -1,0 +1,14 @@
+<div class="body1">{{ title }}</div>
+<div class="mt-2">
+    <ng-container *ngIf="!loading">
+        <span class="title2">
+        {{ value }}
+        </span>
+        <span class="body1 ml-1" *ngIf="unit">{{ unit }}</span>
+    </ng-container>
+
+    <span *ngIf="loading" class="title2">
+        <lib-loader type="white" class="d-inline-block"></lib-loader>
+         <span>&nbsp;</span>
+    </span>
+</div>

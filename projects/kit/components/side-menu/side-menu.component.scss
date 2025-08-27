@@ -1,0 +1,135 @@
+@use 'mixins' as *;
+
+:host {
+    display: block;
+}
+
+.side-menu {
+    background-color: cssvar(cards-and-blocks);
+}
+
+.side-menu-overlay {
+    width: 50px;
+    height: inherit;
+    display: none;
+    z-index: 10;
+}
+
+.left-40px {
+    left: -40px;
+}
+
+.hamburger-menu {
+    margin-top: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 2px 0 8px rgb(0 0 0 / 15%);
+
+    &:before {
+        position: relative;
+        top: -10px;
+        left: 5px;
+        padding-left: 5px;
+    }
+}
+
+aside {
+    z-index: 10;
+    flex-shrink: 0;
+    overflow: hidden;
+    height: inherit;
+    top: 0;
+    width: 200px;
+    padding-bottom: 20px;
+    border-right: 1px solid cssvar(border-and-dividers);
+    border-bottom: 1px solid cssvar(border-and-dividers);
+}
+
+.has-search {
+    height: calc(100% - 25px);
+}
+
+.side-menu-item {
+    position: relative;
+    display: block;
+    line-height: 38px;
+    padding: 0 5px 0 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border: 3px solid transparent;
+    cursor: pointer;
+
+    .children-container > & {
+        padding-left: 40px;
+
+        .children-container > & {
+            padding-left: 60px !important;
+
+            .children-container > & {
+                padding-left: 80px !important;
+            }
+        }
+    }
+
+    .chevron-icon {
+        margin-left: auto;
+        margin-right: 15px;
+        font-size: 16px !important;
+    }
+
+    .chevron-icon--right {
+        font-size: 10px !important;
+    }
+}
+
+.side-menu-item.active:not(.side-menu-item-parent) {
+    font-weight: 600;
+}
+
+.side-menu-item:hover,
+.side-menu-item.active:not(.side-menu-item-parent) {
+    color: cssvar(primary-text);
+    background: cssvar(brand-12);
+    border-color: cssvar(brand-20);
+
+    .side-menu-item.active:before {
+        content: "";
+    }
+}
+
+.side-menu-item:focus {
+    outline: none;
+}
+
+.chevron-down::after,
+.chevron-right::after {
+    color: cssvar(secondary-text-and-icons);
+    cursor: pointer;
+    content: "\f107";
+    font: normal normal normal 16px/1 "FontAwesome", sans-serif;
+}
+
+.chevron-right::after {
+    content: "\f105";
+}
+
+.height-unset {
+    height: unset !important;
+}
+
+@media (max-width: 1000px) {
+    :host {
+        width: 10px !important;
+    }
+
+    .side-menu-overlay {
+        display: block;
+    }
+
+    aside {
+        display: none;
+        position: relative;
+    }
+}

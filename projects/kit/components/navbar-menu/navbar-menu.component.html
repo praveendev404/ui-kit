@@ -1,0 +1,156 @@
+<div class="navbar-nav-scroll d-flex">
+    <ng-container *ngIf="menuItems; else observableDataTemplate">
+        <ng-template
+            [ngTemplateOutlet]="collapsedTmpl"
+            [ngTemplateOutletContext]="{ $implicit: menuItems }"
+        >
+        </ng-template>
+
+        <ul class="navbar-nav flex-row">
+            <li
+                class="nav-item"
+                *ngFor="let item of menuItems; let i = index"
+                id="{{ i }}"
+            >
+                <ng-template
+                    [ngTemplateOutlet]="itemTemplate"
+                    [ngTemplateOutletContext]="{ $implicit: item }"
+                >
+                </ng-template>
+            </li>
+        </ul>
+    </ng-container>
+
+    <ng-template #observableDataTemplate>
+        <ng-container *ngIf="menuItems$ | async as items">
+            <ng-template
+                [ngTemplateOutlet]="collapsedTmpl"
+                [ngTemplateOutletContext]="{ $implicit: items }"
+            >
+            </ng-template>
+
+            <ul class="navbar-nav flex-row">
+                <li
+                    class="nav-item"
+                    *ngFor="let item of items; let k = index"
+                    id="{{ k }}"
+                >
+                    <ng-template
+                        [ngTemplateOutlet]="itemTemplate"
+                        [ngTemplateOutletContext]="{ $implicit: item }"
+                    >
+                    </ng-template>
+                </li>
+            </ul>
+        </ng-container>
+    </ng-template>
+</div>
+
+<ng-template #itemTemplate let-item>
+    <a
+        *ngIf="
+            !item.specialItem && (item.active$ ? (item.active$ | async) : true)
+        "
+        class="nav-link"
+        [ngClass]="{ 'link-without-pic': !item.image && !item.icon }"
+        [routerLinkActive]="['active']"
+        [routerLink]="[item.routerLink]"
+    >
+        <div class="d-flex flex-column">
+            <div
+                *ngIf="item.icon || item.image"
+                class="row no-gutters justify-content-center align-content-center"
+                [style.height.px]="18"
+            >
+                <fa-icon
+                    *ngIf="item.icon && !item.image"
+                    class="fa-icon font-16px"
+                    [icon]="item.icon"
+                ></fa-icon>
+                <span
+                    *ngIf="item.image && !item.icon"
+                    class="header-item-image"
+                    [innerHTML]="item.image | safeHtml: 'html'"
+                >
+                </span>
+            </div>
+            <div class="row no-gutters font-12px">
+                <span>
+                    {{ item.label }}
+                </span>
+            </div>
+        </div>
+        <ng-container *ngIf="navbarMenuItemAdditionalContent">
+            <ng-template
+                [ngTemplateOutlet]="navbarMenuItemAdditionalContent.template"
+                [ngTemplateOutletContext]="{
+                    $implicit: item
+                }"
+            ></ng-template>
+        </ng-container>
+    </a>
+    <ng-template
+        *ngIf="
+            item.specialItem && (item.active$ ? (item.active$ | async) : true)
+        "
+        [ngTemplateOutlet]="navbarMenuSpecialItemsDirective.template"
+        [ngTemplateOutletContext]="{ $implicit: item }"
+    ></ng-template>
+</ng-template>
+
+<ng-template #collapsedTmpl let-items>
+    <div
+        *ngIf="collapsed"
+        class="dropdown collapsed-menu"
+        ngbDropdown
+        container="body"
+        placement="bottom-left"
+        display="dynamic"
+    >
+        <a
+            class="hamburger-menu dropdown-button"
+            aria-label="Hide Sidebar"
+            id="collapseDropdown"
+            ngbDropdownToggle
+        ></a>
+        <div aria-labelledby="navbarAditionDropdown" ngbDropdownMenu>
+            <ng-container *ngFor="let menu of items">
+                <a
+                    *ngIf="
+                        !menu.specialItem &&
+                        (menu.active$ ? (menu.active$ | async) : true)
+                    "
+                    [routerLink]="menu.routerLink"
+                    class="dropdown-item collapsed-item cursor-pointer"
+                >
+                    <fa-icon
+                        *ngIf="menu.icon"
+                        class="fa-icon pt-1"
+                        [style.height.px]="16"
+                        [icon]="menu.icon"
+                    ></fa-icon>
+                    <span
+                        *ngIf="menu.image && !menu.icon"
+                        [style.margin-right.px]="12"
+                        [style.height.px]="16"
+                        [innerHTML]="menu.image | safeHtml: 'html'"
+                    >
+                    </span>
+                    <div>
+                        {{ menu.label }}
+                    </div>
+                </a>
+                <ng-template
+                    *ngIf="
+                        menu.specialItem &&
+                        (menu.active$ ? (menu.active$ | async) : true)
+                    "
+                    [ngTemplateOutlet]="
+                        navbarMenuSpecialItemsDirective.template
+                    "
+                    [ngTemplateOutletContext]="{ $implicit: menu }"
+                ></ng-template>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>

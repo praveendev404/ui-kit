@@ -1,0 +1,54 @@
+{
+    "name": "@dagility-ui/kit",
+    "version": "19.0.1",
+    "engines": {
+        "npm": ">=8.0.0 <12.0.0"
+    },
+    "engineStrict": true,
+    "exports": {
+        ".": {
+            "sass": "./styles/_styles.scss"
+        },
+        "./styles/mixins": {
+            "sass": "./styles/_mixins.scss"
+        },
+        "./styles/variables": {
+            "sass": "./styles/_variables.scss"
+        }
+    },
+    "peerDependencies": {
+        "@angular/common": ">=11.0.2 < 19",
+        "@angular/animations": ">=11.0.2 < 19",
+        "@angular/core": ">=11.0.2 < 19",
+        "@angular/forms": ">=11.0.2 < 19",
+        "@angular/cdk": ">=13 < 19",
+        "rxjs": "6.0.0 - 8.x",
+        "@ng-bootstrap/ng-bootstrap": "^11.0.1",
+        "@ng-select/ng-select": "^10.0.4",
+        "perfect-scrollbar-angular": "^13.0.1",
+        "@fortawesome/free-solid-svg-icons": "^5.9.0",
+        "@fortawesome/angular-fontawesome": "~0.10.2",
+        "@fortawesome/fontawesome-svg-core": "^1.2.19",
+        "open-sans-fonts": "^1.5.1",
+        "bootstrap": "^4.6.0",
+        "font-awesome": "^4.7.0",
+        "ngx-toastr": "^15.2.0",
+        "keycloak-js": "^18.0.1"
+    },
+    "dependencies": {
+        "tslib": "^2.0.0",
+        "@angular/cdk": "~13",
+        "@ng-bootstrap/ng-bootstrap": "^11.0.1",
+        "@ng-select/ng-select": "^10.0.4",
+        "perfect-scrollbar-angular": "^13.0.1",
+        "@fortawesome/free-solid-svg-icons": "^5.9.0",
+        "@fortawesome/angular-fontawesome": "~0.10.2",
+        "@fortawesome/fontawesome-svg-core": "^1.2.19",
+        "open-sans-fonts": "^1.5.1",
+        "bootstrap": "^4.6.0",
+        "font-awesome": "^4.7.0",
+        "ngx-toastr": "^15.2.0",
+        "keycloak-js": "^18.0.1"
+    },
+    "schematics": "./schematics/collection.json"
+}

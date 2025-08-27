@@ -1,0 +1,13 @@
+<div class="trigger">
+    <div class="trigger-button" [ngClass]="{ 'checked': value, 'disabled': disabled }" (click)="onCheck()">
+        <div *ngIf="value && type === 'text'" class="trigger-label-on">ON</div>
+        <fa-icon *ngIf="value && type === 'icon'" icon="simpleCheck" [style.fontSize.px]="14" class="d-flex trigger-label-on"></fa-icon>
+        <div class="trigger-button-circle"></div>
+        <div *ngIf="!value && type === 'text'" class="trigger-label-off">OFF</div>
+        <fa-icon *ngIf="!value && type === 'icon'" icon="facDelete" [style.fontSize.px]="14" class="d-flex trigger-label-off"></fa-icon>
+    </div>
+    <div class="trigger-label">
+        <ng-content></ng-content>
+    </div>
+</div>
+<lib-app-warning-message [message]="warningMessage"></lib-app-warning-message>

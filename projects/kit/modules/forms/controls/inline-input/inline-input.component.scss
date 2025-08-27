@@ -1,0 +1,64 @@
+:host {
+    display: flex;
+}
+.content-container {
+    position: absolute;
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.content-container:has(+ input:focus) {
+    visibility: hidden;
+}
+input {
+    border: 1px solid transparent;
+    outline: none;
+    color: transparent;
+    height: 32px;
+    padding: 0 8px;
+}
+:host::ng-deep {
+    input:not(.invalid) {
+        &:hover {
+            border-color: var(--da-border) !important;
+            border-radius: 4px;
+        }
+        &:focus {
+            border-color: var(--da-brand-base) !important;
+            box-shadow: none !important;
+        }
+        & {
+            border-color: transparent !important;
+        }
+    }
+
+    input:focus + .max-length {
+        visibility: visible;
+    }
+    .max-length {
+        visibility: hidden;
+    }
+}
+
+:host(.disabled)::ng-deep {
+    input {
+        visibility: hidden;
+    }
+}
+
+:host::ng-deep [libTextElement] {
+    outline: none;
+    margin: unset !important;
+    padding: 0 9px;
+    white-space: pre;
+}
+
+:host(.disabled) {
+    input {
+        visibility: hidden;
+    }
+
+    .content-container {
+        pointer-events: initial;
+    }
+}

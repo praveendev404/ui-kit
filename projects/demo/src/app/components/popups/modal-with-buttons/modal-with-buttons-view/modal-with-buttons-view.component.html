@@ -1,0 +1,23 @@
+<div class="modal-main-container d-block">
+    <lib-modal-header>
+        Modal With Buttons
+        <ng-container ngProjectAs="[subtitle]"> This is a subtitle </ng-container>
+    </lib-modal-header>
+
+    <div class="modal-body font-12px">Do you confirm?</div>
+
+    <div class="modal-footer">
+        <button
+            class="btn btn-secondary font-11px"
+            (click)="activeModal.dismiss()"
+        >
+            Cancel
+        </button>
+        <button
+            class="btn btn-primary font-11px ml-25px"
+            (click)="activeModal.dismiss()"
+        >
+            Confirm
+        </button>
+    </div>
+</div>

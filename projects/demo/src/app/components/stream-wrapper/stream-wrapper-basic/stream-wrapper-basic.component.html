@@ -1,0 +1,37 @@
+<h2 class="mb-2">Finite stream</h2>
+<lib-stream-wrapper
+    class="d-flex flex-column flex-1 align-items-center justify-content-start"
+    [dataStream$]="dataStream$"
+>
+    <ng-template contentTemplate let-data="data">
+        <lib-data-grid [dataSource]="data" [columns]="gridColumns">
+            <ng-template rowTemplate let-data="item">
+                <td [style.width]="gridColumns[0].width">
+                    {{ data.headerName1 }}
+                </td>
+                <td [style.width]="gridColumns[1].width">
+                    {{ data.headerName2 }}
+                </td>
+            </ng-template>
+        </lib-data-grid>
+    </ng-template>
+</lib-stream-wrapper>
+<h2 class="mb-2">Long-living stream</h2>
+<lib-search (searchText)="query$.next($event)"></lib-search>
+<lib-stream-wrapper
+    class="d-flex flex-column mt-2 flex-1 align-items-center justify-content-start"
+    [dataStream$]="longLivingStream$"
+>
+    <ng-template contentTemplate let-data="data">
+        <lib-data-grid [dataSource]="data" [columns]="gridColumns">
+            <ng-template rowTemplate let-data="item">
+                <td [style.width]="gridColumns[0].width">
+                    {{ data.headerName1 }}
+                </td>
+                <td [style.width]="gridColumns[1].width">
+                    {{ data.headerName2 }}
+                </td>
+            </ng-template>
+        </lib-data-grid>
+    </ng-template>
+</lib-stream-wrapper>

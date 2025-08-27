@@ -1,0 +1,155 @@
+@use 'mixins' as *;
+
+$arrow-width: 8px;
+
+:host {
+    height: 24px;
+
+    &[breadcrumb-mode="arrow"] {
+        display: flex;
+
+        ::ng-deep .breadcrumb-arrow-item {
+            position: relative;
+            --breadcrumb-background: var(--da-brand-12);
+            display: flex;
+            margin-right: 2px;
+
+            &-first {
+                .content {
+                    padding-left: 8px !important;
+                    border-radius: 4px 0 0 4px;
+                }
+            }
+
+            .content {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--breadcrumb-background);
+                padding: 0 4px;
+                font-size: 10px;
+                line-height: 14px;
+                color: cssvar(brand-base);
+            }
+
+            &:focus,
+            &:active {
+                --breadcrumb-background: var(--da-brand-20);
+            }
+
+            &.active {
+                --breadcrumb-background: var(--da-brand-base);
+                .content {
+                    color: cssvar(table-header);
+                }
+            }
+
+            &:focus,
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .end-arrow {
+            position: absolute;
+            top: 0;
+            left: -9px;
+            color: var(--breadcrumb-background);
+        }
+
+        .start-arrow {
+            color: var(--breadcrumb-background);
+        }
+    }
+
+    &[breadcrumb-mode="pace"], &[breadcrumb-mode="bootstrap"] {
+        margin-bottom: 0;
+        height: unset;
+    }
+
+    a.active,
+    .fake {
+        pointer-events: none;
+    }
+}
+
+.section {
+    display: contents;
+}
+
+:host[breadcrumb-mode="pace"] {
+    height: auto;
+    color: var(--da-primary-text);
+    display: inline-flex;
+
+    fa-icon.delimeter {
+        padding: 6px;
+    }
+
+    a {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: inherit;
+    }
+
+    .section {
+        border-radius: 0.25rem;
+        border: 1px solid var(--da-border-and-dividers);
+        display: inline-flex;
+        gap: 0.25rem;
+        align-items: center;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .section.prefix {
+        border-color: var(--da-brand-base);
+        background-color: var(--da-brand-12);
+        color: var(--da-brand-base);
+        font-weight: 600;
+    }
+
+    .section + .section {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 0;
+    }
+
+    .section:last-of-type {
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+    }
+
+    .section a:first-of-type {
+        padding-left: 1rem;
+    }
+
+    .section a:last-of-type {
+        padding-right: 1rem;
+    }
+
+    a.active {
+        font-weight: bold;
+        color: var(--da-brand-base);
+    }
+
+    a:any-link,
+    a.cursor-pointer {
+        color: inherit;
+
+        &:hover {
+            text-decoration: underline;
+            text-underline-offset: 5px;
+            color: var(--da-brand-hover);
+        }
+    }
+
+    a.fake {
+        pointer-events: inherit;
+        cursor: default;
+
+        &:hover {
+            color: var(--da-brand-hover);
+        }
+    }
+}

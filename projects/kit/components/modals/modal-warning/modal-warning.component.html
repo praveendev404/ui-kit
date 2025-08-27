@@ -1,0 +1,52 @@
+<div *ngIf="message.image" class="centered-container mt-40px">
+    <img *ngIf="checkImageType(message.image) === 'url'" [src]="message.image" test-id="image-container-with-image" />
+    <fa-icon
+        test-id="image-container-with-icon"
+        *ngIf="checkImageType(message.image) === 'icon'"
+        class="fa-icon"
+        [icon]="message.image"
+        [style.color]="message.imageColor"
+        [style.fontSize]="message.imageFontSize"
+    >
+    </fa-icon>
+</div>
+<h2 *ngIf="message.title" ngbAutofocus class="centered-container text-center mt-4 mx-40px" [class.mt-40px]="!message.image" test-id="title">
+    {{ message.title }}
+</h2>
+<p *ngIf="message.description" class="text-description text-center body2 secondary-text-and-icons  mx-40px">
+    {{ message?.description }}
+</p>
+<div class="d-flex centered-container mt-3 mt-16px  mx-40px" *ngIf="message && message.content">
+    <fa-icon
+        *ngIf="message.icon"
+        [style.color]="message.iconColor"
+        [style.fontSize]="message.iconFontSize"
+        class="mr-16px"
+        [icon]="message.icon"
+    >
+    </fa-icon>
+    <p class="body1 modal-warning-content text-left m-0 ">{{ message?.content }}</p>
+</div>
+<div class="modal-footer centered-container mt-40px">
+    <button
+        [ngbTooltip]="cancelBtnTooltip"
+        *ngIf="showCancelButton"
+        type="button"
+        class="btn btn-secondary"
+        [disabled]="cancelBtnDisable"
+        (click)="cancel()"
+        test-id="cancelButton"
+    >
+        {{ closeButtonText }}
+    </button>
+    <button
+        *ngIf="showConfirmButton"
+        [btnWithLoader]="confirmButtonLoading"
+        type="button"
+        class="btn btn-primary"
+        (click)="confirm()"
+        test-id="confirmButton"
+    >
+        {{ confirmButtonText }}
+    </button>
+</div>

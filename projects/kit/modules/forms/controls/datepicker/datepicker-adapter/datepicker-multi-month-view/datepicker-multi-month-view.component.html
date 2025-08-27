@@ -1,0 +1,103 @@
+<div class="width-fit-content h-100">
+    <div
+        *ngIf="!yearsMode; else yearsTemplate"
+        class="d-flex flex-column w-100 h-100"
+    >
+        <div
+            *ngIf="currentDate"
+            class="ngb-dp-header bg-light w-100 d-flex d-inline-flex align-items-center"
+        >
+            <div class="ngb-dp-arrow">
+                <button
+                    class="btn ngb-dp-arrow-btn"
+                    (click)="changeYear(currentDate, -1)"
+                >
+                    <span class="ngb-dp-navigation-chevron"></span>
+                </button>
+            </div>
+            <div class="ngb-dp-month-name" (click)="turnMode()">
+                {{ currentDate.getFullYear() }}
+            </div>
+            <div class="ngb-dp-arrow right">
+                <button
+                    class="btn ngb-dp-arrow-btn"
+                    (click)="changeYear(currentDate, +1)"
+                >
+                    <span class="ngb-dp-navigation-chevron"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1 p-5px month-content">
+            <div
+                *ngFor="let chunkMonth of chunkMonths"
+                class="row no-gutters d-flex d-inline-flex flex-nowrap align-items-center"
+            >
+                <div
+                    *ngFor="let month of chunkMonth"
+                    class="col-3 item d-flex d-inline-flex align-items-center justify-content-center month"
+                    [class.selected]="
+                        currentDate.getMonth() == month.getMonth()
+                    "
+                    (click)="pickMonth(month)"
+                >
+                    <div>
+                        {{ transformDate(month, "MMM") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #yearsTemplate>
+    <div class="d-flex flex-column w-100 h-100">
+        <div
+            class="ngb-dp-header bg-light w-100 d-flex d-inline-flex align-items-center"
+        >
+            <div class="ngb-dp-arrow">
+                <button
+                    class="btn ngb-dp-arrow-btn"
+                    (click)="changeYearsSet(-12)"
+                >
+                    <span class="ngb-dp-navigation-chevron"></span>
+                </button>
+            </div>
+            <div class="ngb-dp-month-name header-cursor">
+                {{
+                    years[0].getFullYear() +
+                        " - " +
+                        years[years.length - 1].getFullYear()
+                }}
+            </div>
+            <div class="ngb-dp-arrow right">
+                <button
+                    class="btn ngb-dp-arrow-btn"
+                    (click)="changeYearsSet(+12)"
+                >
+                    <span class="ngb-dp-navigation-chevron"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="w-100 flex-1 p-5px years-content">
+            <div
+                *ngFor="let chunkYear of chunkYears"
+                class="row no-gutters w-100 d-flex d-inline-flex flex-nowrap align-items-center"
+            >
+                <div
+                    *ngFor="let year of chunkYear"
+                    class="col-3 item d-flex d-inline-flex align-items-center justify-content-center year"
+                    [class.selected]="
+                        currentDate.getFullYear() == year.getFullYear()
+                    "
+                    (click)="pickYear(year)"
+                >
+                    <div>
+                        {{ transformDate(year, "yyyy") }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

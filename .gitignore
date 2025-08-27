@@ -1,0 +1,10 @@
+/.angular/cache
+node_modules
+dist
+coverage
+projects/kit/reports
+.idea
+.vscode
+projects/demo/src/demos-sources.ts
+/schematics/**/*.js
+/schematics/**/*.js.map

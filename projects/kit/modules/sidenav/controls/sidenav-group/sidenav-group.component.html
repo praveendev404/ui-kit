@@ -1,0 +1,31 @@
+<h3 *ngIf="(expanded || isHovered) && item.title !== ''" class="mt-0 mb-3 mx-3">{{ item.title }}</h3>
+
+<ng-container *ngIf="item?.search">
+    <lib-search
+        class="mb-3 mx-3"
+        *ngIf="expanded || isHovered; else compactSearchTemplate"
+        [value]="value"
+        (searchText)="handleSearch($event)"
+    ></lib-search>
+    <ng-template #compactSearchTemplate>
+        <div
+            class="cursor-pointer sidenav-search-icon mb-1"
+            (click)="handleSearchClick()"
+        >
+            <fa-icon icon="search"></fa-icon>
+        </div>
+    </ng-template>
+</ng-container>
+
+<perfect-scrollbar class="flex-1 sidenav-group-scrollbar" style="width: unset; max-width: unset">
+    <ng-template
+        [ngTemplateOutlet]="filteredItems?.length ? menuTemplate : noItemsFound"
+        [ngTemplateOutletContext]="{ $implicit: filteredItems, level: level }">
+    </ng-template>
+</perfect-scrollbar>
+
+<ng-template #noItemsFound>
+    <div class="text-center mt-1 no-items-text">
+        {{ expanded || isHovered ? "No items found" : "" }}
+    </div>
+</ng-template>

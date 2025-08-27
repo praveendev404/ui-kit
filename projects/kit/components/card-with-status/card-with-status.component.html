@@ -1,0 +1,39 @@
+<div class="status-dot status-dot--{{ statusValue }}"></div>
+
+<div class="card-wrapper flex-1">
+    <div
+        class="max-width-fit-content status-container status-container--{{
+            statusValue
+        }} mb-2"
+        [class.status-container--padding]="statusValue !== 'default'"
+    >
+        <fa-icon
+            *ngIf="status.icon"
+            class="mr-2 status-icon"
+            [icon]="status.icon"
+        ></fa-icon
+        >{{ status.label }}
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <ng-content></ng-content>
+    </div>
+
+    <ng-container *ngIf="cardExpandedTemplate && cardExpandedTemplate.isShown">
+        <div class="divider mt-4" [class.border-bottom]="!!expanded">
+            <div class="expand-collapse" (click)="expanded = !expanded">
+                <fa-icon
+                    class="expand-collapse--icon mr-1"
+                    icon="open"
+                    [class.expanded]="!!expanded"
+                ></fa-icon>
+                {{ cardExpandedTemplate.expandedLabel }}
+            </div>
+        </div>
+
+        <div [@expand]="!!expanded ? 'expanded' : 'collapsed'">
+            <ng-container [ngTemplateOutlet]="cardExpandedTemplate.template">
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

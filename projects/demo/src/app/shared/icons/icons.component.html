@@ -1,0 +1,77 @@
+<lib-search
+    class="d-block mb-4 search-block"
+    [placeholder]="'Search icon'"
+    (searchText)="searchIcon($event)"
+></lib-search>
+
+<div>
+    <div class="mb-5" *ngFor="let group of filteredGroupedItems">
+        <h2 class="mt-0">{{ group[0] }}</h2>
+        <div class="d-flex flex-wrap" *ngFor="let row of group[1]">
+            <div
+                *ngFor="let section of row; let index = index"
+                [class.ml-5]="index > 0"
+            >
+                <h4 class="mb-3">{{ section.name }}</h4>
+                <div class="font-14px d-flex align-items-center">
+                    <div
+                        *ngFor="let icon of section.icons"
+                        class="mr-3 text-center cursor-pointer"
+                        container="body"
+                        [ngbTooltip]="'Copy ' + icon[0] + ' to clipboard'"
+                        placement="top"
+                        (click)="copyIcon(icon[0])"
+                    >
+                        <fa-icon
+                            [icon]="icon[0]"
+                            class="d-inline-flex {{ icon[0]}}"
+                            [style.fontSize.px]="icon[1] ? icon[1] : null"
+                        ></fa-icon>
+                        <div style="font-size: 8px">{{ icon[0] }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngFor="let icon of icons">
+        <ng-container *ngIf="icon.iconName as icon">
+            <div
+                *ngIf="!allSortedIcons.includes(icon)"
+                class="mb-30px mr-20px d-inline-flex"
+            >
+                <div class="icon-block">
+                    <div class="card icon-item mb-7px">
+                        <fa-icon
+                            [icon]="icon"
+                            [class.icon--dots]="icon === 'dots'"
+                        ></fa-icon>
+                    </div>
+                    <button
+                        type="button"
+                        class="btn btn-light mr-2 toggle-code"
+                        ngbTooltip="Copy code to clipboard"
+                        placement="top-left"
+                        (click)="copyIcon(icon)"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            fill="#28a745"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <div class="code">
+                    <span class="body5 ml-12px">{{ icon }}</span>
+                    <app-code [snippet]="getSnippet(icon)"></app-code>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

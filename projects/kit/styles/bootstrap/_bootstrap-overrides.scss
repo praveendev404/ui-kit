@@ -1,0 +1,233 @@
+@import "../mixins";
+@import "./bootstrap-variables";
+
+$button-colors: (
+    primary: (
+        background: cssvar(brand-base),
+        color: #fff,
+        border-color: cssvar(brand-base),
+        hover-background: cssvar(brand-hover),
+        hover-icon-background: cssvar(brand-12),
+        hover-color: #fff,
+        hover-border-color: cssvar(brand-hover),
+        active-background: cssvar(brand-active),
+        active-icon-background: cssvar(brand-20),
+        active-color: #fff,
+        active-border-color: cssvar(brand-active)
+    ),
+    success: (
+        background: cssvar(success-base),
+        color: #fff,
+        border-color: cssvar(success-base),
+        hover-background: cssvar(success-hover),
+        hover-icon-background: cssvar(success-base-12),
+        hover-color: #fff,
+        hover-border-color: cssvar(success-hover),
+        active-background: cssvar(success-active),
+        active-icon-background: cssvar(success-base-20),
+        active-color: #fff,
+        active-border-color: cssvar(success-active)
+    ),
+    danger: (
+        background: cssvar(error-base),
+        color: #fff,
+        border-color: cssvar(error-base),
+        hover-background: cssvar(error-hover),
+        hover-icon-background: cssvar(error-base-12),
+        hover-color: #fff,
+        hover-border-color: cssvar(error-hover),
+        active-background: cssvar(error-active),
+        active-icon-background: cssvar(error-base-20),
+        active-color: #fff,
+        active-border-color: cssvar(error-active)
+    ),
+    warning: (
+        background: cssvar(warning-base),
+        color: #fff,
+        border-color: cssvar(warning-base),
+        hover-background: cssvar(warning-hover),
+        hover-icon-background: cssvar(warning-base-12),
+        hover-color: #fff,
+        hover-border-color: cssvar(warning-hover),
+        active-background: cssvar(warning-active),
+        active-icon-background: cssvar(warning-base-20),
+        active-color: #fff,
+        active-border-color: cssvar(warning-active)
+    ),
+    secondary: (
+        background: transparent,
+        color: cssvar(brand-base),
+        border-color: cssvar(brand-base),
+        hover-background: cssvar(brand-20),
+        hover-icon-background: cssvar(brand-12),
+        hover-color: cssvar(brand-base),
+        hover-border-color: cssvar(brand-base),
+        active-background: transparent,
+        active-icon-background: cssvar(brand-20),
+        active-color: cssvar(brand-base),
+        active-border-color: cssvar(brand-base)
+    ),
+    light: (
+        background: cssvar(brand-12),
+        color: cssvar(brand-base),
+        border-color: cssvar(brand-12),
+        hover-background: cssvar(brand-20),
+        hover-icon-background: cssvar(brand-12),
+        hover-color: cssvar(brand-base),
+        hover-border-color: cssvar(brand-20),
+        active-background: cssvar(brand-20),
+        active-icon-background: cssvar(brand-20),
+        active-color: cssvar(brand-base),
+        active-border-color: cssvar(brand-20)
+    )
+);
+
+@mixin button(
+    $background,
+    $color,
+    $border-color,
+    $hover-background,
+    $hover-color,
+    $hover-border-color,
+    $active-background,
+    $active-color,
+    $active-border-color
+) {
+    color: $color;
+    background: $background;
+    border-color: $border-color;
+
+    &:hover {
+        color: $hover-color;
+        background: $hover-background;
+        border-color: $hover-border-color;
+    }
+
+    &:focus,
+    &.focus {
+        color: $active-color;
+        background: $hover-background;
+        border-color: $hover-border-color;
+    }
+
+    // Disabled comes first so active can properly restyle
+    &.disabled,
+    &:disabled {
+        color: $color;
+        background-color: $background;
+        border-color: $border-color;
+    }
+
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active,
+    .show > &.dropdown-toggle {
+        background-color: $active-background;
+        border-color: $active-border-color;
+    }
+}
+
+@each $color, $value in $button-colors {
+    .btn-#{$color} {
+        @include button(
+            $background: map-deep-get($button-colors, $color, "background"),
+            $color: map-deep-get($button-colors, $color, "color"),
+            $border-color: map-deep-get($button-colors, $color, "border-color"),
+            $hover-background:
+                map-deep-get($button-colors, $color, "hover-background"),
+            $hover-color: map-deep-get($button-colors, $color, "hover-color"),
+            $hover-border-color:
+                map-deep-get($button-colors, $color, "hover-border-color"),
+            $active-background:
+                map-deep-get($button-colors, $color, "active-background"),
+            $active-color: map-deep-get($button-colors, $color, "active-color"),
+            $active-border-color:
+                map-deep-get($button-colors, $color, "active-border-color")
+        );
+    }
+
+    .btn-icon.btn-#{$color}:hover {
+        background: map-deep-get($button-colors, $color, "hover-icon-background");
+        color: map-deep-get($button-colors, $color, "background");
+    }
+
+    .btn-icon.btn-#{$color}:active {
+        background: map-deep-get($button-colors, $color, "active-icon-background") !important;
+    }
+
+    .btn-icon.btn-#{$color}:focus {
+        background: none;
+        color: map-deep-get($button-colors, $color, "background");
+    }
+}
+
+.btn:not(:disabled):not(.disabled):focus {
+    box-shadow: $input-btn-focus-box-shadow;
+}
+
+.btn:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
+}
+
+.btn-secondary:focus {
+    background: cssvar(cards-and-blocks);
+}
+
+.btn-secondary,
+.btn-secondary:not(:disabled):not(.disabled):focus,
+.btn-secondary:not(:disabled):not(.disabled):hover {
+    color: cssvar(brand-base);
+    background: none;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active {
+    color: cssvar(brand-active);
+}
+
+.btn-secondary:disabled,
+.btn-secondary.disabled {
+    border-color: cssvar(disable);
+    color: cssvar(disable);
+    opacity: 1;
+    background: none;
+}
+
+.btn-primary:disabled,
+.btn-primary.disabled {
+    border-color: cssvar(disable);
+    background: cssvar(disable);
+}
+
+.btn-link {
+    color: cssvar(brand-base);
+}
+
+.btn-link:hover,
+.btn-secondary:not(:disabled):not(.disabled):hover {
+    color: cssvar(brand-base);
+    background: cssvar(brand-12);
+}
+
+.btn-link:active,
+.btn-secondary:not(:disabled):not(.disabled):active {
+    background: cssvar(brand-20);
+}
+
+.btn-link:disabled {
+    color: cssvar(disable);
+    opacity: 1;
+}
+
+.btn.disabled {
+    box-shadow: none;
+    cursor: default;
+}
+
+$theme-colors: (
+    "light": cssvar(light)
+);
+
+@each $color, $value in $theme-colors {
+    .bg-#{$color} {
+        background: $value;
+    }
+}

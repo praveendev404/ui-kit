@@ -1,0 +1,33 @@
+@use 'mixins' as *;
+
+$main-color: rgba(50, 125, 226, 0.12);
+
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidenav-search-icon {
+    align-self: center;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $main-color;
+    background-color: $main-color;
+    color:cssvar(brand-base);
+    border-radius: 50%;
+}
+
+.no-items-text {
+    color: cssvar(secondary-text-and-icons);
+    font-style: italic;
+}
+
+:host::ng-deep .sidenav-group-scrollbar > .ps.ps--active-y > .ps__rail-y {
+    right: 6px !important;
+    background: none !important;
+}

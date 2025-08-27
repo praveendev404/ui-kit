@@ -1,0 +1,12 @@
+<div class="d-flex w-100 align-items-center flex-wrap-reverse" [formGroup]="formGroup">
+    <lib-datepicker
+        [dateWithTime]="true"
+        class="mr-25px mt-5px"
+        [placeholder]="'Start date/time'"
+        formControlName="date"
+        inputDatetimeFormat="{{ dateFormat }}"
+    >
+    </lib-datepicker>
+
+    <div class="col text-nowrap pl-0 min-width-fit-content">Date Format: {{ dateFormat }}</div>
+</div>

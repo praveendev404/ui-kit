@@ -1,0 +1,26 @@
+<!--<lib-input [label]="'Input'" [value]="'Text'" id="with-value"></lib-input>-->
+
+<lib-inline-input [(ngModel)]="value">
+    <h1 libTextElement></h1>
+    <lib-input libInlineInput [maxlength]="30"/>
+</lib-inline-input>
+
+<lib-inline-input [(ngModel)]="value" showPencilButton="false">
+    <h3 libTextElement></h3>
+    <lib-input libInlineInput/>
+</lib-inline-input>
+
+<lib-inline-input [(ngModel)]="value">
+    <span class="body3" libTextElement></span>
+    <lib-input libInlineInput/>
+</lib-inline-input>
+
+<lib-inline-input [formControl]="formControl">
+    <span class="body3" libTextElement></span>
+    <lib-input libInlineInput [maxlength]="30"/>
+</lib-inline-input>
+
+<lib-inline-input [formControl]="formControl1">
+    <h2 libTextElement></h2>
+    <lib-input libInlineInput />
+</lib-inline-input>

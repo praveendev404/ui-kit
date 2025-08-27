@@ -1,0 +1,11 @@
+<ng-container
+    *ngIf="headerTemplate"
+    [ngTemplateOutlet]="headerTemplate.template"
+></ng-container>
+
+<ng-content></ng-content>
+
+<ng-container
+    *ngIf="footerTemplate"
+    [ngTemplateOutlet]="footerTemplate.template"
+></ng-container>

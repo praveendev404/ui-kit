@@ -1,0 +1,30 @@
+<span *ngIf="label" class="label text-truncate" [class.disabled]="readonly">
+    {{ label }}
+    <span *ngIf="isRequired" class="mandatory">*</span>
+    <ng-content></ng-content>
+</span>
+<div class="position-relative input-content">
+    <input
+        #input
+        #controlContainer
+        [ngbTypeahead]="search"
+        [value]="value === undefined || value === null ? '' : value"
+        [attr.placeholder]="placeholder"
+        [class.invalid]="hasErrors"
+        [class.warning]="warning"
+        [class.with-icon]="icon"
+        [class.clearable]="clearable"
+        [class.with-max-length]="maxlength"
+        [readonly]="readonly"
+        [attr.maxlength]="maxlength"
+        [checked]="type === 'radio' && checked"
+        [type]="type"
+        [attr.data-test-id]="id"
+        (input)="handleInput($event)"
+        (focus)="handleFocus($event); toggleReadonly(false);"
+        (blur)="onTouched(); toggleReadonly(true); blur.emit($event);"
+        (keydown)="validate('keydown', $event)"
+        (paste)="validate('paste', $event)"
+        (selectItem)="handleSelect($event)"
+    />
+</div>

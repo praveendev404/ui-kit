@@ -1,0 +1,8 @@
+{
+    "name": "@dagility-ui/kit/toastr",
+    "peerDependencies": {
+        "@angular/core": ">=11.0.2 < 15",
+        "rxjs": "6.0.0 - 8.x",
+        "ngx-toastr": "^13.1.0"
+    }
+}

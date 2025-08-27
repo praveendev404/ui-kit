@@ -1,0 +1,11 @@
+@use 'variables' as *;
+
+:host {
+    display: flow-root;
+}
+
+.main-container {
+    margin-top: $default-header-height;
+    min-height: calc(100vh - #{$default-header-height});
+    overflow: hidden;
+}

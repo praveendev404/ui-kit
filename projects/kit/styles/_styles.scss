@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./mixins";
+@import './themes';
+@import "./bootstrap/bootstrap";
+@import "controls";
+
+@import "open-sans-fonts/open-sans-ng.css";
+
+@import "./core/utils";
+@import "./core/spacers";
+
+@import './common';
+
+@import '@fortawesome/fontawesome-svg-core/styles';
+@import 'font-awesome/css/font-awesome.min.css';
+@import '@ng-select/ng-select/themes/default.theme.css';
+

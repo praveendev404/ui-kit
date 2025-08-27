@@ -1,0 +1,54 @@
+<label
+    class="label body2 min-width-fit-content"
+    *ngIf="label"
+    [class.disabled]="readonly && !copyable"
+>
+    {{ label }}
+    <span *ngIf="isRequired" class="mandatory">*</span>
+    <fa-icon
+        *ngIf="copyable"
+        icon="facClone"
+        class="fa font-12px copy-icon ml-5px"
+        ngbTooltip="Copy to clipboard"
+        (click)="copyToClipboard(input)"
+        [openDelay]="800"
+        placement="top"
+    ></fa-icon>
+</label>
+
+<div class="w-100 position-relative">
+    <!--    #controlContainer and #input are necessary for base form control-->
+    <perfect-scrollbar
+        class="textarea-wrapper"
+        [class.textarea-wrapper--readonly]="readonly"
+        [class.invalid]="hasErrors"
+        #controlContainer
+    >
+        <textarea
+            #input
+            class="textarea-input"
+            [readOnly]="readonly"
+            [attr.data-test-id]="id"
+            [style.resize]="resize ? 'both' : resizeMode"
+            [ngClass]="{ textareaHeight: customHeight }"
+            [value]="value"
+            (input)="handleInput($event.target.value)"
+            (blur)="onTouched()"
+            [attr.placeholder]="placeholder"
+            [class.invalid]="hasErrors"
+            [attr.maxlength]="maxlength"
+        ></textarea>
+    </perfect-scrollbar>
+
+    <button *ngIf="!readonly && value" class="clear-btn" data-test-id="clear-btn" (click)="handleClearBtn()">
+        <span aria-hidden="true" class="icon">&times;</span>
+    </button>
+
+    <div
+        *ngIf="maxlength && !hasErrors"
+        class="info2 secondary-text-and-icons mt-2px"
+    >
+        {{ +this.maxlength - (this.value || "").length }}
+        {{ translatedText?.CHARACTERS_LEFT || "characters left" }}
+    </div>
+</div>

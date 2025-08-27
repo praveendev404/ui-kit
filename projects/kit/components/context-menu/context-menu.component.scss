@@ -1,0 +1,64 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: fit-content;
+}
+
+:host button {
+    padding: 0 2px !important;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+
+    &:focus,
+    &:hover,
+    &:active {
+        outline: none;
+        box-shadow: none !important;
+
+        ::ng-deep * {
+            color: cssvar(brand-base);
+        }
+    }
+}
+
+.dropdown-button {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    .chevron-icon {
+        font-size: 16px !important;
+
+        &.active {
+            color: cssvar(brand-base);
+        }
+    }
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+
+    .fa-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.context-menu {
+    width: fit-content;
+}
+
+.fa-icon:last-child {
+    margin-right: 0 !important;
+}

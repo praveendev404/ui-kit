@@ -1,0 +1,18 @@
+<lib-data-grid
+    *ngIf="gridData$ | async as gridData; else loadingTmpl"
+    [dataSource]="gridData"
+    [columns]="gridColumns"
+>
+    <ng-template rowTemplate let-data="item">
+        <td [style.width]="gridColumns[0].width">
+            {{ data.headerName }}
+        </td>
+        <td [style.width]="gridColumns[1].width">{{ data.value }}</td>
+    </ng-template>
+</lib-data-grid>
+
+<ng-template #loadingTmpl>
+    <div class="mt-30px d-flex justify-content-center">
+        <lib-loader></lib-loader>
+    </div>
+</ng-template>

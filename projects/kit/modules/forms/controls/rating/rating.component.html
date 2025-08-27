@@ -1,0 +1,116 @@
+<div class="rating-content">
+    <div
+        *ngIf="!expanded; else rateExpanded"
+        class="rating-label-wrapper align-items-center"
+        triggers="manual"
+        [class.cursor-pointer]="editable"
+        #t1="ngbTooltip"
+        [placement]="tooltipPlacement"
+        [ngbTooltip]="tipContent"
+        tooltipClass="rating-tooltip"
+        (click)="editable && toggleTooltip(t1)"
+    >
+        <div *ngIf="!myRate" class="rating-star">
+            <fa-icon
+                *ngFor="let fullStar of fullStars"
+                icon="star"
+                class="brand-star"
+            ></fa-icon>
+            <fa-icon
+                *ngFor="let emptyStar of emptyStars"
+                icon="star"
+                class="empty-star"
+            ></fa-icon>
+        </div>
+        <div *ngIf="myRate" class="rating-star">
+            <fa-icon
+                *ngFor="let myFullStar of myFullStars"
+                icon="star"
+                class="my-rate-star"
+            ></fa-icon>
+            <fa-icon
+                *ngFor="let myEmptyStar of myEmptyStars"
+                icon="star"
+                class="empty-star"
+            ></fa-icon>
+            <span class="custom-badge warning size-s text-white font-10px">
+                {{ myRate }}
+            </span>
+        </div>
+        <div class="rating-value text-truncate">
+            <span [ngClass]="value !== 0 ? 'color-brand' : 'color-gray'">{{
+                value | number: "1.1-2"
+            }}</span>
+        </div>
+    </div>
+
+    <ng-template #tipContent>
+        <div>
+            <ng-template [ngTemplateOutlet]="rateExpanded"></ng-template>
+            <ng-container *ngIf="myRate; else rateButtonTemplate">
+                <div class="row no-gutters mt-10px">
+                    <button class="btn btn-link rate-button" (click)="rate()">
+                        <span class="text-button">
+                            {{ translatedText?.CHANGE_MY_RATE || 'Change my rating' }}
+                        </span>
+                        <span class="my-rating">{{ myRate }}</span>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+
+        <ng-template #rateButtonTemplate>
+            <div class="row no-gutters mt-10px">
+                <button class="btn btn-link rate-button" (click)="rate()">
+                    {{ translatedText?.RATE_IT_NOW || 'Rate it now' }}
+                </button>
+            </div>
+        </ng-template>
+    </ng-template>
+</div>
+
+<ng-template #rateExpanded>
+    <div class="w-100" *ngIf="ratingLoaded; else loadingTemplate">
+        <lib-rating
+            class="rating-for-tooltip"
+            [editable]="false"
+            [(ngModel)]="rating.rating"
+            [max]="max"
+        ></lib-rating>
+        <div class="row no-gutters d-flex justify-content-center">
+            <span class="rates-label">
+                {{ rating?.ratesCount }} {{ translatedText?.USER_RATINGS || 'user ratings' }}
+            </span>
+            <span class="downloads-label ml-5px">
+                {{ rating?.downloads }} {{ translatedText?.DOWNLOADS || 'downloads' }}
+            </span>
+        </div>
+        <div class="rating-by-stars d-flex flex-column mt-16px">
+            <div
+                *ngFor="let ratingRowItem of ratingRowsTemplate"
+                class="row no-gutters mt-5px align-items-center text-nowrap"
+            >
+                <span class="rating-row-label mr-5px col">
+                    {{
+                        ratingRowItem.label + " " +
+                            (ratingRowItem.label !== "1" ? (translatedText?.STARS || "stars") : (translatedText?.STAR || "star"))
+                    }}
+                </span>
+                <ngb-progressbar
+                    [style.width]="ratingRowItem.width"
+                    [height]="ratingRowItem.height"
+                    type="primary"
+                    [value]="ratingRowItem.value"
+                ></ngb-progressbar>
+                <span class="rating-row-value ml-5px col"
+                    >{{ ratingRowItem.value | number: "1.0-1" }} %</span
+                >
+            </div>
+        </div>
+    </div>
+    <ng-template #loadingTemplate>
+        <div class="spinner d-flex justify-content-center align-items-center">
+            <lib-spinner></lib-spinner>
+        </div>
+    </ng-template>
+</ng-template>

@@ -1,0 +1,46 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+$control-height: 32px;
+$control-height-s: 24px;
+$control-height-l: 48px;
+
+:host ::ng-deep {
+    .dropdown-menu {
+        width: 100%;
+        transform: initial !important;
+        top: $control-height !important;
+        background: cssvar(cards-and-blocks);
+        box-shadow: cssvar(dropdown-box-shadow);
+        border-radius: cssvar(dropdown-border-radius);
+    }
+
+    .dropdown-item {
+        &.active:not(:hover) {
+            color: cssvar(primary-text) !important;
+            background: none !important;
+        }
+
+        color: cssvar(primary-text);
+        white-space: inherit;
+        justify-content: flex-start !important;
+    }
+
+    .active {
+        color: cssvar(primary-text) !important;
+    }
+}
+
+::ng-deep {
+    lib-typeahead.size-s {
+        .dropdown-menu {
+            top: $control-height-s !important;
+        }
+    }
+
+    lib-typeahead.size-l {
+        .dropdown-menu {
+            top: $control-height-l !important;
+        }
+    }
+}

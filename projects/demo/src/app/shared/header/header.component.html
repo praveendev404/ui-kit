@@ -1,0 +1,25 @@
+<header class="navbar px-4">
+    <div class="app-header-logo">
+        <a
+            class="navbar-brand app-header-navbar pr-2"
+            routerLink="/"
+            aria-label="Dagility Kit"
+        >
+            <img
+                alt="image"
+                [src]="
+                    'assets/images/dagilityLogo' +
+                    (isDarkMode ? 'Dark.svg' : 'Light.svg')
+                "
+                class="logo"
+            />
+        </a>
+    </div>
+
+    <lib-navbar-menu [menuItems]="topMenuItems"> </lib-navbar-menu>
+    <div class="ml-auto">
+        <trigger [(ngModel)]="isDarkMode" (ngModelChange)="changeTheme()"
+            >Dark Mode</trigger
+        >
+    </div>
+</header>

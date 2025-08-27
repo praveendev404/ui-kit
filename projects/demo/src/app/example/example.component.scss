@@ -1,0 +1,29 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.app-header-logo {
+    width: 120px;
+    height: $default-header-height;
+}
+
+.app-header-navbar {
+    font-size: 0.825rem;
+    line-height: 50px;
+    text-align: center;
+}
+
+.logo {
+    height: 41px;
+    margin-left: 0.75rem;
+}
+
+.example-wrapper {
+    background: cssvar(background);
+}
+
+.example-container {
+    height: calc(100vh - #{$default-header-height});
+    width: 90vw;
+    background: cssvar(cards-and-blocks);
+    overflow: auto;
+}

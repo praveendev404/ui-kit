@@ -1,0 +1,27 @@
+@use 'mixins' as *;
+
+:host ::ng-deep {
+    .language-html,
+    .language-typescript {
+        * {
+            text-shadow: none;
+            background: none;
+        }
+    }
+}
+
+.language-html {
+    background: cssvar(cards-and-blocks);
+    * {
+        text-shadow: none;
+        color: cssvar(primary-text);
+    }
+}
+
+.language-typescript {
+    background: cssvar(cards-and-blocks);
+
+    * {
+        color: cssvar(primary-text);
+    }
+}

@@ -1,0 +1,8 @@
+:host {
+    padding: 40px;
+    min-width: 240px;
+}
+
+.loader {
+    width: 24px;
+}

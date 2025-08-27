@@ -1,0 +1,110 @@
+<div class="example-wrapper d-flex justify-content-center">
+    <div class="example-container p-4">
+        <div>
+            <app-example-source></app-example-source>
+        </div>
+        <div class="app-header-logo d-inline-flex">
+            <a
+                class="navbar-brand mr-md-2 mr-0 app-header-navbar pr-2"
+                routerLink="/"
+                aria-label="Dagility Kit"
+            >
+                <img
+                    alt="image"
+                    [src]="
+                        'assets/images/dagilityLogo' +
+                        (isDarkMode ? 'Dark.svg' : 'Light.svg')
+                    "
+                    class="logo"
+                />
+            </a>
+            <lib-navbar-menu class="ml-15px" [menuItems]="topMenuItems">
+            </lib-navbar-menu>
+
+            <lib-context-menu [menuItems]="menuItems">
+                <ng-template buttonTemplate>
+                    <fa-icon
+                        class="fa-icon mr-10px"
+                        icon="QuestionInCircle"
+                    ></fa-icon>
+                </ng-template>
+            </lib-context-menu>
+        </div>
+
+        <div class="d-flex justify-content-between mt-30px">
+            <h1>My Solutions</h1>
+            <button class="btn btn-primary" (click)="openModal()">
+                <fa-icon icon="plus" class="fa mr-5px"></fa-icon>
+                Add Solution
+            </button>
+        </div>
+
+        <div class="blue-tab mt-30px">
+            <nav
+                #horizontalNav="ngbNav"
+                ngbNav
+                class="nav nav-tabs justify-content-start"
+            >
+                <ng-container ngbNavItem>
+                    <a ngbNavLink>Active Solutions</a>
+                    <ng-template ngbNavContent>
+                        <ng-container
+                            [ngTemplateOutlet]="cardTmpl"
+                        ></ng-container>
+                    </ng-template>
+                </ng-container>
+                <ng-container ngbNavItem>
+                    <a ngbNavLink>Active Users</a>
+                    <ng-template ngbNavContent>
+                        <ng-container
+                            [ngTemplateOutlet]="gridTmpl"
+                        ></ng-container
+                    ></ng-template>
+                </ng-container>
+            </nav>
+            <div class="mb-20px" [ngbNavOutlet]="horizontalNav"></div>
+        </div>
+    </div>
+
+    <ng-template #cardTmpl>
+        <div class="row no-gutters">
+            <div class="col"></div>
+            <lib-search
+                class="col"
+                [placeholder]="'Search By Title'"
+                (searchText)="searchCard($event)"
+            ></lib-search>
+        </div>
+        <div class="row no-gutters">
+            <div *ngFor="let card of cards" class="d-inline-flex mt-20px">
+                <lib-card class="mr-20px">
+                    <ng-template headerTemplate>
+                        <div class="font-16px font-weight-bold mb-8px">
+                            {{ card.title }}
+                        </div>
+                    </ng-template>
+                    {{ card.content }}
+                </lib-card>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #gridTmpl>
+        <lib-data-grid
+            [dataSource]="dataSource"
+            [columns]="gridColumns"
+            [sticky]="true"
+            [bodyHeight]="'300px'"
+        >
+            <ng-template rowTemplate let-user="item">
+                <td [style.width]="gridColumns[0].width">
+                    {{ user.firstName }}
+                </td>
+                <td [style.width]="gridColumns[1].width">
+                    {{ user.lastName }}
+                </td>
+                <td [style.width]="gridColumns[2].width">{{ user.email }}</td>
+            </ng-template></lib-data-grid
+        >
+    </ng-template>
+</div>

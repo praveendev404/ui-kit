@@ -1,0 +1,145 @@
+@use "sass:math";
+@use 'variables' as *;
+@use 'mixins' as *;
+
+$timeline-margin: 4px;
+$timeline-width: 2px;
+$status-dot-diameter: 10px;
+
+$gradient-height: 50px;
+$collapsed-card-height: 124px;
+
+$margin-container: 20px;
+$margin-bottom: 0.5rem;
+
+$expand-horizontal-padding: 5px;
+$expand-line-height: 16px;
+
+:host {
+    width: 100%;
+    position: relative;
+    display: flex;
+    margin-bottom: $margin-bottom;
+    background: cssvar(cards-and-blocks);
+
+    &::before {
+        position: absolute;
+        content: " ";
+        width: $timeline-width;
+        height: calc(100% + #{2 * $margin-bottom});
+        top: 0;
+        bottom: 0;
+        left: $timeline-margin;
+        background: cssvar(border-and-dividers);
+    }
+}
+
+.card-wrapper {
+    min-width: 775px;
+    padding: 20px;
+    margin-left: 35px;
+    box-shadow: cssvar(card-hover-box-shadow);
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 16px;
+
+    &--description {
+        color: cssvar(title);
+    }
+    &--time {
+        color: cssvar(secondary-text-and-icons);
+    }
+}
+
+$status-colors-map: (
+    approved: cssvar(success-base),
+    waiting: cssvar(warning-base),
+    rejected: cssvar(error-base),
+    to-do: cssvar(blue-base)
+);
+
+.status-dot {
+    position: absolute;
+    top:  math.div($collapsed-card-height, 2) -  math.div($status-dot-diameter, 2);
+    left: $timeline-margin + math.div($timeline-width, 2) - math.div($status-dot-diameter, 2);
+
+    border: 1px solid cssvar(cards-and-blocks);
+    width: $status-dot-diameter;
+    height: $status-dot-diameter;
+    border-radius: 50%;
+
+    @each $status, $color in $status-colors-map {
+        &--#{$status} {
+            background-color: $color;
+        }
+    }
+}
+
+.status-container {
+    border-radius: 9px;
+    font-size: 10px;
+    line-height: 13px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 0;
+
+    color: cssvar(secondary-text-and-icons);
+
+    .status-icon {
+        color: cssvar(secondary-text-and-icons);
+    }
+
+    &--padding {
+        padding: 2px 6px;
+    }
+
+    @each $status, $color in $status-colors-map {
+        &--#{$status} {
+            background-color: $color;
+        }
+    }
+
+    &--approved,
+    &--rejected,
+    &--waiting,
+    &--to-do {
+        color: white;
+
+        .status-icon {
+            color: white;
+        }
+    }
+}
+
+.divider {
+    margin-left: -$margin-container;
+    margin-right: -$margin-container;
+    position: relative;
+    height: 1px;
+
+    &.border-bottom {
+        border-bottom: 1px solid cssvar(border-and-dividers) !important;
+    }
+    .expand-collapse {
+        cursor: pointer;
+        font-size: 12px;
+        line-height: $expand-line-height;
+        color: cssvar(brand-base);
+        background-color: cssvar(cards-and-blocks);
+        padding: 0 $expand-horizontal-padding;
+        position: absolute;
+        left: $margin-container - $expand-horizontal-padding;
+        top: -1 * math.div($expand-line-height,2);
+        display: flex;
+        align-items: center;
+
+        &--icon {
+            color: cssvar(brand-base);
+            transform: rotate(-90deg);
+            &.expanded {
+                transform: rotate(90deg);
+            }
+        }
+    }
+}

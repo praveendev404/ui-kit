@@ -1,0 +1,69 @@
+[assist-ai-button] {
+    box-shadow: 0px 0px 10px 0px #0097ab80;
+    color: var(--da-brand-base);
+    --bg-angle: 0deg;
+    animation: rotate_gradient 2.5s infinite linear paused;
+    --button-background: linear-gradient(to bottom, white, white);
+    --border-background: conic-gradient(
+        from var(--bg-angle) in oklch longer hue,
+        oklch(0.85 0.37 0) 0 0
+    );
+    background:
+        var(--button-background) padding-box,
+        var(--border-background) border-box;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    &:hover:enabled {
+        animation-play-state: running;
+        &::before {
+            background: var(--da-brand-12);
+        }
+    }
+
+    &:disabled {
+        box-shadow: none;
+        --border-background: linear-gradient(
+            to bottom,
+            var(--da-disable),
+            var(--da-disable)
+        );
+        color: var(--da-disable);
+    }
+
+    &:active:enabled::before {
+        background: var(--da-brand-20);
+    }
+
+    .stars-container {
+        display: inline-block;
+        margin-right: 0.5rem;
+        width: 1.25em;
+        height: 1.25em;
+    }
+
+@keyframes rotate_gradient {
+    to {
+        --bg-angle: 360deg;
+    }
+}
+}
+
+:root[data-theme^="dark"] [assist-ai-button] {
+    --button-background: linear-gradient(
+        to bottom,
+        var(--da-cards-and-blocks),
+        var(--da-cards-and-blocks)
+    );
+}

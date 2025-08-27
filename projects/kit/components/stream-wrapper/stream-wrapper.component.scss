@@ -1,0 +1,6 @@
+@use 'mixins' as *;
+
+.error-text {
+    color:cssvar(brand-base);
+    font-size: 12px;
+}

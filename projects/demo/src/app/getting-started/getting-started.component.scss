@@ -1,0 +1,18 @@
+h2 {
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--da-border-and-dividers);
+}
+
+.code-container{
+    border-radius: 4px;
+    border: 1px solid var(--da-border-and-dividers);
+    background: var(--da-cards-and-blocks);
+    padding: 10px;
+    margin-top: 10px;
+}
+.code-text{
+    color: var(--da-primary-text);
+}
+.comment-text{
+    color: var(--da-secondary-text-and-icons);
+}

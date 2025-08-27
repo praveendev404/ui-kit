@@ -1,0 +1,14 @@
+{
+    "name": "@dagility-ui/kit/auth",
+    "ngPackage": {
+        "lib": {
+            "entryFile": "index.ts"
+        }
+    },
+    "peerDependencies": {
+        "@angular/common": ">=11.0.2 < 15",
+        "@angular/core": ">=11.0.2 < 15",
+        "rxjs": "6.0.0 - 8.x",
+        "keycloak-js": "18.x.x"
+    }
+}

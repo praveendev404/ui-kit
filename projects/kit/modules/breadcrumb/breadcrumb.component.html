@@ -1,0 +1,128 @@
+<svg *ngIf="mode === 'arrow'" class="d-none">
+    <symbol id="start-arrow" viewBox="0 0 9 24" fill="transparent">
+        <path
+            d="M0 24V0C0.217794 0 0.421177 0.108847 0.541987 0.290063L7.97881 11.4453C8.20275 11.7812 8.20275 12.2188 7.97881 12.5547L0.541987 23.7099C0.421177 23.8912 0.217794 24 0 24Z"
+            fill="currentColor"
+        />
+    </symbol>
+    <symbol id="end-arrow" viewBox="0 0 9 24" fill="transparent">
+        <path
+            d="M7.99999 12L1.03645 1.5547C0.593416 0.890145 1.06981 0 1.8685 0H7.99999L7.99999 12L7.99999 24H1.8685C1.06981 24 0.593416 23.1099 1.03645 22.4453L7.99999 12Z"
+            fill="currentColor"
+        />
+    </symbol>
+</svg>
+
+@let prefixes = breadcrumbService.getPrefixes() | async;
+
+<div *ngIf="prefixes.length && mode === 'pace'" class="section prefix">
+    <ng-template [ngTemplateOutlet]="prefixesTemplate"></ng-template>
+</div>
+
+<ng-template #prefixesTemplate>
+    @for (item of prefixes; track item.label; let first = $first, last = $last)
+    {
+    <ng-template #prefixTemplate>
+        {{ item.label }}
+    </ng-template>
+    <ng-container
+        *ngTemplateOutlet="
+            crumbTemplate;
+            context: {
+                $implicit: item,
+                template: prefixTemplate,
+                first: first && !prefixes?.length,
+                last: last,
+                prefix: true
+            }
+        "
+    ></ng-container>
+    }
+</ng-template>
+
+<div class="section">
+    <ng-container *ngIf="mode !== 'pace'">
+        <ng-template [ngTemplateOutlet]="prefixesTemplate"></ng-template>
+    </ng-container>
+
+    <ng-container *ngFor="let item of items; first as first; last as last">
+        <ng-container
+            *ngTemplateOutlet="
+                crumbTemplate;
+                context: {
+                    $implicit: item,
+                    template: item.template,
+                    first: first && !prefixes?.length,
+                    last: last
+                }
+            "
+        ></ng-container>
+    </ng-container>
+</div>
+
+<ng-template
+    #crumbTemplate
+    let-template="template"
+    let-item
+    let-first="first"
+    let-last="last"
+>
+    @let fakeItem = isFake(item);
+
+    <ng-container [ngSwitch]="mode">
+        <ng-container *ngSwitchCase="'arrow'">
+            <a
+                class="breadcrumb-arrow-item"
+                [class.breadcrumb-arrow-item-first]="first"
+                [class.fake]="fakeItem"
+                [attr.tabindex]="isActive(item) ? -1 : undefined"
+                [routerLink]="item.link?.()"
+                [class.active]="isActive(item)"
+                [class.cursor-pointer]="!fakeItem"
+                (click)="item.breadcrumbClick?.emit($event)"
+            >
+                <svg class="end-arrow" *ngIf="!first" width="9" height="24">
+                    <use transform="translate(1)" href="#end-arrow"></use>
+                </svg>
+                <span class="content">
+                    <ng-container *ngTemplateOutlet="template"></ng-container>
+                </span>
+                <svg class="start-arrow" width="9" height="24">
+                    <use href="#start-arrow"></use>
+                </svg>
+            </a>
+        </ng-container>
+        <ng-container *ngSwitchCase="'bootstrap'">
+            <a
+                class="breadcrumb-item"
+                [routerLink]="item.link?.()"
+                [attr.tabindex]="isActive(item) ? -1 : undefined"
+                [class.active]="isActive(item)"
+                [class.fake]="fakeItem"
+                [class.cursor-pointer]="!fakeItem"
+                (click)="item.breadcrumbClick?.emit($event)"
+            >
+                <ng-container *ngTemplateOutlet="template"></ng-container>
+            </a>
+        </ng-container>
+        <ng-container *ngSwitchCase="'pace'">
+            <a
+                [class.active]="isActive(item)"
+                [routerLink]="item.link?.()"
+                [attr.tabindex]="isActive(item) ? -1 : undefined"
+                [class.active]="isActive(item)"
+                [class.fake]="fakeItem"
+                [class.cursor-pointer]="!fakeItem"
+                (click)="item.breadcrumbClick?.emit($event)"
+            >
+                <ng-container *ngTemplateOutlet="template"></ng-container>
+            </a>
+
+            <fa-icon
+                class="delimeter"
+                *ngIf="!last"
+                icon="chevron-right"
+            ></fa-icon>
+        </ng-container>
+    </ng-container>
+</ng-template>

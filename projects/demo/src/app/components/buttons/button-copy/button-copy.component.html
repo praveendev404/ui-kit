@@ -1,0 +1,5 @@
+<lib-textarea [(ngModel)]="text"></lib-textarea>
+
+<button class="btn btn-primary mt-3" [copyToClipboard]="text" (copied)="handleCopied()">
+    Copy to clipboard
+</button>

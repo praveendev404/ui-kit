@@ -1,0 +1,13 @@
+<lib-side-menu [menuItems]="menu">
+    <ng-template sideMenuHeaderTemplate>
+        <h1 class="pl-2">Header Content</h1>
+    </ng-template>
+
+    <ng-template sideMenuItemTemplate let-item>
+        {{ item.title }}
+    </ng-template>
+
+    <ng-template sideMenuChildItemTemplate let-item>
+        {{ item.title }}
+    </ng-template>
+</lib-side-menu>

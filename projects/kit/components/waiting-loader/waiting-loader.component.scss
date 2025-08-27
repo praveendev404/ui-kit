@@ -1,0 +1,6 @@
+@use 'mixins' as *;
+
+:host {
+    display: block;
+    color: cssvar(brand-base);
+}

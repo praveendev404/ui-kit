@@ -1,0 +1,41 @@
+@use 'mixins' as *;
+
+$border-width: 1px;
+nav {
+    position: relative;
+    width: 100%;
+    height: 28px;
+    background-color: cssvar(blackout);
+    font-size: 1em;
+    border: $border-width solid cssvar(brand-base);
+    border-radius: 4px;
+}
+
+nav a {
+    height: 100%;
+    font-size: 12px;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    text-align: center;
+    color: cssvar(brand-base);
+    cursor: pointer;
+    line-height: 26px;
+    transition: all 0.5s ease 0s;
+}
+
+.switch-active-item {
+    color: #fff !important;
+}
+
+nav .slider {
+    position: absolute;
+    height: calc(100% + 2 * #{$border-width});
+    border-radius: 4px;
+    top: -$border-width;
+    z-index: 0;
+    transition: all 0.5s ease 0s;
+    background-color: cssvar(brand-base);
+    margin-left: -$border-width;
+}

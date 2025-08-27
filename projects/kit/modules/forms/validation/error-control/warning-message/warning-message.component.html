@@ -1,0 +1,15 @@
+<ng-template [ngTemplateOutlet]="isInfo ? info : warning"></ng-template>
+
+<ng-template #info>
+    <div class="info-message-container body3" [hidden]="!show">
+        <fa-icon icon="facInfoCircle" class="mr-5px font-12px"></fa-icon>
+        {{ text }}
+    </div>
+</ng-template>
+
+<ng-template #warning>
+    <div class="warning-message-container" [hidden]="!show">
+        {{ text }}
+    </div>
+</ng-template>
+

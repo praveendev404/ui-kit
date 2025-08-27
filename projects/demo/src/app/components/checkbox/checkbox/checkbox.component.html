@@ -1,0 +1,36 @@
+<div class="d-flex" style="gap: 10px">
+    <div
+        class="d-flex flex-column"
+        style="gap: 20px"
+        *ngFor="let appearance of ['filled', 'border', 'unbordered']"
+    >
+        <h3>Appearance {{ appearance }}</h3>
+        <checkbox [appearance]="appearance" [value]="true"
+            >True Enabled</checkbox
+        >
+        <checkbox [appearance]="appearance" [value]="true" [disabled]="true"
+            >True Disabled</checkbox
+        >
+        <checkbox [appearance]="appearance" [value]="false"
+            >False Enabled</checkbox
+        >
+        <checkbox [appearance]="appearance" [value]="false" [disabled]="true"
+            >False Disabled</checkbox
+        >
+        <checkbox [appearance]="appearance" [undefinedState]="true"
+            >Undefined Enabled</checkbox
+        >
+        <checkbox
+            [appearance]="appearance"
+            [undefinedState]="true"
+            [disabled]="true"
+            >Undefined Disabled</checkbox
+        >
+        <checkbox [appearance]="appearance" [value]="true" [loading]="true"
+            >True Loading</checkbox
+        >
+        <checkbox [appearance]="appearance" [value]="false" [loading]="true"
+            >False Loading</checkbox
+        >
+    </div>
+</div>

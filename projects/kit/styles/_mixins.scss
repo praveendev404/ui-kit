@@ -1,0 +1,61 @@
+$prefix: 'da';
+
+@mixin cssvars($css_variables, $theme: '') {
+    #{':root' + if($theme != '', '[data-theme="#{$theme}"]','')} {
+        @each $name, $value in $css_variables {
+            --#{$prefix}-#{"" + $name}: #{$value};
+        }
+    }
+}
+
+//build css variable
+@mixin cssvar($name, $value: '') {
+    --#{$prefix}-#{$name}: #{$value};
+}
+
+// get css variable
+@function cssvar($name) {
+    @return var(--#{$prefix}-#{$name});
+}
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        @if map-has-key($map, $key) {
+            $map: map-get($map, $key);
+        } @else {
+            @error "Property #{$property} must be either left or right.";
+        }
+    }
+    @return $map;
+}
+
+
+// reusable styles
+
+@mixin responsive-styles($default-font-size:null, $default-line-height:null, $default-height:null, $default-min-height:null, $default-max-height:null, $default-padding:null, $font-size:null, $line-height:null, $height:null, $min-height:null, $max-height:null, $padding:null,$font-size-2:null, $line-height-2:null, $height-2:null, $min-height-2:null, $max-height-2:null, $padding-2:null) {
+    
+    font-size: $default-font-size;
+    line-height: $default-line-height;
+    height: $default-height;
+    min-height: $default-min-height;
+    max-height: $default-max-height;
+    padding: $default-padding;
+    
+    @media screen and (min-width: 1366px) {
+        font-size: $font-size;
+        line-height: $line-height;
+        height: $height;
+        min-height: $min-height;
+        max-height: $max-height;
+        padding: $padding;
+    }
+
+    @media screen and (min-width: 1920px) {
+        font-size: $font-size-2;
+        line-height: $line-height-2;
+        height: $height-2;
+        min-height: $min-height-2;
+        max-height: $max-height-2;
+        padding: $padding-2;
+    }
+}

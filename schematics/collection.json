@@ -1,0 +1,13 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-new": {
+      "description": "Init project and install Native Federation",
+      "factory": "./mfe/install-native-federation/index#installNf"
+    },
+    "generate-micro-frontend": {
+      "description": "Micro frontend generation schematic",
+      "factory": "./mfe/generate-micro-front/index#generateMfe"
+    }
+  }
+}

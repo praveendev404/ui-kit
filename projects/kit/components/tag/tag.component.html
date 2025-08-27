@@ -1,0 +1,14 @@
+<div class="tag">
+    <ng-content select="[left-content]"></ng-content>
+    <span class="text text-truncate body3">
+        {{ tag }}
+    </span>
+    <fa-icon *ngIf="isLink" class="body3 ml-1" icon="goto"></fa-icon>
+
+    <fa-icon
+        *ngIf="removable"
+        class="body3 ml-1 cursor-pointer"
+        icon="times"
+        (click)="handleRemove($event)"
+    ></fa-icon>
+</div>

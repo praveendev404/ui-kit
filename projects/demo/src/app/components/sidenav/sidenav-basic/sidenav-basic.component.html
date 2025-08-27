@@ -1,0 +1,32 @@
+<div [style.height.px]="400" style="position: relative">
+    <lib-sidenav-container>
+        <lib-sidenav [items]="sidenavItems">
+            <ng-template
+                libSidenavItemPostfix
+                let-expanded="expanded"
+                let-item="item"
+            >
+                <div
+                    class="custom-badge ml-auto custom-badge-background text-white"
+                    [class.custom-badge--collapsed]="!expanded"
+                    *ngIf="item.data"
+                >
+                    {{ item.data.count }}
+                </div>
+            </ng-template>
+        </lib-sidenav>
+
+        <lib-sidenav-content class="sidenav-content">
+            dfgfgfg
+            <ng-container [ngTemplateOutlet]="sidenavContent"></ng-container>
+        </lib-sidenav-content>
+    </lib-sidenav-container>
+    <ng-template #sidenavContent>
+        dfdfdf
+        <router-outlet></router-outlet>
+    </ng-template>
+</div>
+
+<lib-sidebar style="height: 200px; --expanded-sidebar-width: 250px">
+    <div>verylargeverylargeverylargeverylargeverylargeverylargeverylargeverylarge</div>
+</lib-sidebar>

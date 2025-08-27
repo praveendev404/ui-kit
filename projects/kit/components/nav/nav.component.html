@@ -1,0 +1,100 @@
+<div #tabSet class="nav-tab-set blue-tab level-{{ level }}">
+    <nav
+        #horizontalNav="ngbNav"
+        ngbNav
+        libScroller
+        [lisScrollerDisabled]="!useHorizontalScroll"
+        class="nav nav-tabs justify-content-start"
+        [(activeId)]="activeId"
+        [destroyOnHide]="destroyOnHide === undefined ? true : destroyOnHide"
+        (navChange)="onNavChange($event)"
+    >
+        <ng-container
+            *ngFor="let navItem of navItems"
+            [ngbNavItem]="navItem.navItemId"
+        >
+            <ng-container
+                *ngIf="!navItem.hidden && !navItem.navItemHeaderTemplate"
+            >
+                <a
+                    *ngIf="
+                        !navItem.navItemLink && !navItem.navItemContextMenuItems
+                    "
+                    ngbNavLink
+                    (click)="onNavItemClick(navItem)"
+                >
+                    <ng-template
+                        [ngTemplateOutlet]="tabTitleTmpl"
+                    ></ng-template>
+                </a>
+
+                <a
+                    *ngIf="navItem.navItemLink"
+                    ngbNavLink
+                    routerLinkActive
+                    #rla="routerLinkActive"
+                    [routerLink]="navItem.navItemLink"
+                    [class.active]="rla.isActive"
+                    (click)="onNavItemClick(navItem)"
+                >
+                    <ng-template
+                        [ngTemplateOutlet]="tabTitleTmpl"
+                    ></ng-template>
+                </a>
+
+                <lib-context-menu
+                    *ngIf="
+                        !navItem.navItemLink && navItem.navItemContextMenuItems
+                    "
+                    class="context-menu mr-30px"
+                    [placement]="'bottom-left'"
+                    [menuItems]="navItem.navItemContextMenuItems"
+                    (itemClicked)="onNavItemClick($event)"
+                    (click)="onNavItemClick(navItem)"
+                >
+                    <ng-template buttonTemplate>
+                        <span class="nav-tem nav-link mr-0">
+                            {{ navItem.navItemName }}
+                        </span>
+                    </ng-template>
+                </lib-context-menu>
+            </ng-container>
+
+            <a *ngIf="navItem.navItemHeaderTemplate" ngbNavLink>
+                <ng-container
+                    *ngTemplateOutlet="navItem.navItemHeaderTemplate"
+                ></ng-container>
+            </a>
+            <ng-template ngbNavContent>
+                <ng-container
+                    *ngTemplateOutlet="navItem.template"
+                ></ng-container>
+            </ng-template>
+            <ng-template #tabTitleTmpl>
+                <ng-container *ngIf="tabHeaderTmpl; else defaultHeaderTmpl">
+                    <ng-template
+                        [ngTemplateOutlet]="tabHeaderTmpl"
+                        [ngTemplateOutletContext]="{ $implicit: navItem }"
+                    ></ng-template>
+                </ng-container>
+                <ng-template #defaultHeaderTmpl>{{
+                        navItem.navItemName
+                    }}</ng-template>
+            </ng-template>
+        </ng-container>
+        <lib-context-menu class="context-menu" [hidden]="!hiddenItems.length">
+            <ng-template specialItems>
+                <span
+                    *ngFor="let item of hiddenItems"
+                    class="dropdown-item cursor-pointer font-12px"
+                    [routerLink]="item.routerLink"
+                    (click)="selectById(item.id)"
+                >
+                    {{ item.name }}
+                </span>
+            </ng-template>
+        </lib-context-menu>
+    </nav>
+    <div [ngbNavOutlet]="horizontalNav"></div>
+    <ng-content></ng-content>
+</div>

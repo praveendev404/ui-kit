@@ -1,0 +1,133 @@
+@use 'mixins' as *;
+
+$default-checkbox-radius: 4px;
+
+.checkbox-item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: inherit;
+    #{--checkbox-border}: cssvar(border-and-dividers);
+}
+
+.button-item {
+    font-size: 11px;
+    padding: 1px 6px;
+    border-color: cssvar(color-border-3);
+    color: cssvar(title);
+    box-shadow: none;
+
+    &.btn-primary {
+        color: cssvar(white);
+    }
+
+    &:hover {
+        background: none;
+    }
+
+    &:active,
+    &.btn-primary:hover {
+        background-color: cssvar(brand-base) !important;
+        box-shadow: none !important;
+    }
+}
+
+.checkbox-item__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--checkbox-border-radius, #{$default-checkbox-radius});
+    position: relative;
+    background: var(--da-checkbox-background);
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    line-height: initial;
+
+    & .icon,
+    :host::ng-deep & svg path {
+        color: var(--da-checkbox-icon) !important;
+    }
+}
+
+:host[data-appearance="filled"] .checkbox-item {
+    .native-checkbox:checked,
+    .native-checkbox:indeterminate {
+        & + .checkbox-item__icon {
+            #{--da-checkbox-background}: cssvar(brand-base);
+            #{--da-checkbox-icon}: cssvar(white);
+        }
+
+        &:disabled + .checkbox-item__icon {
+            #{--da-checkbox-background}: cssvar(brand-disabled);
+        }
+
+        &:enabled:not(:focus):hover + .checkbox-item__icon {
+            #{--da-checkbox-background}: cssvar(brand-hover);
+        }
+    }
+}
+
+:host[data-appearance="border"],
+:host[data-appearance="unbordered"] {
+    #{--da-checkbox-icon}: cssvar(brand-base);
+}
+
+:host[data-appearance="border"] {
+    .checkbox-item__icon::after {
+        content: "";
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 1px solid cssvar(border-and-dividers);
+        border-radius: var(
+            --checkbox-border-radius,
+            #{$default-checkbox-radius}
+        );
+    }
+
+    .native-checkbox:enabled:not(:focus):hover + .checkbox-item__icon::after {
+        border-color: cssvar(brand-base);
+    }
+
+    .native-checkbox:disabled + .checkbox-item__icon {
+        #{--da-checkbox-background}: #0000000a;
+    }
+}
+
+.native-checkbox:disabled ~,
+.checkbox-item.loading {
+    .checkbox-item__label {
+        color: cssvar(disable);
+    }
+}
+
+.checkbox-item.loading,
+.checkbox-item.disabled {
+    cursor: initial;
+}
+
+.checkbox-item:not(.loading) .native-checkbox:disabled + .checkbox-item__icon {
+    #{--da-checkbox-icon}: cssvar(disable);
+}
+
+:host.size-s {
+    .checkbox-item {
+        &__icon {
+            width: 18px;
+            height: 18px;
+            font-size: 18px;
+        }
+    }
+}
+
+.native-checkbox:enabled:focus + .checkbox-item__icon {
+    box-shadow: 0 0 0 4px cssvar(brand-20);
+}
+
+.native-checkbox {
+    appearance: none;
+}

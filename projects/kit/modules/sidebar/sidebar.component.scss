@@ -1,0 +1,76 @@
+:host {
+    position: relative;
+    display: block;
+    width: var(--sidebar-width);
+    
+    --sidebar-width: var(--expanded-sidebar-width);
+}
+
+:host.sidebar-transition {
+    transition: width 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+:host.collapsed {
+    --sidebar-width: 25px;
+
+    section {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .resize-button fa-icon {
+        transform: scaleX(-1);
+    }
+}
+
+section {
+    min-width: var(--expanded-sidebar-width);
+    transition: opacity 200ms linear, visibility linear;
+}
+
+.resize-button-wrapper {
+    position: absolute;
+    top: var(--sidebar-expand-button-top, 1rem);
+    right: 0;
+    transform: translateX(50%);
+    background-color: var(--da-cards-and-blocks);
+    
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    transition: opacity 350ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.resize-button {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--da-cards-and-blocks);
+    border: 1px solid var(--da-border-and-dividers);
+    box-shadow: var(--da-card-hover-box-shadow);
+}
+
+.resize-button-wrapper:hover,
+:host:not(.collapsed):hover .resize-button-wrapper {
+    opacity: 1;
+}
+
+:host:not(.collapsed) .resize-button-wrapper {
+    opacity: 0;
+}
+
+.resize-button-zone {
+    position: absolute;
+    inset: -1rem;
+}
+
+::ng-deep .sidebar-resize-tooltip .tooltip-inner {
+    width: fit-content;
+    max-width: 500px;
+    white-space: nowrap;
+}
+
+.content-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+}

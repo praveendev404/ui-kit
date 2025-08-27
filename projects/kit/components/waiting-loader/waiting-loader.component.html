@@ -1,0 +1,29 @@
+<svg [attr.viewBox]="'0 0 ' + loaderRadius * 2 + ' ' + loaderRadius * 2">
+    <g
+        [attr.transform]="
+            'translate(' + loaderRadius + ',' + loaderRadius + ')'
+        "
+    >
+        <g
+            *ngFor="let circle of circles; first as first"
+            [attr.transform]="circle.transform"
+        >
+            <circle
+                cx="0"
+                cy="0"
+                r="2"
+                fill="currentColor"
+                [attr.fill-opacity]="first ? 1 : 0"
+            >
+                <animate
+                    attributeName="fill-opacity"
+                    dur="1s"
+                    repeatCount="indefinite"
+                    begin="0s"
+                    calcMode="discrete"
+                    [attr.values]="circle.values"
+                ></animate>
+            </circle>
+        </g>
+    </g>
+</svg>

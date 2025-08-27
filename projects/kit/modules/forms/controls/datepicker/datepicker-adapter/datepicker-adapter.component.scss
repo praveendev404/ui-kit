@@ -1,0 +1,392 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.form-control:focus {
+    outline: 0 !important;
+    border-color: initial;
+    box-shadow: none;
+}
+
+.control {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    height: fit-content;
+}
+
+.label {
+    font-size: 11px;
+    color: cssvar(title);
+    display: block;
+    margin-bottom: 8px;
+
+    &.disabled {
+        color: cssvar(disable);
+    }
+    .mandatory {
+        color: cssvar(error-base);
+    }
+}
+
+.has-validation-error {
+    border-color: cssvar(error-base);
+}
+
+.custom-navigation {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+}
+
+:host .custom-datepicker-group {
+    background: cssvar(cards-and-blocks);
+
+    ::ng-deep {
+        .dropdown-menu {
+            .ngb-dp-month-name,
+            .ngb-dp-day .btn-light {
+                font-size: 14px !important;
+                line-height: 18px !important;
+            }
+
+            .years-content,
+            .month-content {
+                .item {
+                    font-size: 14px;
+                    line-height: 18px;
+                }
+            }
+
+            .ngb-dp-day .btn-light {
+                width: inherit;
+                height: inherit;
+            }
+
+            .ngb-dp-weekday,
+            .ngb-dp-day {
+                width: 40px !important;
+                height: 40px !important;
+            }
+
+            .ngb-dp-week {
+                padding: 0 8px !important;
+            }
+
+            .ngb-dp-week:last-child {
+                padding: 0 8px 8px !important;
+            }
+        }
+    }
+
+    .form-control {
+        background: cssvar(cards-and-blocks);
+        border-color: cssvar(border-and-dividers) !important;
+        height: calc(
+            100% - #{$control-normal-border-size + $control-normal-border-size}
+        ) !important; // need to fix overlapping border of input
+    }
+
+    &:not(.disabled) {
+        &:focus-within {
+            border: #{$control-focus-border-size} solid cssvar(brand-20);
+            width: calc(
+                100% + #{$control-focus-border-size -
+                    $control-normal-border-size}
+            );
+
+            .form-control {
+                border: 0 !important;
+                // default padding-left: 12 px
+                padding-left: #{13px - $control-normal-border-size -
+                    ($control-focus-border-size - $control-normal-border-size)};
+                margin-right: -#{$control-focus-border-size - $control-normal-border-size};
+            }
+
+            ::ng-deep .dropdown-menu {
+                top: 3px !important;
+                left: -3px !important;
+            }
+        }
+
+        &:focus-within,
+        &:hover,
+        &:active {
+            border-radius: 4px;
+
+            .form-control {
+                border: 0 !important;
+            }
+
+            .input-group-append {
+                height: 100% !important;
+                border: 0 !important;
+                margin-top: -$control-normal-border-size; // fix for jumping button
+            }
+        }
+
+        &:hover,
+        &:active {
+            width: 100%;
+            border: #{$control-normal-border-size} solid cssvar(brand-base);
+
+            // fix for jumping popup
+            ::ng-deep .dropdown-menu {
+                left: #{$control-focus-border-size - $control-normal-border-size} !important;
+                top: #{$control-focus-border-size - $control-normal-border-size} !important;
+            }
+
+            //default values
+            .form-control {
+                padding-left: #{13px - $control-normal-border-size};
+                margin-right: 0;
+            }
+
+            ::ng-deep .dropdown-menu {
+                top: 6px !important;
+                left: 0 !important;
+            }
+        }
+    }
+
+    &.disabled {
+        background: rgba(0, 0, 0, 0.04);
+        border-color: cssvar(border-and-dividers);
+        color: cssvar(disable);
+
+        .form-control,
+        .input-group-append {
+            border: 0 !important;
+            color: cssvar(disable);
+
+            .icons {
+                cursor: default;
+                color: cssvar(disable);
+            }
+        }
+    }
+
+    .penult {
+        border: 1px solid cssvar(border-and-dividers);
+        border-left: none;
+        border-right: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        height: inherit;
+    }
+
+    .last {
+        display: flex;
+        align-items: center;
+        border: 1px solid cssvar(border-and-dividers);
+        border-bottom-right-radius: 0.25rem !important;
+        border-top-right-radius: 0.25rem !important;
+        border-left: none;
+        height: inherit;
+    }
+
+    ::ng-deep {
+        .ngb-dp-month-name {
+            font-size: 14px;
+            line-height: 18px;
+            color: cssvar(title);
+            height: 2em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .ngb-dp-weekdays {
+            .ngb-dp-weekday {
+                text-align: center;
+                font-style: normal;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                text-transform: uppercase;
+                color: cssvar(primary-text);
+            }
+        }
+
+        .ngb-dp-arrow {
+            .ngb-dp-arrow-btn {
+                .ngb-dp-navigation-chevron {
+                    color: cssvar(brand-base);
+                    font-size: 10px;
+                }
+
+                display: flex;
+                flex-direction: row;
+            }
+            color: cssvar(border-and-dividers);
+            font-size: 10px;
+            height: 2em !important;
+        }
+    }
+
+    .selected {
+        background: cssvar(brand-base);
+        color: white !important;
+    }
+}
+
+:host.size-s {
+    .custom-datepicker-group {
+        ::ng-deep {
+            .dropdown-menu {
+                .ngb-dp-month-name,
+                .ngb-dp-day .btn-light {
+                    font-size: 12px !important;
+                    line-height: 16px !important;
+                }
+
+                .years-content,
+                .month-content {
+                    .item {
+                        font-size: 12px;
+                        line-height: 16px;
+                        height: 32px;
+                        width: 32px;
+                    }
+                }
+
+                .ngb-dp-weekday,
+                .ngb-dp-day {
+                    width: 32px !important;
+                    height: 32px !important;
+                }
+            }
+        }
+    }
+}
+
+:host.lib-datepicker-adapter--left {
+    align-items: center;
+
+    .input-group {
+        flex-grow: 1;
+        margin-left: 5px;
+    }
+
+    .label {
+        margin-bottom: 0;
+    }
+}
+.input-group-append {
+    height: calc(
+        100% - #{$control-normal-border-size + $control-normal-border-size}
+    ) !important; // fix for center position
+
+    .icons {
+        color: cssvar(base-brand);
+    }
+
+    .btn {
+        box-shadow: none;
+        z-index: 0 !important;
+    }
+
+    .btn:hover {
+        background: none;
+    }
+}
+
+::ng-deep .dropdown-menu {
+    border-color: cssvar(border-and-dividers);
+    min-width: auto;
+    box-shadow: cssvar(soft-default-shadow);
+    border-radius: 4px;
+
+    .ngb-dp-header {
+        .ngb-dp-arrow {
+            .ngb-dp-arrow-btn {
+                padding: 0 !important;
+                margin: 0 8px 0 auto;
+                height: calc(100% - 2px) !important;
+            }
+            .ngb-dp-arrow-btn:focus {
+                outline: none !important;
+            }
+        }
+    }
+
+    .ngb-dp-week {
+        .ngb-dp-day {
+            * {
+                color: cssvar(primary-text);
+            }
+
+            .btn-light {
+                font-weight: 400 !important;
+                font-size: 14px !important;
+                line-height: 18px !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover:not(.outside) {
+                    color: cssvar(brand-base) !important;
+                }
+
+                &.outside,
+                &:hover {
+                    background: cssvar(cards-and-blocks) !important;
+                }
+
+                &.active:not(.outside) {
+                    background: cssvar(brand-base) !important;
+                    color: white !important;
+                }
+            }
+        }
+    }
+
+    .ngb-dp-arrow.right {
+        .ngb-dp-arrow-btn {
+            margin: 0 auto 0 8px;
+        }
+    }
+
+    .ngb-dp-header {
+        padding-top: 0.25rem;
+        line-height: 16px !important;
+    }
+
+    .ngb-dp-header,
+    .ngb-dp-weekdays {
+        background: cssvar(table-header);
+    }
+
+    .ngb-dp-weekdays {
+        margin-bottom: 8px;
+    }
+}
+
+.hide-month-picker {
+    ::ng-deep {
+        .ngb-dp-content.ngb-dp-months {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    :host ::ng-deep {
+        .datepicker-with-label {
+            .dropdown-menu {
+                left: -55px;
+            }
+        }
+
+        .dropdown-menu {
+            left: -15px !important;
+        }
+
+        .timepicker-popover {
+            left: -15px !important;
+        }
+    }
+}

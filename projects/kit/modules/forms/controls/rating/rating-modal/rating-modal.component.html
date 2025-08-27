@@ -1,0 +1,82 @@
+<lib-modal-header>
+    <span>{{ translatedText?.RATING_OF || 'Rating of' }} {{ templateName }}</span>
+</lib-modal-header>
+
+<div class="modal-body" [formGroup]="form">
+    <div class="d-flex flex-column border-bottom mb-10px">
+        <div class="row no-gutters align-items-center mb-5px">
+            <ngb-rating class="rating" formControlName="rating" [max]="max">
+                <ng-template let-fill="fill">
+                    <fa-icon
+                        *ngIf="fill === 100"
+                        icon="star"
+                        class="brand-star"
+                    ></fa-icon>
+
+                    <fa-icon
+                        *ngIf="fill < 100"
+                        icon="star"
+                        class="empty-star"
+                    ></fa-icon>
+                </ng-template>
+            </ngb-rating>
+        </div>
+        <div class="row no-gutters align-items-center mb-10px">
+            <span>
+                {{ translatedText?.WILL_CHANGE || 'You will be able to change it in any time' }}
+            </span>
+        </div>
+    </div>
+    <span class="text-label mb-10px">
+        {{ translatedText?.OVERALL_RATING || 'Overall Rating' }}
+    </span>
+    <lib-rating
+        [editable]="false"
+        formControlName="rating"
+        [max]="max"
+    ></lib-rating>
+    <span class="downloads-label">
+        {{ data?.downloads || 0 }} {{ translatedText?.DOWNLOADS || 'downloads' }}
+    </span>
+    <div class="d-flex flex-column mt-10px">
+        <div
+            *ngFor="let ratingRowItem of ratingRowsTemplate"
+            class="row no-gutters mt-5px align-items-center"
+        >
+            <span class="rating-row-label-left mr-5px col">
+                {{
+                    ratingRowItem.label +
+                        (ratingRowItem.label !== "1" ? " stars" : " star")
+                }}
+            </span>
+            <ngb-progressbar
+                [style.width]="ratingRowItem.width"
+                [height]="ratingRowItem.height"
+                type="primary"
+                [value]="ratingRowItem.value"
+            ></ngb-progressbar>
+            <span class="rating-row-label-right ml-2 col"
+                >{{ ratingRowItem.value | number: "1.0-1" }} %</span
+            >
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.dismiss('Cancel click')"
+    >
+        {{ translatedText?.CANCEL || 'Cancel' }}
+    </button>
+    <button
+        type="button"
+        ngbAutofocus
+        class="btn btn-primary"
+        [disabled]="!form.dirty"
+        (click)="saveRating()"
+    >
+        {{ translatedText?.RATE || 'Rate' }}
+    </button>
+</div>

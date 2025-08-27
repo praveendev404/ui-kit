@@ -1,0 +1,130 @@
+<span
+    *ngIf="label"
+    class="label label-{{ labelPosition }}"
+    [class.disabled]="disabled"
+>
+    {{ label }}
+    <span *ngIf="isRequired" class="mandatory">*</span>
+    <ng-content></ng-content>
+</span>
+<div
+    perfect-scrollbar-styles
+    #treelikeDropdown
+    class="treelike-dropdown"
+    [ngClass]="{
+        'label-left': labelPosition === 'left',
+        'has-validation-error': validationError || hasErrors,
+        clearable: clearable,
+        warning: warning,
+        'size-s': sizeS
+    }"
+>
+    <!--    #controlContainer is necessary for base form control-->
+    <ng-select
+        class="treelike-dropdown-select"
+        #controlContainer
+        [class.select--append-to]="!!appendTo"
+        [attr.disabled]="disabled || null"
+        [style.minWidth.px]="minWidth"
+        [style.maxWidth.px]="maxWidth"
+        [style.width.px]="width"
+        [style.maxHeight.px]="height * 2"
+        [class.truncated]="truncate"
+        [(ngModel)]="value"
+        [items]="currentItems"
+        [bindValue]="'value'"
+        [bindLabel]="'label'"
+        [placeholder]="placeholder"
+        [notFoundText]="notFoundText"
+        [disabled]="disabled"
+        [virtualScroll]="virtualScroll"
+        [multiple]="false"
+        [closeOnSelect]="closeOnSelect"
+        [clearable]="clearable"
+        [appendTo]="appendTo"
+        [dropdownPosition]="dropdownPosition"
+        (open)="onOpen()"
+        (change)="handleChange($event)"
+        (remove)="handleRemove($event)"
+        (blur)="onTouched()"
+        (scroll)="onScrollToEnd($event)"
+        (scrollToEnd)="onScroll()"
+        (close)="onClose()"
+        (clear)="onClear()"
+        [attr.data-test-id]="id"
+    >
+        <ng-template ng-option-tmp let-item="item">
+            <ng-container
+                *ngTemplateOutlet="
+                    defaultOptionTemplate;
+                    context: {
+                        item: item
+                    }
+                "
+            ></ng-container>
+            <ng-template #defaultOptionTemplate>
+                <div
+                    class="go-to-parent"
+                    (click)="
+                        currentItems.indexOf(item) === 0 &&
+                        itemParentMap.get(item.value)
+                            ? goBackToParens(item)
+                            : handleChange(item)
+                    "
+                >
+                    <fa-icon
+                        [icon]="item.icon"
+                        *ngIf="
+                            (currentItems.indexOf(item) === 0 &&
+                                itemParentMap.get(item.value)) ||
+                            (!itemParentMap.get(item.value) && item.icon)
+                        "
+                        class="font-16px"
+                    ></fa-icon>
+                </div>
+                <div class="treelike-option" (click)="handleChange(item)">
+                    <div class="option-label" [class.size-s]="sizeS">
+                        {{ getOptionLabel(item) }}
+                    </div>
+                    <div class="go-to-child">
+                        <fa-icon
+                            [icon]="icons.facChevronRight"
+                            *ngIf="item.children?.length"
+                            class="font-16px"
+                        ></fa-icon>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-template>
+
+        <ng-template ng-label-tmp let-item="item">
+            <ng-container
+                *ngTemplateOutlet="
+                    labelTemplateRef || defaultLabelTemplate;
+                    context: {
+                        item: item
+                    }
+                "
+            ></ng-container>
+
+            <ng-template #defaultLabelTemplate>
+                <span class="value-label" [class.size-s]="sizeS">
+                    {{ getLabel(item.value) }}
+                </span>
+            </ng-template>
+        </ng-template>
+    </ng-select>
+    <div
+        *ngIf="validationError"
+        class="validation-error"
+        [class.size-s]="sizeS"
+    >
+        <fa-icon class="fa" icon="facExclamationCircle"></fa-icon>
+        {{ validationError }}
+    </div>
+
+    <lib-app-warning-message
+        *ngIf="warning"
+        [message]="warningMessage"
+    ></lib-app-warning-message>
+</div>

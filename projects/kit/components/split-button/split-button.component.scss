@@ -1,0 +1,81 @@
+@use 'mixins' as *;
+
+:host {
+    display: inline-block;
+}
+
+.dropdown-menu {
+    box-shadow: cssvar(dropdown-box-shadow);
+    border-radius: 4px;
+
+    .dropdown-item {
+        color: cssvar(primary-text);
+        background-color: cssvar(cards-and-blocks);
+
+        &:hover,
+        &.disabled:hover {
+            background-color: cssvar(brand-12) !important;
+        }
+
+        &.disabled {
+            color: cssvar(disable);
+            pointer-events: initial;
+            cursor: default;
+        }
+
+        &:first-child {
+            border-radius: 4px 4px 0 0;
+        }
+
+        &:last-child {
+            border-radius: 0 0 4px 4px;
+        }
+    }
+}
+
+.dropdown-list {
+    margin: 0;
+}
+
+[x-placement^="top"] {
+    margin-bottom: 4px;
+}
+
+[x-placement^="bottom"] {
+    margin-top: 4px;
+}
+
+[x-placement^="left"] {
+    margin-right: 4px;
+}
+
+[x-placement^="right"] {
+    margin-left: 4px;
+}
+
+.chevron-icon {
+    margin-left: 8px;
+    font-size: 14px;
+
+    &-along {
+        margin-left: 0 !important;
+    }
+}
+
+.dropdown-toggle:after {
+    content: none !important;
+}
+
+::ng-deep {
+    .split-button-item {
+        fa-icon {
+            color: cssvar(brand-base);
+        }
+
+        &.disabled {
+            fa-icon {
+                color: cssvar(disable);
+            }
+        }
+    }
+}

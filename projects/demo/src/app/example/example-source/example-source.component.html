@@ -1,0 +1,81 @@
+<div>
+    <h2 class="source-container">
+        <span>Example</span>
+        <button
+            type="button"
+            class="btn btn-light mr-2 toggle-code"
+            [class.active]="showCode"
+            (click)="showCode = !showCode"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"
+                />
+            </svg>
+            <span class="ml-1">Code</span>
+        </button>
+    </h2>
+
+    <div class="card">
+        <div
+            *ngIf="showCode"
+            class="bg-light border-bottom tabset-code"
+        >
+            <ul
+                ngbNav
+                #nav="ngbNav"
+                class="nav-{{ hasManyFiles ? 'pills' : 'tabs' }}"
+                [class.d-flex]="hasManyFiles"
+                [class.flex-row]="hasManyFiles"
+                [orientation]="hasManyFiles ? 'vertical' : 'horizontal'"
+            >
+                <ng-template [ngIf]="files" [ngIfElse]="old">
+                    <li
+                        ngbNavItem="{{ file.name }}-{{ index }}"
+                        *ngFor="let file of files; index as index"
+                    >
+                        <a ngbNavLink>
+                                    <span
+                                        class="text-truncate"
+                                        [title]="tabType(file.name)"
+                                    >{{ file.name }}</span
+                                    >
+                        </a>
+                        <app-code
+                            *ngbNavContent
+                            [snippet]="getFileSnippet(file)"
+                        ></app-code>
+                    </li>
+                </ng-template>
+
+                <ng-template #old>
+                    <li ngbNavItem="{{ id }}-html">
+                        <a ngbNavLink>
+                            <span>{{ id }}.html</span>
+                        </a>
+                        <app-code
+                            *ngbNavContent
+                            [snippet]="markupSnippet"
+                        ></app-code>
+                    </li>
+                    <li ngbNavItem="{{ id }}-typescript">
+                        <a ngbNavLink>
+                            <span>{{ id }}.ts</span>
+                        </a>
+                        <app-code
+                            *ngbNavContent
+                            [snippet]="codeSnippet"
+                        ></app-code>
+                    </li>
+                </ng-template>
+            </ul>
+
+            <div [ngbNavOutlet]="nav"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,487 @@
+@import "variables";
+
+// buttons
+button,
+button.size-m,
+.btn.button {
+    &:not(.close):not(.jump-to-button):not(.default-size) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0 !important;
+        font-size: 14px !important;
+        height: 32px !important;
+        padding: 0 16px;
+
+        &.size-s {
+            padding: 0 8px;
+            font-size: 12px !important;
+            height: 24px !important;
+        }
+
+        &.size-l {
+            font-size: 14px !important;
+            height: 48px !important;
+        }
+    }
+}
+
+button.btn-icon {
+    padding: 0 8px !important;
+    background: none;
+    border-width: 0;
+    color: cssvar(disable);
+
+    fa-icon {
+        font-size: 16px !important;
+    }
+}
+
+.accordion {
+    button,
+    button.size-m {
+        &:not(.close):not(.jump-to-button):not(.default-size) {
+            display: inline-block;
+            justify-content: normal !important;
+            line-height: normal !important;
+            height: auto !important;
+            font-size: inherit !important;
+        }
+    }
+}
+
+// checkboxes, radio, switch
+.lib-checkbox,
+.lib-checkbox.size-m,
+.lib-radio-button,
+.lib-radio-button.size-m,
+.lib-trigger,
+.lib-trigger.size-m {
+    font-size: 14px !important;
+    line-height: 18px !important;
+    height: 18px !important;
+
+    &.size-s {
+        font-size: 12px !important;
+        line-height: 16px !important;
+        height: 16px !important;
+    }
+}
+
+// search
+.lib-search,
+.lib-search.size-m {
+    height: 32px !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+
+    &.size-s {
+        height: 24px !important;
+        font-size: 12px !important;
+        line-height: 16px !important;
+    }
+
+    &.size-l {
+        height: 48px !important;
+
+        .input-group-text {
+            padding-left: 16px !important;
+        }
+
+        .input {
+            padding-right: 16px !important;
+        }
+    }
+}
+
+// dropdown
+.dropdown,
+.dropdown.size-m,
+.dropdown.size-l {
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.dropdown,
+.dropdown.size-m {
+    .dropdown {
+        height: 32px !important;
+
+        .dropdown-select.ng-select-focused {
+            .perfect-scrollbar {
+                margin-bottom: -2px;
+            }
+        }
+    }
+}
+
+.dropdown.size-s {
+    .dropdown {
+        height: 24px !important;
+        font-size: 12px !important;
+        line-height: 16px !important;
+
+        .dropdown-select.ng-select-focused {
+            &:not(.active):not(:hover) .multiple-label-container {
+                margin-top: -#{$control-focus-border-size - $control-normal-border-size} !important;
+            }
+
+            .perfect-scrollbar {
+                margin-bottom: -1px;
+            }
+        }
+
+        .multiple-label-container {
+            padding: 0 !important;
+            max-height: 24px !important;
+
+            .perfect-scrollbar {
+                max-height: 16px !important;
+            }
+
+            .value-label {
+                font-size: 10px;
+                padding: 0 6px !important;
+            }
+        }
+    }
+}
+
+.dropdown.size-l {
+    .dropdown {
+        height: 48px !important;
+
+        .ng-select-single .ng-select-container {
+            padding-left: 16px !important;
+        }
+
+        .dropdown-select {
+            .dropdown-select.ng-select-focused {
+                .perfect-scrollbar {
+                    margin-bottom: -2px;
+                }
+            }
+
+            .ng-select-container {
+                .ng-input {
+                    left: 5px !important; // for fixing cursor position
+                }
+
+                .ng-clear-wrapper {
+                    padding-right: 8px;
+
+                    .ng-clear,
+                    .ng-clear-wrapper:hover .ng-clear {
+                        font-size: 24px !important;
+                    }
+                }
+            }
+        }
+
+        .multiple-label-container {
+            max-height: 48px !important;
+
+            .perfect-scrollbar {
+                max-height: 36px !important;
+            }
+        }
+    }
+}
+
+// treelike dropdown
+.treelike-dropdown,
+.treelike-dropdown.size-m,
+.treelike-dropdown.size-l {
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.treelike-dropdown,
+.treelike-dropdown.size-m {
+    .treelike-dropdown {
+        height: 32px !important;
+
+        .treelike-dropdown-select.ng-select-focused {
+            .perfect-scrollbar {
+                margin-bottom: -2px;
+            }
+        }
+    }
+}
+
+.treelike-dropdown.size-s {
+    .treelike-dropdown {
+        height: 24px !important;
+        font-size: 12px !important;
+        line-height: 16px !important;
+
+        .treelike-dropdown-select.ng-select-focused {
+            &:not(.active):not(:hover) .multiple-label-container {
+                margin-top: -#{$control-focus-border-size - $control-normal-border-size} !important;
+            }
+
+            .perfect-scrollbar {
+                margin-bottom: -1px;
+            }
+        }
+
+        .multiple-label-container {
+            padding: 0 !important;
+            max-height: 24px !important;
+
+            .perfect-scrollbar {
+                max-height: 16px !important;
+            }
+
+            .value-label {
+                font-size: 10px;
+                padding: 0 6px !important;
+            }
+        }
+    }
+}
+
+.treelike-dropdown.size-l {
+    .treelike-dropdown {
+        height: 48px !important;
+
+        .ng-select-single .ng-select-container {
+            padding-left: 16px !important;
+        }
+
+        .treelike-dropdown-select {
+            .treelike-dropdown-select.ng-select-focused {
+                .perfect-scrollbar {
+                    margin-bottom: -2px;
+                }
+            }
+
+            .ng-select-container {
+                .ng-input {
+                    left: 5px !important; // for fixing cursor position
+                }
+
+                .ng-clear-wrapper {
+                    padding-right: 8px;
+
+                    .ng-clear,
+                    .ng-clear-wrapper:hover .ng-clear {
+                        font-size: 24px !important;
+                    }
+                }
+            }
+        }
+
+        .multiple-label-container {
+            max-height: 48px !important;
+
+            .perfect-scrollbar {
+                max-height: 36px !important;
+            }
+        }
+    }
+}
+
+// datepicker
+.lib-datepicker,
+.lib-datepicker.size-m,
+.lib-datepicker.size-l {
+    input {
+        font-size: 14px !important;
+        line-height: 18px !important;
+    }
+}
+
+.lib-datepicker,
+.lib-datepicker.size-m {
+    .input-group {
+        height: 32px !important;
+    }
+}
+
+.lib-datepicker.size-s {
+    .input-group {
+        height: 24px !important;
+
+        input {
+            font-size: 12px !important;
+            line-height: 16px !important;
+        }
+    }
+}
+
+.lib-datepicker.size-l {
+    .input-group {
+        height: 48px !important;
+
+        .form-control.control {
+            padding: 0 16px !important;
+        }
+    }
+
+    .input-group-append:last-child {
+        padding: 0 16px 0 0 !important;
+    }
+
+    .custom-datepicker-group {
+        &:focus-within {
+            .form-control {
+                // default 16px
+                padding-left: #{16px -
+                    ($control-focus-border-size - $control-normal-border-size)} !important;
+            }
+        }
+
+        &:hover,
+        &:active {
+            border: 1px solid #327de2;
+
+            .form-control {
+                padding-left: 16px !important;
+            }
+
+            .input-group-append {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+//datepicker adapter
+.datepicker-adapter,
+.datepicker-adapter.size-m {
+    .custom-datepicker-group {
+        // 2px is need for input and icon
+        height: 32px + 2px;
+    }
+}
+
+.datepicker-adapter.size-s {
+    .custom-datepicker-group {
+        // 2px is need for input and icon
+        height: 24px + 2px;
+
+        .form-control {
+            padding-top: 4px !important;
+            padding-bottom: 4px !important;
+            font-size: 12px !important;
+            line-height: 16px !important;
+        }
+    }
+}
+
+.datepicker-adapter.size-l {
+    .custom-datepicker-group {
+        // 2px is need for input and icon
+        height: 48px + 2px;
+    }
+}
+
+// textarea
+.textarea,
+.textarea.size-m,
+.textarea.size-l {
+    font-size: 14px !important;
+    line-height: 18px !important;
+}
+
+.textarea,
+.textarea.size-s,
+.textarea.size-m {
+    .textarea-input {
+        padding: 7px 8px !important;
+    }
+}
+
+.textarea.size-s {
+    .textarea-input {
+        font-size: 12px !important;
+        line-height: 16px !important;
+    }
+}
+
+.textarea.size-l {
+    .textarea-input {
+        padding: 15px 16px !important;
+    }
+}
+
+//input
+.lib-input,
+.lib-input.size-s,
+.lib-input.size-m {
+    input {
+        padding: 8px 7px;
+    }
+}
+
+.lib-input.size-s {
+    font-size: 12px;
+    line-height: 16px;
+
+    input {
+        height: 24px;
+    }
+
+    .password-toggle {
+        margin-top: 4px;
+    }
+}
+
+.lib-input,
+.lib-input.size-m,
+.lib-input.size-l {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.lib-input,
+.lib-input.size-m {
+    input {
+        height: 32px;
+        padding: 15px 8px;
+    }
+}
+
+.lib-input.size-l {
+    input {
+        height: 48px;
+        padding: 16px 15px;
+
+        &:active,
+        &:hover {
+            height: 48px;
+        }
+    }
+
+    .password-toggle {
+        margin-top: 15px;
+    }
+}
+
+.button-toggle-group {
+    display: inline-flex;
+    height: 32px;
+    border: 1px solid cssvar(brand-base);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.button-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.button-toggle-group input {
+    display: none;
+}
+
+.button-toggle-group input:checked + .button-toggle {
+    color: cssvar(white);
+    background: cssvar(brand-base);
+}

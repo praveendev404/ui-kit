@@ -1,0 +1,5 @@
+<div class="radio-button-item" [ngClass]="{ disabled: disabledState }">
+    <!--    #controlContainer is necessary for base form control-->
+    <input #controlContainer [id]="id" type="radio" [attr.data-test-id]="testId" [value]="value" [checked]="checked" [name]="name" [disabled]="disabledState" (input)="handleChange()"/>
+    <label [ngClass]="{ disabled: disabledState, 'margin-icon': !noLabelMargin }" [for]="id"><ng-content *ngIf="!label"></ng-content>{{label}}</label>
+</div>

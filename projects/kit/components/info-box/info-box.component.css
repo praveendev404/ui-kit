@@ -1,0 +1,10 @@
+:host {
+    border-radius: 4px;
+    font-weight: bold;
+    background-color: var(--da-brand-12);
+}
+
+.icon {
+    color: var(--da-brand-base);
+    font-size: 16px;
+}

@@ -1,0 +1,55 @@
+@use 'mixins' as *;
+
+.modal-header {
+    color: cssvar(title);
+    border: none;
+
+    button.close {
+        font-size: 30px;
+        font-weight: 300;
+        color: cssvar(popup-icon-close-color);
+        line-height: 1rem;
+    }
+}
+
+.modal-body {
+    font-size: 12px;
+    white-space: pre-line;
+
+    i {
+        color: cssvar(popup-icon-warning-color);
+        font-size: 14px;
+        margin: 0 4px;
+    }
+    .text-description {
+        color: #bebebe;
+        font-size: 10px;
+    }
+
+    .message-with-warning {
+        margin-left: 5px;
+    }
+
+    .warning-icon {
+        color: cssvar(error-base);
+        font-size: 16px !important;
+    }
+}
+
+.modal-footer {
+    border: none;
+    display: flex;
+
+    button {
+        font-size: 11px;
+        line-height: 14px;
+        height: 28px;
+        margin-left: 1rem;
+    }
+
+    button:not(.additional-button) {
+        min-width: fit-content;
+        width: 88px;
+        white-space: nowrap;
+    }
+}

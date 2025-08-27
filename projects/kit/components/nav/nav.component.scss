@@ -1,0 +1,118 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.nav-tab-set {
+    .nav-link {
+        font-size: 14px;
+        border-bottom: 1px solid cssvar(border-and-dividers);
+        padding: 15px 0;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .tab-content {
+        padding: 24px;
+    }
+
+    .more-menu {
+        line-height: 45px;
+        font-size: 16px;
+    }
+}
+
+.nav-tab-set.level-0 {
+    &.blue-tab {
+        background: cssvar(background);
+    }
+
+    .nav-tabs {
+        padding: 0 24px;
+        box-shadow: 0 4px 8px -4px rgba(15, 38, 68, 0.16);
+    }
+
+    .tab-content {
+        background: transparent;
+    }
+}
+
+:host::ng-deep .nav-tab-set.level-0 .tab-pane {
+    background-color: cssvar(cards-and-blocks);
+    padding: 24px;
+    box-shadow: 0 4px 8px rgba(15, 38, 68, 0.16);
+    border-radius: 4px;
+}
+
+:host::ng-deep .nav-tab-set.level-1 .tab-pane,
+:host::ng-deep .nav-tab-set.level-2 .tab-pane {
+    box-shadow: none;
+}
+
+.nav-tab-set.level-1 {
+    .nav-tabs {
+        padding: 0 24px;
+        box-shadow: none;
+    }
+
+    .tab-content {
+        background-color: cssvar(cards-and-blocks);
+    }
+}
+
+.nav-tab-set.level-2 {
+    .nav-tabs {
+        padding: 0;
+        border-bottom: none;
+        box-shadow: none;
+
+        .nav-link {
+            border: 1px solid cssvar(border-and-dividers);
+            border-radius: 4px 4px 0 0;
+            border-left: none;
+            margin-right: 0;
+            padding: 10px 16px;
+            background-color: cssvar(background);
+            color: cssvar(secondary-text-and-icons);
+
+            &.active {
+                border-bottom: 1px solid cssvar(border-and-dividers) !important;
+                background-color: cssvar(cards-and-blocks);
+                color: cssvar(brand-base);
+            }
+
+            &:focus {
+                border-color: cssvar(border-and-dividers) !important;
+            }
+
+            &:first-child {
+                border-left: 1px solid cssvar(border-and-dividers);
+            }
+        }
+    }
+
+    .tab-content {
+        background-color: cssvar(cards-and-blocks);
+        border: 1px solid cssvar(border-and-dividers);
+        border-radius: 0 4px 4px 4px;
+    }
+
+    .more-menu {
+        margin-left: 30px;
+    }
+}
+
+:host ::ng-deep .nav-tab-set .context-menu .chevron-icon {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+:host .context-menu {
+    ::ng-deep button {
+        padding: 0 !important;
+
+        .nav-link {
+            border: none;
+        }
+    }
+}

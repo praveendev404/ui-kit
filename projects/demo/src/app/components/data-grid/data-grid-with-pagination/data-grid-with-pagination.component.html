@@ -1,0 +1,11 @@
+<lib-data-grid
+    [dataSource]="dataSource"
+    [columns]="gridColumns"
+    [pagination]="pagination"
+    [pageable]="pageable"
+    (pageChange)="onPageChange($event)">
+    <ng-template rowTemplate let-data="item">
+        <td [style.width]="gridColumns[0].width">{{ data.headerName1 }}</td>
+        <td [style.width]="gridColumns[1].width">{{ data.headerName2 }}</td>
+    </ng-template>
+</lib-data-grid>

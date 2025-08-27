@@ -1,0 +1,22 @@
+@include cssvars(
+    (
+        body-color: #fff,
+        title: #fff,
+        primary-text: #dbdfe3,
+        secondary-text-and-icons: #abb3be,
+        disable: #3f5169,
+        border-and-dividers: #2c405b,
+        blackout: rgba(0, 0, 0, 0.3),
+        background: #0f2644,
+        cards-and-blocks: #182f4b,
+        table-header: #223753,
+        table-header-new: #223753,
+        critical-base: #ab644f,
+        tile-gray: rgba(0, 0, 0, 0.3),
+        tile-white: rgba(255, 255, 255, 0.12),
+        checkbox-background: rgba(0, 0, 0, 0.3),
+        toggle-off-background: rgba(0, 0, 0, 0.3),
+        grid-no-rows-layout-data: #ffffff
+    ),
+    "dark-da-branded"
+);

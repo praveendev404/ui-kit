@@ -1,0 +1,16 @@
+<lib-context-menu class="context-menu" [menuItems]="menuItems">
+    <ng-template buttonTemplate>
+        <fa-icon class="fa-icon mr-10px" [icon]="icons.facCheck"></fa-icon>
+    </ng-template>
+</lib-context-menu>
+
+<h2 class="mb-2">Context Menu With Another Dropdown Position</h2>
+<lib-context-menu
+    class="context-menu"
+    [menuItems]="menuItems"
+    [placement]="'top-left'"
+>
+    <ng-template buttonTemplate>
+        <fa-icon class="fa-icon mr-10px" [icon]="icons.facCheck"></fa-icon>
+    </ng-template>
+</lib-context-menu>

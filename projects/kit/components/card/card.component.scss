@@ -1,0 +1,27 @@
+@use 'mixins' as *;
+
+:host {
+    border: 1px solid cssvar(border-and-dividers);
+    padding: 16px;
+    background: cssvar(cards-and-blocks);
+    display: block;
+    border-radius: 4px;
+
+    &.with-shadow {
+        box-shadow: cssvar(soft-default-shadow);
+    }
+
+    &:not(.static-card) {
+        &:hover {
+            box-shadow: cssvar(card-hover-box-shadow);
+        }
+
+        &:focus,
+        &:active,
+        &.selected {
+            box-shadow: none;
+            border: 1px solid cssvar(brand-base);
+            outline: none;
+        }
+    }
+}

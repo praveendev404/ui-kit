@@ -1,0 +1,96 @@
+<div *ngIf="hamburgerMenu" class="side-menu-overlay">
+    <div
+        class="hamburger-menu cursor-pointer"
+        (click)="handleOverlay(true)"
+    ></div>
+</div>
+
+<aside
+    class="side-menu"
+    [class.left-40px]="hamburgerMenu"
+    [class.pt-20px]="!hasSearch"
+    (mouseleave)="handleOverlay(false)"
+    (mouseenter)="handleOverlay(true)"
+>
+    <ng-template
+        *ngIf="sideMenuHeaderDirective"
+        [ngTemplateOutlet]="sideMenuHeaderDirective.template"
+    ></ng-template>
+
+    <lib-search
+        *ngIf="hasSearch"
+        class="d-block size-s px-2 my-2"
+        (searchText)="search($event)"
+    ></lib-search>
+
+    <perfect-scrollbar
+        *ngIf="sideMenuItemTemplate"
+        class="search-scrollbar"
+        [class.has-search]="hasSearch"
+        [class.height-unset]="sideMenuFooterDirective"
+    >
+        <ng-template
+            [ngTemplateOutlet]="menu"
+            [ngTemplateOutletContext]="{
+                $implicit: items,
+                menuClicked: sideMenuClicked,
+                template: sideMenuItemTemplate.template
+            }"
+        ></ng-template>
+    </perfect-scrollbar>
+
+    <ng-template
+        *ngIf="sideMenuFooterDirective"
+        [ngTemplateOutlet]="sideMenuFooterDirective.template"
+    ></ng-template>
+</aside>
+
+<ng-template
+    #menu
+    let-menuItems
+    let-menuClicked="menuClicked"
+    let-template="template"
+>
+    <ng-container *ngFor="let menuItem of menuItems">
+        <div
+            class="side-menu-item d-flex"
+            [class.side-menu-item-parent]="menuItem.children?.length"
+            [class.active]="
+                !menuItem.children?.length && menuItem === activeMenu
+            "
+            [routerLink]="
+                menuItem.children?.length ? null : menuItem.routerLink
+            "
+            [routerLinkActive]="menuItem.routerLink ? 'active' : ''"
+            (click)="handleClick(menuItem, menuClicked, $event)"
+        >
+            <ng-template
+                [ngTemplateOutlet]="template"
+                [ngTemplateOutletContext]="{ $implicit: menuItem }"
+            ></ng-template>
+            <fa-icon
+                *ngIf="menuItem.children?.length"
+                class="chevron-icon chevron-icon--{{
+                    menuItem.opened ? 'down' : 'right'
+                }}"
+                icon="{{ menuItem.opened ? 'chevron-down' : 'chevron-right' }}"
+            >
+            </fa-icon>
+        </div>
+
+        <div
+            class="children-container"
+            *ngIf="menuItem.opened && menuItem.children?.length"
+        >
+            <ng-template
+                *ngIf="sideMenuChildItemTemplate"
+                [ngTemplateOutlet]="menu"
+                [ngTemplateOutletContext]="{
+                    $implicit: menuItem.children,
+                    menuClicked: sideSubMenuClicked,
+                    template: sideMenuChildItemTemplate.template
+                }"
+            ></ng-template>
+        </div>
+    </ng-container>
+</ng-template>

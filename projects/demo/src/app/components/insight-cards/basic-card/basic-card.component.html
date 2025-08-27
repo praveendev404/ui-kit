@@ -1,0 +1,46 @@
+<lib-insight-card
+    color="primary"
+    [title]="'Workflows'"
+    [value]="11"
+    class="mr-2"
+    [active]="active === 0"
+    (click)="active = 0"
+></lib-insight-card>
+<lib-insight-card
+    color="success"
+    [title]="'Average Execution Duration'"
+    [value]="'2:38'"
+    [unit]="'hrs'"
+    class="mr-2"
+    [active]="active === 1"
+    (click)="active = 1"
+></lib-insight-card>
+<lib-insight-card
+    color="warning"
+    [title]="'Issues'"
+    [value]="50"
+    class="mr-2"
+    [active]="active === 2"
+    (click)="active = 2"
+></lib-insight-card>
+<lib-insight-card
+    color="danger"
+    [title]="'Needs Attention'"
+    [value]="3"
+    [active]="active === 3"
+    (click)="active = 3"
+    class="mr-2"
+></lib-insight-card>
+<lib-insight-card
+    color="success"
+    [title]="'Not Clickable'"
+    [value]="'3'"
+    [disabled]="true"
+    class="mr-2"
+></lib-insight-card>
+<lib-insight-card
+    color="success"
+    [title]="'Loading'"
+    [value]="'3'"
+    [loading]="true"
+></lib-insight-card>

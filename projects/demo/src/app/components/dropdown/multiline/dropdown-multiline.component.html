@@ -1,0 +1,33 @@
+<div class="row no-gutters w-100 my-2">
+    <lib-dropdown
+        class="col"
+        [multiple]="true"
+        [(ngModel)]="selectedFruits"
+        [items]="items"
+        [placeholder]="'Select Fruit'"
+        [clearable]="true"
+        label="Fruit"
+        appendTo="body"
+        [labelRemovable]="true"
+    >
+    </lib-dropdown>
+</div>
+<pre>
+    {{ selectedFruits | json}}
+</pre>
+<h2>Multiple mode with disabled state</h2>
+<div class="row no-gutters w-100 my-2">
+    <lib-dropdown
+        class="col"
+        [multiple]="true"
+        [(ngModel)]="selectedFruits"
+        [items]="items"
+        [setDisable]="true"
+        [placeholder]="'Select Fruit'"
+        [clearable]="true"
+        label="Fruit"
+        appendTo="body"
+        [labelRemovable]="true"
+    >
+    </lib-dropdown>
+</div>

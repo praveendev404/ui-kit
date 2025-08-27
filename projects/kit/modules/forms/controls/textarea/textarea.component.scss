@@ -1,0 +1,126 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+$label-height: 16px;
+
+:host {
+    .clear-btn {
+        position: absolute;
+        padding: 0 !important;
+        top: 0;
+        right: 0.5rem;
+        width: 16px;
+
+        border: none !important;
+        background: none !important;
+        color: cssvar(secondary-text-and-icons);
+
+        .icon {
+            font-size: 16px !important;
+        }
+
+        &:focus {
+            outline: none !important;
+        }
+    }
+
+    &.label-left {
+        flex-direction: row !important;
+
+        .label {
+            margin-top: 0.5rem;
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.label {
+    font-size: 11px;
+    color: cssvar(title);
+
+    &.disabled {
+        color: cssvar(title);
+    }
+}
+
+.mandatory {
+    color: cssvar(error-base);
+}
+
+.copy-icon {
+    cursor: pointer;
+    color: cssvar(secondary-text-and-icons);
+    font-size: 14px;
+}
+
+.copy-icon:hover {
+    color: cssvar(brand-base);
+}
+
+textarea,
+.textarea-wrapper {
+    display: block;
+    width: 100%;
+    border: $control-normal-border-size solid cssvar(border-and-dividers);
+    background: cssvar(cards-and-blocks);
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 0.375rem 0.75rem;
+    color: cssvar(primary-text);
+    outline: none !important;
+
+    &.textarea-input {
+        padding-right: 24px !important;
+    }
+
+    &.textarea-wrapper:not(.textarea-wrapper--readonly) {
+        &:focus,
+        &:focus-within {
+            box-shadow: 0 0 0 $control-focus-border-size cssvar(brand-20);
+        }
+
+        &:hover,
+        &:active,
+        &.invalid {
+            margin: 0;
+            width: 100%;
+        }
+
+        &:hover,
+        &:active {
+            border: 1px solid cssvar(brand-base);
+            box-shadow: none;
+        }
+
+        &.invalid {
+            border: 1px solid cssvar(error-base) !important;
+            box-shadow: none !important;
+        }
+    }
+
+    &.textarea-wrapper--readonly {
+        cursor: default;
+    }
+
+    &:disabled {
+        cursor: default;
+        background: rgba(0, 0, 0, 0.04);
+        color: cssvar(disable);
+    }
+}
+
+.textarea-wrapper {
+    padding: 0;
+}
+
+textarea {
+    border: 0 !important;
+}
+
+textarea::placeholder {
+    color: cssvar(disable);
+}
+
+.textareaHeight {
+    height: 94px;
+}

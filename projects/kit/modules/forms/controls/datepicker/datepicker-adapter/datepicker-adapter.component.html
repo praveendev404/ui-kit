@@ -1,0 +1,103 @@
+<label *ngIf="label" class="label" [class.disabled]="disabled"
+    >{{ label }}
+    <span *ngIf="isRequired" class="mandatory">*</span>
+</label>
+<div
+    #controlContainer
+    class="input-group custom-datepicker-group"
+    [class.hide-month-picker]="isCustomNavigation"
+>
+    <input
+        [style.height]="height"
+        [style.width]="width"
+        #inputElement
+        name="d2"
+        [id]="id"
+        [disabled]="disabled"
+        class="form-control control py-2 border-right-0 border"
+        [ngClass]="{ 'has-validation-error': validationError || hasErrors }"
+        [maxDate]="!withoutMaxDate ? getTodayNgbDate() : null"
+        [autocomplete]="'off'"
+        [placeholder]="placeholder"
+        [navigation]="'arrows'"
+        [(ngModel)]="model"
+        #d2="ngbDatepicker"
+        ngbDatepicker
+        (ngModelChange)="dateChangedHandler()"
+        (closed)="onDatePickerClosed()"
+    />
+    <div
+        class="input-group-append"
+        [ngClass]="{ last: !dateWithTime, penult: dateWithTime }"
+        [style.height]="height"
+    >
+        <button
+            class="btn btn-link control"
+            type="button"
+            id="{{ id + '_calendar' }}"
+            attr.data-test-id="{{ id + '_calendar' }}"
+            [disabled]="disabled"
+            (click)="toggle(d2)"
+            [ngClass]="{ 'has-validation-error': validationError || hasErrors }"
+        >
+            <fa-icon class="fa icons font-13px" icon="calendar"></fa-icon>
+        </button>
+    </div>
+    <div
+        *ngIf="dateWithTime"
+        class="input-group-append last"
+        [style.height]="height"
+    >
+        <button
+            class="btn btn-link control"
+            type="button"
+            [disabled]="_disabled"
+            [ngbPopover]="timepicker"
+            popoverClass="timepicker-popover"
+            [autoClose]="'outside'"
+            [placement]="'bottom'"
+            [ngClass]="{ 'has-validation-error': validationError || hasErrors }"
+        >
+            <fa-icon [icon]="icons.faClock"></fa-icon>
+        </button>
+    </div>
+</div>
+
+<button
+    *ngIf="!hideTodayButton"
+    class="btn btn-sm btn-secondary mt-15px control"
+    [class.size-s]="sizeS"
+    [class.size-l]="sizeL"
+    (click)="getToday()"
+>
+    {{ translatedText?.SELECT_TODAY || 'Select Today' }}
+</button>
+
+<ng-template #timepicker>
+    <ngb-timepicker
+        [meridian]="meridian"
+        [hourStep]="hourStep"
+        [minuteStep]="minuteStep"
+        [secondStep]="secondStep"
+        [(ngModel)]="time"
+        (ngModelChange)="onTimeChanged($event)"
+    >
+    </ngb-timepicker>
+</ng-template>
+
+<ng-template #customNavigation let-param let-currDate="currDate">
+    <div class="custom-navigation w-100 h-100">
+        <lib-datepicker-multi-month-view
+            [inputDate]="currDate"
+            (selectDate)="
+                d2.navigateTo({
+                    year: $event.getFullYear(),
+                    month: $event.getMonth() + 1,
+                    day: $event.getDate()
+                });
+                goToDateAhead()
+            "
+        >
+        </lib-datepicker-multi-month-view>
+    </div>
+</ng-template>

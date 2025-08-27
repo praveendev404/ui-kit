@@ -1,0 +1,82 @@
+<div class="modal-main-container d-block">
+    <lib-modal-header>
+        <span>Add New Solution</span>
+    </lib-modal-header>
+
+    <div class="modal-body font-12px">
+        <lib-input
+            class="mb-20px"
+            [label]="'Solution Name'"
+            [placeholder]="'Enter Solution Name'"
+            [value]="''"
+        ></lib-input>
+
+        <div class="mb-20px mr-20px d-inline-flex">
+            <checkbox [value]="true">Default Solution</checkbox>
+            <trigger class="ml-20px" [value]="true">Automatic Tests</trigger>
+        </div>
+
+        <div class="mb-20px mr-20px">
+            <div class="d-inline-flex">
+                <lib-radio-button
+                    class="mb-20px"
+                    [id]="'gitLab'"
+                    [name]="'toolSelection'"
+                    [checked]="toolSelection"
+                    [label]="'GitLab'"
+                ></lib-radio-button>
+
+                <lib-radio-button
+                    class="mb-20px ml-20px"
+                    [id]="'gitHub'"
+                    [name]="'toolSelection'"
+                    [checked]="!toolSelection"
+                    [label]="'GitHub'"
+                ></lib-radio-button>
+
+                <lib-radio-button
+                    class="mb-20px ml-20px"
+                    [id]="'bitBucket'"
+                    [name]="'toolSelection'"
+                    [checked]="!toolSelection"
+                    [label]="'BitBucket'"
+                ></lib-radio-button>
+            </div>
+        </div>
+
+        <lib-textarea
+            [label]="'Solution Description'"
+            [placeholder]="'Enter Solution Description'"
+            [value]="''"
+            [resize]="false"
+            class="mb-20px"
+        >
+        </lib-textarea>
+
+        <lib-dropdown
+            [multiple]="true"
+            [(ngModel)]="selectedUsers"
+            [items]="items"
+            [placeholder]="'Select Approval Users'"
+            [clearable]="true"
+            label="Approval Users"
+            [labelRemovable]="true"
+        >
+        </lib-dropdown>
+    </div>
+
+    <div class="modal-footer">
+        <button
+            class="btn btn-secondary font-11px"
+            (click)="activeModal.dismiss()"
+        >
+            Cancel
+        </button>
+        <button
+            class="btn btn-primary font-11px ml-25px"
+            (click)="activeModal.dismiss()"
+        >
+            Confirm
+        </button>
+    </div>
+</div>

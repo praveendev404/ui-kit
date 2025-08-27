@@ -1,0 +1,93 @@
+<span *ngIf="label" class="label text-truncate" [class.disabled]="readonly">
+    {{ label }}
+    <span *ngIf="isRequired" class="mandatory">*</span>
+    <ng-content></ng-content>
+</span>
+<div #controlContainer class="position-relative input-content">
+    <!--    #controlContainer and #input are necessary for base form control-->
+    <input
+        #input
+        [value]="value === undefined || value === null ? '' : value"
+        [attr.placeholder]="placeholder"
+        [class.disabled]="readonly"
+        [class.invalid]="hasErrors"
+        [class.warning]="warning"
+        [class.with-icon]="icon"
+        [class.clearable]="clearable"
+        [class.with-max-length]="maxlength"
+        [class.with-copyable-length]="copyable"
+        [readonly]="readonly"
+        [attr.maxlength]="maxlength"
+        [checked]="type === 'radio' && checked"
+        [type]="type"
+        [attr.data-test-id]="id"
+        (input)="handleInput($event)"
+        (focus)="toggleReadonly(false)"
+        (blur)="onTouched(); toggleReadonly(true); blur.emit($event)"
+        (keydown)="validate('keydown', $event)"
+        (paste)="validate('paste', $event)"
+        [ngbTooltip]="value"
+        container="body"
+        triggers="manual"
+        libTooltipWhenOverflow
+    />
+    <div
+        *ngIf="maxlength"
+        class="info2 secondary-text-and-icons max-length position-absolute"
+        [style.right.px]="
+            clearable && copyable ? 180 : copyable ? 160 : clearable ? 32 : 12
+        "
+    >
+        {{ (this.value || "").length }}/{{ this.maxlength }}
+    </div>
+    <fa-icon *ngIf="icon" class="icon" [icon]="icon"></fa-icon>
+
+    <button
+        *ngIf="!readonly && clearable && value.length"
+        [style.right.px]="copyable ? 160 : 12"
+        class="clear-btn"
+        (click)="handleClearBtn()"
+    >
+        <span aria-hidden="true" class="icon">&times;</span>
+    </button>
+
+    <div
+        *ngIf="copyable"
+        [style.right.px]="0"
+        class="position-absolute max-length btn btn-link cursor-pointer"
+        [openDelay]="400"
+        ngbTooltip="Copy to clipboard"
+        placement="top"
+        (click)="copyToClipboard(input)"
+    >
+        <fa-icon icon="facClone" class="fa color-brand font-14px"></fa-icon>
+    </div>
+
+    <fa-icon
+        *ngIf="type === 'password' && passwordPreview"
+        icon="eyeOff"
+        class="position-absolute password-toggle"
+        ngbTooltip="Show"
+        (click)="togglePassword()"
+        [openDelay]="800"
+        placement="top"
+    ></fa-icon>
+    <fa-icon
+        *ngIf="isPasswordVisible"
+        icon="facEyeOpen"
+        class="position-absolute password-toggle"
+        ngbTooltip="Hide"
+        (click)="togglePassword()"
+        [openDelay]="800"
+        placement="top"
+    ></fa-icon>
+</div>
+<lib-app-warning-message
+    *ngIf="warning"
+    [message]="warningMessage"
+></lib-app-warning-message>
+<lib-app-warning-message
+    *ngIf="info"
+    [message]="infoMessage"
+    [isInfo]="true"
+></lib-app-warning-message>

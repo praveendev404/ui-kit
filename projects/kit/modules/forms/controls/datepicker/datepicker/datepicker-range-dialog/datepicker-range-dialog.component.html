@@ -1,0 +1,23 @@
+<div *ngIf="leftTemplate">
+    <ng-template [ngTemplateOutlet]="leftTemplate"></ng-template>
+</div>
+<div>
+    <lib-datepicker-range-navigation
+        class="d-flex align-items-center"
+        [date]="dp.model.firstDate!"
+        [months]="dp.model.months"
+        [disabled]="dp.model.disabled"
+        [showSelect]="dp.model.navigation === 'select'"
+        [prevDisabled]="dp.model.prevDisabled"
+        [nextDisabled]="dp.model.nextDisabled"
+        [selectBoxes]="dp.model.selectBoxes"
+        (navigate)="dp.onNavigateEvent($event)"
+        (select)="dp.onNavigateDateSelect($event)">
+    </lib-datepicker-range-navigation>
+    <div class="d-flex">
+        <ngb-datepicker-month *ngFor="let month of dp.state.months; let i = index" [month]="month"></ngb-datepicker-month>
+    </div>
+</div>
+<div *ngIf="rightTemplate">
+    <ng-template [ngTemplateOutlet]="rightTemplate"></ng-template>
+</div>

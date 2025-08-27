@@ -1,0 +1,171 @@
+<div class="col-12 content-wrapper">
+    <div class="row align-items-center">
+        <div class="col pl-1">
+            <div *ngIf="totalCount > 0">
+                <span class="secondary-text-and-icons">{{
+                    translatedText?.SHOW || "Show"
+                }}</span>
+                <div
+                    ngbDropdown
+                    class="d-inline-block"
+                    [placement]="placement"
+                    [container]="pageSizeContainer"
+                >
+                    <button
+                        class="btn nav-link dropdown-toggle"
+                        id="dropdownBasic1"
+                        ngbDropdownToggle
+                        [style.fontSize]="'0.7rem !important'"
+                        [style.height]="'25px !important'"
+                        [style.padding]="'0 10px'"
+                    >
+                        {{ perPageCount }}
+                    </button>
+                    <div
+                        class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownBasic1"
+                        ngbDropdownMenu
+                        container="body"
+                    >
+                        <button
+                            *ngFor="let option of sortOptions"
+                            class="dropdown-item"
+                            [style.fontSize]="'0.7rem !important'"
+                            [style.height]="'25px !important'"
+                            [style.padding]="'0 12px !important'"
+                            on-click="changeMessage(option)"
+                        >
+                            {{ option }}
+                        </button>
+                    </div>
+                </div>
+                <span class="secondary-text-and-icons">{{
+                    translatedText?.ENTRIES || "entries"
+                }}</span>
+            </div>
+        </div>
+        <div
+            class="col text-center pl-1 pr-1 font-italic secondary-text-and-icons"
+        >
+            <span *ngIf="totalCount > 0" class="secondary-text-and-icons"
+                >{{ translatedText?.SHOWING || "Showing" }}
+                {{ pager.startIndex }} {{ translatedText?.TO || "to" }}
+                {{ pager.endIndex }} {{ translatedText?.OF || "of" }}
+                {{ totalCount }}
+                {{ translatedText?.ENTRIES || "entries" }}</span
+            >
+            <span *ngIf="totalCount === 0">{{ noDataText }}</span>
+        </div>
+        <div class="col pr-1 min-width-fit-content">
+            <nav *ngIf="pager.totalPages" aria-label="Page navigation">
+                <span
+                    *ngIf="isDiscrete"
+                    class="first"
+                    [ngClass]="{ disabled: pager.currentPage === 1 }"
+                >
+                    <fa-icon
+                        class="fa cursor-pointer font-16px color-brand"
+                        icon="arrow-back"
+                        (click)="setPage(1)"
+                    ></fa-icon>
+                </span>
+                <span
+                    *ngIf="isDiscrete"
+                    class="splitter"
+                    [ngClass]="{ disabled: pager.currentPage === 1 }"
+                ></span>
+                <span
+                    class="previous"
+                    [ngClass]="{ disabled: pager.currentPage === 1 }"
+                >
+                    <fa-icon
+                        class="fa cursor-pointer font-16px color-brand"
+                        icon="facArrowLeftRegular"
+                        (click)="setPage(pager.currentPage - 1)"
+                    ></fa-icon>
+                </span>
+                <ul *ngIf="pager.pages && isDiscrete" class="pagination">
+                    <li *ngFor="let page of getVisiblePages()">
+                        <a
+                            [ngClass]="{ active: pager.currentPage === page }"
+                            (click)="setPage(page)"
+                            >{{ page }}</a
+                        >
+                    </li>
+                    <li
+                        class="pagination-ellipsis disable"
+                        *ngIf="!isEndOfList()"
+                    >
+                        ...
+                    </li>
+                    <li>
+                        <a
+                            [ngClass]="{
+                                active: pager.currentPage === pager.totalPages
+                            }"
+                            (click)="setPage(pager.totalPages)"
+                        >
+                            {{ pager.totalPages }}
+                        </a>
+                    </li>
+                </ul>
+                <ul *ngIf="pager.pages && !isDiscrete" class="pagination">
+                    <li *ngFor="let page of pager.pages">
+                        <a
+                            [ngClass]="{ active: pager.currentPage === page }"
+                            (click)="setPage(page)"
+                            >{{ page }}</a
+                        >
+                    </li>
+                </ul>
+                <span
+                    class="next"
+                    [ngClass]="{
+                        disabled: pager.currentPage === pager.totalPages
+                    }"
+                >
+                    <fa-icon
+                        class="fa cursor-pointer font-16px color-brand"
+                        icon="facArrowRightRegular"
+                        (click)="setPage(pager.currentPage + 1)"
+                    ></fa-icon>
+                </span>
+                <span
+                    *ngIf="isDiscrete"
+                    class="splitter last"
+                    [ngClass]="{
+                        disabled: pager.currentPage === pager.totalPages
+                    }"
+                ></span>
+                <span
+                    *ngIf="isDiscrete"
+                    class="last"
+                    [ngClass]="{
+                        disabled: pager.currentPage === pager.totalPages
+                    }"
+                >
+                    <fa-icon
+                        class="fa cursor-pointer font-16px color-brand"
+                        icon="arrow-forward"
+                        (click)="setPage(pager.totalPages)"
+                    ></fa-icon>
+                </span>
+                <span *ngIf="isDiscrete">
+                    <lib-input
+                        type="number"
+                        min="1"
+                        class="jump-to-input size-s"
+                        [placeholder]="translatedText?.JUMP_TO || 'Jump to ...'"
+                        [value]="jumpValue"
+                        (keypress)="validateJumpValue($event)"
+                        (keyup)="onJumpValueChange($event)"
+                    >
+                    </lib-input>
+                    <button class="jump-to-button active" (click)="jump()">
+                        <em class="fa fa-arrow-right"></em>
+                    </button>
+                </span>
+            </nav>
+        </div>
+    </div>
+</div>

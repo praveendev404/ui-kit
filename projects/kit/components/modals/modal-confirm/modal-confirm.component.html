@@ -1,0 +1,62 @@
+<lib-modal-header>
+    @if (message.title) {
+        @if (message.additionalTitleHtml) {
+            <span
+                [innerHTML]="message.additionalTitleHtml | safeHtml: 'html'"
+            >
+            </span>
+        }
+        <span>{{ message.title }}</span>
+    }
+</lib-modal-header>
+<ng-container
+    *ngIf="
+        message &&
+        (message.content || message.description || message.warningMessage)
+    "
+>
+    <div class="modal-body">
+        <p *ngIf="message.content">{{ message?.content }}</p>
+        <p *ngIf="message.description" class="text-description">
+            {{ message?.description }}
+        </p>
+        <p *ngIf="message.warningMessage">
+            <fa-icon class="warning-icon" icon="facExclamationCircle"></fa-icon>
+            <span class="message-with-warning">
+                {{ message?.warningMessage }}
+            </span>
+        </p>
+    </div>
+</ng-container>
+
+<div class="modal-footer">
+    <div [ngbTooltip]="cancelBtnTooltip">
+        <button
+            *ngIf="showCancelButton"
+            type="button"
+            class="btn btn-secondary"
+            [disabled]="cancelBtnDisable"
+            (click)="cancel()"
+        >
+            {{ closeButtonText }}
+        </button>
+    </div>
+    <button
+        *ngIf="showAdditionalButton"
+        type="button"
+        class="btn btn-primary additional-button"
+        (click)="confirmAdditional()"
+    >
+        {{ additionalButtonText }}
+    </button>
+    <button
+        *ngIf="showConfirmButton"
+        [btnWithLoader]="confirmButtonLoading"
+        type="button"
+        ngbAutofocus
+        class="btn btn-primary"
+        (click)="confirm()"
+    >
+        {{ confirmButtonText }}
+    </button>
+</div>

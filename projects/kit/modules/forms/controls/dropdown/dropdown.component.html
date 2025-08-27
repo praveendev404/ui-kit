@@ -1,0 +1,276 @@
+<span
+    *ngIf="label"
+    class="label label-{{ labelPosition }}"
+    [class.disabled]="disabled"
+    >{{ label }}
+    <span *ngIf="isRequired" class="mandatory">*</span>
+    <ng-content></ng-content>
+</span>
+<div
+    perfect-scrollbar-styles
+    #dropdown
+    class="dropdown"
+    [ngClass]="{
+        'label-left': labelPosition === 'left',
+        'dropdown-multiple': multiple,
+        'has-validation-error': validationError || hasErrors,
+        searchable: searchable,
+        clearable: clearable,
+        warning: warning,
+        'show-input': showInput || addTag,
+        multiline: multiline,
+        'size-s': sizeS
+    }"
+>
+    <!--    #controlContainer is necessary for base form control-->
+    <ng-select
+        class="dropdown-select"
+        #controlContainer
+        [class.select--append-to]="!!appendTo"
+        [bindValue]="valueKey"
+        [bindLabel]="labelKey"
+        [placeholder]="multiple ? '0/' + itemsLength : placeholder"
+        [notFoundText]="notFoundText"
+        [disabled]="!multiple && disabled"
+        [attr.disabled]="disabled || null"
+        [style.minWidth.px]="minWidth"
+        [style.maxWidth.px]="maxWidth"
+        [style.width.px]="width"
+        [items]="items"
+        [virtualScroll]="virtualScroll"
+        [multiple]="multiple"
+        [closeOnSelect]="!multiple"
+        [(ngModel)]="value"
+        [clearSearchOnAdd]="clearSearchOnAdd"
+        [typeahead]="ngSelectItemsFilter ? null : typeahead$"
+        [loading]="loading"
+        [clearable]="clearable"
+        [appendTo]="appendTo"
+        [dropdownPosition]="dropdownPosition"
+        [addTag]="addTagFn"
+        [searchFn]="searchFn"
+        [editableSearchTerm]="editableSearchTerm"
+        [style.maxHeight.px]="height * 2"
+        [class.truncated]="truncate"
+        [groupBy]="groupBy"
+        (open)="onOpen()"
+        (ngModelChange)="onSelect($event)"
+        (change)="handleChange($event)"
+        (add)="handleAdd($event)"
+        (remove)="handleRemove($event)"
+        (blur)="onTouched()"
+        (scroll)="onScrollToEnd($event)"
+        (search)="handleSearch($event)"
+        (scrollToEnd)="onScroll()"
+        (close)="onClose()"
+        (clear)="clear.emit()"
+        [attr.data-test-id]="id"
+        [inputAttrs]="{ maxlength: maxLength?.toString() || null }"
+    >
+        <ng-template let-item="item" ng-optgroup-tmp>
+            <span class="internal-header" data-test-id="group-title">
+                {{
+                    item[groupBy] ||
+                        translatedText?.UNNAMED_GROUP ||
+                        "Unnamed group" | titlecase
+                }}
+            </span>
+            <div *ngIf="multiple && !disabled" class="d-flex">
+                <div class="multiple-header-border border-left-0">
+                    {{ translatedText?.SELECT || "Select" }}
+                </div>
+                <div
+                    class="multiple-header-border multiple-header-btn"
+                    data-test-id="add-group-btn"
+                    (click)="addGroup(item[groupBy])"
+                >
+                        <span class="text">{{
+                            translatedText?.ALL || "All"
+                            }}</span>
+                </div>
+                <div
+                    class="multiple-header-border multiple-header-btn"
+                    data-test-id="remove-group-btn"
+                    (click)="removeGroup(item[groupBy])"
+                >
+                        <span class="text">{{
+                            translatedText?.NONE || "None"
+                            }}</span>
+                </div>
+                <div
+                    class="multiple-header-border multiple-header-btn"
+                    data-test-id="invert-group-btn"
+                    (click)="invertAllInGroup(item[groupBy])"
+                >
+                        <span class="text">{{
+                            translatedText?.INVERT || "Invert"
+                            }}</span>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-container *ngIf="multiple && !headerTemplate">
+            <ng-template ng-header-tmp>
+                <div class="d-flex multiple-header" [class.size-s]="sizeS">
+                    <div class="ml-1 multiple-header-border">
+                        {{ translatedText?.SELECT || "Select" }}
+                    </div>
+                    <div
+                        class="multiple-header-border multiple-header-btn"
+                        data-test-id="add-all-btn"
+                        (click)="addAll()"
+                    >
+                        <span class="text">{{
+                            translatedText?.ALL || "All"
+                        }}</span>
+                    </div>
+                    <div
+                        class="multiple-header-border multiple-header-btn"
+                        data-test-id="remove-all-btn"
+                        (click)="removeAll()"
+                    >
+                        <span class="text">{{
+                            translatedText?.NONE || "None"
+                        }}</span>
+                    </div>
+                    <div
+                        class="multiple-header-border multiple-header-btn"
+                        data-test-id="invert-all-btn"
+                        (click)="invertAll()"
+                    >
+                        <span class="text">{{
+                            translatedText?.INVERT || "Invert"
+                        }}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-container>
+
+        <ng-template ng-option-tmp let-item="item" let-item$="item$">
+            <ng-container
+                *ngTemplateOutlet="
+                    optionTemplateRef || defaultOptionTemplate;
+                    context: {
+                        item: item,
+                        item$: item$,
+                        labelKey: labelKey,
+                        valueKey: valueKey,
+                        multiple: multiple
+                    }
+                "
+            ></ng-container>
+            <ng-template #defaultOptionTemplate>
+                <checkbox
+                    *ngIf="multiple"
+                    [disabled]="item.disabled"
+                    class="option-checkbox"
+                    [class.size-s]="sizeS"
+                    [value]="item$.selected"
+                ></checkbox>
+                <span
+                    [ngStyle]="groupBy ? { 'margin-left': '10px' } : {}"
+                    class="option-label text-truncate"
+                    [class.size-s]="sizeS"
+                    [ngbTooltip]="item[labelKey]"
+                    triggers="manual"
+                    libTooltipWhenOverflow
+                    container="body"
+                    [tooltipClass]="'dropdown-tooltip'"
+                    [hoverElementSelectorFn]="hoverElementSelectorFn"
+                    >{{ item[labelKey] }}</span
+                >
+                <fa-icon
+                    *ngIf="disabled && multiple"
+                    class="font-16px"
+                    icon="simpleCheck"
+                ></fa-icon>
+            </ng-template>
+        </ng-template>
+
+        <ng-template ng-label-tmp let-item="item">
+            <ng-container
+                *ngTemplateOutlet="
+                    labelTemplateRef || defaultLabelTemplate;
+                    context: {
+                        item: item,
+                        labelKey: labelKey,
+                        valueKey: valueKey
+                    }
+                "
+            ></ng-container>
+
+            <ng-template #defaultLabelTemplate>
+                <span
+                    class="value-label"
+                    [class.size-s]="sizeS"
+                    [ngbTooltip]="item[labelKey]"
+                    triggers="manual"
+                    libTooltipWhenOverflow
+                    [tooltipClass]="'dropdown-tooltip'"
+                    [textElementSelectorFn]="hoverElementSelectorFn"
+                    [hoverElementSelectorFn]="labelHoverElementSelectorFn"
+                    placement="top-left"
+                    container="body"
+                    >{{ item[labelKey] }}</span
+                >
+            </ng-template>
+        </ng-template>
+
+        <ng-template
+            *ngIf="multiple"
+            ng-multi-label-tmp
+            let-items="items"
+            let-clear="clear"
+        >
+            <div
+                *ngIf="showCounter"
+                class="multiple-label-container"
+                [class.size-s]="sizeS"
+            >
+                <span
+                    class="selected-counter text-truncate"
+                    [ngClass]="{ 'selected-counter-disabled': disabled }"
+                    >{{ min(items.length, itemsLength) }}/{{ itemsLength }}
+                    {{ translatedText?.SELECTED || "selected" }}</span
+                >
+            </div>
+        </ng-template>
+
+        <ng-template ng-tag-tmp let-searchTerm="searchTerm">
+            <span
+                ><span class="ng-tag-label" [class.size-s]="sizeS">{{
+                    translatedText?.ADD_ITEM || "Add item"
+                }}</span
+                >"{{ searchTerm }}"</span
+            >
+            <ng-template #addTagContainerRef></ng-template>
+        </ng-template>
+
+        <ng-container *ngIf="headerTemplate">
+            <ng-template ng-header-tmp>
+                <ng-template
+                    [ngTemplateOutlet]="headerTemplate.template"
+                ></ng-template>
+            </ng-template>
+        </ng-container>
+    </ng-select>
+    <div
+        *ngIf="validationError"
+        class="validation-error"
+        [class.size-s]="sizeS"
+    >
+        <fa-icon class="fa" icon="facExclamationCircle"></fa-icon>
+        {{ validationError }}
+    </div>
+
+    <lib-app-warning-message
+        *ngIf="warning"
+        [message]="warningMessage"
+    ></lib-app-warning-message>
+
+    <lib-app-warning-message
+        *ngIf="info"
+        [message]="infoMessage"
+        [isInfo]="true"
+    ></lib-app-warning-message>
+</div>

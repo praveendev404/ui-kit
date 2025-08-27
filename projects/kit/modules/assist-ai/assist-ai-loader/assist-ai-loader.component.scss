@@ -1,0 +1,95 @@
+lib-assist-ai-loader {
+    display: flex;
+    align-items: center;
+
+    .star-icon-1,
+    .star-icon-2 {
+        transform-origin: center;
+        animation:
+            rotate_tick 1s infinite linear,
+            color_cycle 4s infinite steps(4, end);
+        transform-box: fill-box;
+        animation-fill-mode: both;
+        animation-play-state: running;
+    }
+
+    .star-icon-2 {
+        animation:
+            rotate_tick_reverse 1s infinite linear,
+            color_cycle 4s infinite steps(4, end);
+    }
+
+    @keyframes rotate_tick {
+        0% {
+            transform: rotate(0deg);
+            animation-play-state: running;
+        }
+        50% {
+            transform: rotate(90deg);
+            animation-play-state: paused;
+        }
+        100% {
+            transform: rotate(90deg);
+            animation-play-state: paused;
+        }
+    }
+
+    @keyframes rotate_tick_reverse {
+        0% {
+            transform: rotate(0deg);
+            animation-play-state: running;
+        }
+        50% {
+            transform: rotate(-90deg);
+            animation-play-state: paused;
+        }
+        100% {
+            transform: rotate(-90deg);
+            animation-play-state: paused;
+        }
+    }
+
+    /* We use OKLCH colors because RGB interpolation produces black between 75% and 100% */
+    @keyframes color_cycle {
+        0% {
+            color: oklch(0.6203 0.1077 211.12);
+        }
+        12.5% {
+            color: oklch(80% 0.25 320);
+        }
+        25% {
+            color: oklch(80% 0.25 320);
+        }
+        37.5% {
+            color: oklch(90% 0.3 60);
+        }
+        50% {
+            color: oklch(90% 0.3 60);
+        }
+        62.5% {
+            color: oklch(70% 0.2 140);
+        }
+        75% {
+            color: oklch(70% 0.2 140);
+        }
+        87.5% {
+            color: oklch(0.6203 0.1077 211.12);
+        }
+        100% {
+            color: oklch(
+                0.6203 0.1077 211.12
+            );
+        }
+    }
+
+    .stars-container {
+        display: inline-block;
+        margin-right: 0.5rem;
+        width: 1.25em;
+        height: 1.25em;
+    }
+
+    .stars-container > svg {
+        transform: translate(0px, -5px);
+    }
+}

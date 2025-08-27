@@ -1,0 +1,121 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.toast-container {
+    pointer-events: all;
+}
+
+.toastr {
+    position: relative;
+    overflow: hidden;
+    width: 400px;
+    margin: 0 0 6px;
+    min-height: 78px;
+    border-radius: 3px 3px 3px 3px;
+    background-color: cssvar(cards-and-blocks);
+    box-shadow: cssvar(card-hover-box-shadow);
+    color: cssvar(primary-text);
+    display: flex !important;
+
+    &-icon {
+        width: 78px;
+        min-height: 78px;
+        font-family: 'FontAwesome', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+
+        &-error {
+            background-color: rgba(251, 78, 78, 0.12);
+        }
+
+        &-success {
+            background-color: rgba(46, 204, 113, 0.12);
+        }
+
+        &-notification, &-info {
+            background-color: rgba(50, 125, 226, 0.12);
+        }
+
+        &-warning {
+            background-color: rgba(255, 188, 31, 0.12);
+        }
+    }
+
+    &-content {
+        max-width: 322px;
+        min-height: 78px;
+        word-wrap: break-word;
+        flex: 1;
+        height: 100%;
+        padding: 16px 32px 16px 16px;
+    }
+
+    &-close-button {
+        position: absolute;
+        top: 18px;
+        right: 13px;
+        display: block;
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        font-size: 30px;
+        line-height: 12px;
+        color: cssvar(secondary-text);
+        font-weight: 300;
+    }
+
+
+    &-title {
+        font-size: 14px;
+        margin-bottom: 4px;
+
+        &-notification {
+            color: cssvar(title) !important;
+        }
+    }
+
+    &-message {
+        font-size: 12px;
+    }
+
+    &-notification, &-info {
+        .toastr-icon,
+        .toastr-title {
+            color: cssvar(brand-base);
+        }
+
+        .toast-icon svg {
+            transform: rotate(180deg);
+        }
+    }
+
+    &-success {
+        .toastr-icon,
+        .toastr-title {
+            color: cssvar(success-base);
+        }
+    }
+
+    &-warning {
+        .toastr-icon,
+        .toastr-title {
+            color: cssvar(warning-base);
+        }
+    }
+
+    &-error {
+        .toastr-icon,
+        .toastr-title {
+            color: cssvar(error-base);
+        }
+    }
+}
+
+@media (max-width: 560px) {
+    .toastr {
+        width: 290px;
+    }
+}

@@ -1,0 +1,315 @@
+//
+// Color system
+//
+
+//new color scheme
+$title: #231f20;
+$primary-text: #4f4c4d;
+$secondary-text-and-icons: #868484;
+$disable: #bdbcbc;
+$border-and-dividers: #e9e9e9;
+$blackout: rgba(0, 0, 0, 0.04);
+
+$background: #fbfbfb;
+$cards-and-blocks: #fff;
+$table-header: #fbfbfb;
+
+$brand-12: rgba(50, 125, 226, 0.12);
+$brand-20: rgba(50, 125, 226, 0.2);
+$brand-disabled: #6fa4eb;
+$brand-base: #327de2;
+$brand-hover: #2e73d0;
+$brand-active: #2864b5;
+
+$extremely-good-base-12: rgba(3, 136, 0, 0.12);
+$extremely-good-base-20: rgba(3, 136, 0, 0.2);
+$extremely-good-base: #038800;
+$extremely-good-hover: #068003;
+$extremely-good-active: #097306;
+$extremely-good-disabled: #4fac4c;
+
+$success-base-12: rgba(46, 204, 113, 0.12);
+$success-base-20: rgba(46, 204, 113, 0.2);
+$success-base: #2ecc71;
+$success-hover: #2abc68;
+$success-active: #25a35a;
+$success-disabled: #6ddb9c;
+
+$warning-base-12: rgba(255, 152, 0, 0.12);
+$warning-base-20: rgba(255, 152, 0, 0.2);
+$warning-base: #ff9800;
+$warning-hover: #ed8e03;
+$warning-active: #d38006;
+$warning-disabled: #ffb74c;
+
+$error-base-12: rgba(251, 78, 78, 0.12);
+$error-base-20: rgba(251, 78, 78, 0.2);
+$error-base: #fb4e4e;
+$error-hover: #e74848;
+$error-active: #c93e3e;
+$error-disabled: #fc8383;
+
+$critical-base-12: rgba(135, 34, 4, 0.12);
+$critical-base: #872204;
+$critical-hover: #7f2206;
+$critical-active: #73210a;
+
+$dark-sand-base-12: rgba(218, 210, 188, 0.12);
+$dark-sand-base-20: rgba(218, 210, 188, 0.2);
+$dark-sand-base: #dad2bc;
+$dark-sand-hover: #cbc4b0;
+$dark-sand-active: #b5ae9d;
+$dark-sand-disabled: #e5e0d0;
+
+$extra-base-12: rgba(218, 210, 188, 0.12);
+$extra-base: #dad2bc;
+$tile-gray: rgba(0, 0, 0, 0.04);
+$tile-gray-hover: #868484;
+$tile-gray-active: #4f4c4d;
+
+$tile-white: #ffffff;
+
+$soft-default-shadow: 0px 4px 8px rgba(15, 38, 68, 0.16);
+$card-hover-box-shadow: 0px 8px 20px rgba(15, 38, 68, 0.16);
+$dropdown-box-shadow: 0px 16px 40px rgba(15, 38, 68, 0.24);
+
+// old colors
+//$blue-0-hover: #2e73d0;
+//$blue-0-active: #2864b5;
+//$blue-0-disabled: #6fa4eb; //usage in PACE!!! +
+//$blue-1-main: #327de2; // usage in PACE!!! +
+//$blue-1-main-12: rgba(50, 125, 226, 0.12);
+//$blue-1-main-20: rgba(50, 125, 226, 0.2);
+//$blue-2: #5693e7; //usage in PACE!!! +
+//$blue-3: #7babec; //usage in PACE!!! +
+//$blue-4: #c6dbf7; //usage in PACE!!! +
+//$blue-5-hover: #f1f9fe; //usage in PACE!!! +
+
+//base colors
+$gray-1: #3c4043;
+$gray-2: #5f6368;
+$gray-3: #bdc1c6;
+$gray-4: #f5f5f5;
+$gray-5: #f8f9fa;
+$gray-6: #e5e5e5;
+$gray-7-hover: #f4f5f7;
+
+$white: #fff;
+
+//extra colors
+
+$yellow-base-12: rgba(250, 219, 20, 0.12);
+$yellow-base: #fadb14;
+$yellow-hover: #e6c912;
+$yellow-active: #c8af10;
+$yellow-disabled: #fce65a;
+
+$green-base-12: rgba(98, 205, 32, 0.12);
+$green-base: #62cd20;
+$green-hover: #5abd1d;
+$green-active: #4ea41a;
+$green-disabled: #91dc63;
+
+$turquoise-base-12: rgba(19, 194, 194, 0.12);
+$turquoise-base: #13c2c2;
+$turquoise-hover: #11b2b2;
+$turquoise-active: #0f9b9b;
+$turquoise-disabled: #5ad4d4;
+
+$blue-base-12: rgba(64, 178, 255, 0.12);
+$blue-base: #40b2ff;
+$blue-hover: #3ba4eb;
+$blue-active: #338ecc;
+$blue-disabled: #79c9ff;
+
+$indigo-base-12: rgba(109, 98, 229, 0.12);
+$indigo-base: #6d62e5;
+$indigo-hover: #645ad3;
+$indigo-active: #574eb7;
+$indigo-disabled: #9991ed;
+
+$purple-base-12: rgba(169, 51, 224, 0.12);
+$purple-base: #a933e0;
+$purple-hover: #9b2fce;
+$purple-active: #8729b3;
+$purple-disabled: #c370e9;
+
+$magenta-base-12: rgba(253, 56, 198, 0.12);
+$magenta-base: #fd38c6;
+$magenta-hover: #e934b6;
+$magenta-active: #ca2d9e;
+$magenta-disabled: #fe74d7;
+
+$mauve-base-12: rgba(255, 63, 133, 0.12);
+$mauve-base: #ff3f85;
+$mauve-hover: #eb3a7a;
+$mauve-active: #cc326a;
+$mauve-disabled: #ca2d9e;
+
+//borders colors
+$color-border-1: #ececec;
+$color-border-2: #dfe1e5;
+$color-border-3: #d7d7d7;
+$color-border-4: #b8d6e0;
+$color-border-5: #c0d4b8;
+$color-border-6: #e0dbbc;
+$color-border-7: #d6ada5;
+
+//typography colors
+$color-font-1: #000000;
+$color-font-2: #313131;
+$color-font-3: #565656;
+$color-font-4: #949494;
+$color-font-5: #31708f;
+$color-font-6: #3c763d;
+$color-font-7: #8a6d38;
+$color-font-8: #a94452;
+
+//other colors,
+// labels and badges
+$color-line-1: #89cbdf;
+$color-line-2: #62a420;
+$color-line-3: #9460b8;
+$color-line-4: #c92100;
+$color-line-5: #f38b00;
+$color-line-6: #efd603;
+$color-line-7: $brand-base;
+$color-line-8: #004a70;
+$color-line-9: #747474;
+$color-line-10: #fcf8e3;
+$color-line-11: #f2dede;
+
+//icons
+$color-icons: #747474;
+
+//borders
+$color-line-4-b: #ebafa6;
+
+//light
+$color-line-1-l: #e1f1f6;
+$color-line-2-l: #dff0d0;
+$color-line-3-l: #f3e1ff;
+$color-line-4-l: #f5dbd9;
+$color-line-5-l: #ffe6c5;
+$color-line-6-l: #feecb5;
+$color-line-7-l: #cfe3ff;
+$color-line-8-l: #d6ebf6;
+$color-line-9-l: #e5e5e5;
+
+//hover
+$color-0-hover: #c62828;
+$color-1-hover: #d81b60;
+$color-4-hover: #43a047;
+
+// active
+$color-4-active: #3d8d41;
+
+//normal
+$color-0-normal: #d32f2f;
+$color-1-normal: #e91e63;
+$color-2-normal: #ff9800;
+$color-3-normal: #ffeb3b;
+$color-4-normal: #4caf50;
+$color-5-normal: #03a9f4;
+$color-6-normal: #4054b2;
+$color-7-normal: #673ab7;
+$color-8-normal: #31708f;
+$color-9-normal: #3c763d;
+$color-10-normal: #8a6d38;
+$color-11-normal: #a94452;
+
+//border
+$color-1-border: #f48fb1;
+$color-2-border: #ffcc80;
+$color-3-border: #fff59d;
+$color-4-border: #a5d6a7;
+$color-5-border: #81d4fa;
+$color-6-border: #9fa8da;
+$color-7-border: #81d4fa;
+$color-8-border: #b8d6e0;
+$color-9-border: #c0d488;
+$color-10-border: #e0dbbc;
+$color-11-border: #d6ada5;
+
+//fill
+$color-1-fill: #f8bbd0;
+$color-2-fill: #ffe0b2;
+$color-3-fill: #fff9c4;
+$color-4-fill: #c8e6c9;
+$color-5-fill: #b3e5fc;
+$color-6-fill: #c5cae9;
+$color-7-fill: #d1c4e9;
+$color-8-fill: #d6ebf6;
+$color-9-fill: #c8e6c9;
+$color-10-fill: #fcf8e3;
+$color-11-fill: #f2dede;
+
+//notification colors
+//label
+$notification-label-color-1: $color-line-8-l;
+$notification-label-color-2: $color-line-2-l;
+$notification-label-color-3: $color-line-10;
+$notification-label-color-4: $color-line-11;
+
+//border
+$notification-border-color-1: $color-8-border;
+$notification-border-color-2: $color-9-border;
+$notification-border-color-3: $color-10-border;
+$notification-border-color-4: $color-11-border;
+
+//fonts
+$notification-font-color-1: $color-8-normal;
+$notification-font-color-2: $color-9-normal;
+$notification-font-color-3: $color-10-normal;
+$notification-font-color-4: $color-11-normal;
+
+//fill
+$notification-fill-color-1: $color-8-fill;
+$notification-fill-color-2: $color-4-fill;
+$notification-fill-color-3: $color-10-fill;
+$notification-fill-color-4: $color-11-fill;
+
+//tooltip colors
+$tooltip-dark: #3c4043;
+$tooltip-system: #fbf9f1;
+
+$primary: #327de2 !default;
+$gray-200: #dfe2e5;
+$transparent: transparent;
+$shadow-color: rgba(0, 0, 0, 0.13);
+
+$table-border-color: $gray-200;
+$input-border-color: $gray-200;
+$dropdown-border-color: $gray-200;
+$nav-tabs-border-color: $gray-200;
+$breadcrumb-padding-y: 0;
+$breadcrumb-padding-x: 0;
+$breadcrumb-margin-bottom: 20px;
+$breadcrumb-bg: transparent;
+
+//table colors
+$table-row-color: #fcfcfc;
+
+//popup colors
+$popup-icon-close-color: #bebebe;
+$popup-icon-warning-color: #a81212;
+
+//dropdown colors
+$dropdown-box-shadow: 2px 4px 10px $shadow-color;
+$dropdown-border: 1px solid $color-border-2;
+$dropdown-border-radius: 0 0 4px 4px;
+
+$input-height: 28px;
+
+//card colors
+//$card-border-color: $color-2-border;
+//$card-border: 1px solid $card-border-color;
+$card-box-shadow: 0 8px 10px $shadow-color;
+
+$shadow: -1px 5px 13px rgba(0, 0, 0, 0.06), 0px 3px 9px rgba(0, 0, 0, 0.08);
+
+$default-header-height: 50px;
+
+//control borders
+$control-normal-border-size: 1px;
+$control-focus-border-size: 4px;

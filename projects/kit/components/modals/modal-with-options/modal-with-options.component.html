@@ -1,0 +1,63 @@
+<lib-modal-header>
+    @if (message.title) {
+        @if (message.additionalTitleHtml) {
+            <span
+                [innerHTML]="message.additionalTitleHtml | safeHtml: 'html'"
+            >
+            </span>
+        }
+        <span>{{ message.title }}</span>
+    }
+</lib-modal-header>
+
+<div class="modal-body">
+    <ng-container *ngIf="message">
+        <p *ngIf="message.content">{{ message.content }}</p>
+        <p *ngIf="message.description" class="text-description">
+            {{ message.description }}
+        </p>
+        <p *ngIf="message.warningMessage">
+            <fa-icon class="warning-icon" icon="facExclamationCircle"></fa-icon>
+            <span class="message-with-warning">
+                {{ message.warningMessage }}
+            </span>
+        </p>
+    </ng-container>
+
+    <div class="d-flex flex-column">
+        <div
+            *ngFor="let radio of radios; let i = index; let last = last"
+            [class.mb-16px]="!last"
+        >
+            <lib-radio-button
+                id="radio-button-1"
+                class="size-s d-block mb-3"
+                [checked]="selectedRadioButton == i"
+                [label]="radio.buttonText"
+                (click)="switchRadioButton(i)"
+            ></lib-radio-button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button
+        *ngIf="showCancelButton"
+        type="button"
+        ngbAutofocus
+        class="btn btn-secondary"
+        (click)="cancel()"
+    >
+        {{ closeButtonText }}
+    </button>
+    <button
+        *ngIf="showConfirmButton"
+        [btnWithLoader]="confirmButtonLoading"
+        [disabled]="selectedRadioButton === null"
+        type="button"
+        class="btn btn-primary"
+        (click)="confirm()"
+    >
+        {{ confirmButtonText }}
+    </button>
+</div>

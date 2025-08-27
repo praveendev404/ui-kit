@@ -1,0 +1,10 @@
+<lib-side-menu [hasSearch]="true" [menuItems]="menu">
+    <ng-template sideMenuItemTemplate let-item>
+        {{ item.title }}
+    </ng-template>
+
+    <ng-template sideMenuChildItemTemplate let-item>
+        <span class="color-brand mr-5px"> >> </span>
+        {{ item.title }}
+    </ng-template>
+</lib-side-menu>

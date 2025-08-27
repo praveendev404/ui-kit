@@ -1,0 +1,78 @@
+@use "sass:math";
+@use 'mixins' as *;
+
+$icon-size: 16px;
+
+.radio-button-item {
+    cursor: pointer;
+    display: flex;
+    width: fit-content;
+    height: inherit;
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    label {
+        display: inline-flex;
+        cursor: pointer;
+        position: relative;
+        margin-right: 0;
+        margin-bottom: 0;
+        user-select: none;
+        align-items: center;
+        justify-content: center;
+
+        &.margin-icon {
+            &:before {
+                margin-right: 7px;
+            }
+        }
+
+        &:before {
+            width: $icon-size;
+            min-width: $icon-size;
+            height: $icon-size;
+            background: cssvar(checkbox-background);
+            border: 1px solid cssvar(border-and-dividers);
+            content: " ";
+            border-radius: math.div($icon-size, 2);
+        }
+
+        &.disabled {
+            color: cssvar(disable);
+
+            &:before {
+                background: cssvar(checkbox-blackout);
+            }
+        }
+    }
+
+    input[type="radio"]:checked + label:before {
+        width: $icon-size;
+        min-width: $icon-size;
+        height: $icon-size;
+        border: solid math.div($icon-size, 2.5) cssvar(brand-base);
+        background: cssvar(white);
+        border-radius: math.div($icon-size, 2);
+    }
+
+    input[type="radio"]:checked + label:not(.disabled):hover:before {
+        border-color: cssvar(brand-hover);
+    }
+
+    &.disabled {
+        input[type="radio"]:checked + label:before {
+            width: $icon-size;
+            min-width: $icon-size;
+            height: $icon-size;
+            border-color: cssvar(checkbox-background-disabled);
+            background: cssvar(radio-disable);
+            border-radius: math.div($icon-size, 2);
+        }
+    }
+
+    label:not(.disabled):hover:before {
+        border-color: cssvar(brand-base);
+    }
+}

@@ -1,0 +1,172 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.mandatory {
+    color: cssvar(error-base);
+}
+
+$input-padding-x: 8px;
+$icon-offset: 20px;
+
+.label {
+    font-size: 11px;
+    margin-bottom: 7px;
+    color: cssvar(title);
+}
+
+input {
+    border-radius: 4px;
+    border: $control-normal-border-size solid cssvar(border-and-dividers);
+    width: 100%;
+    color: cssvar(primary-text);
+    background: cssvar(cards-and-blocks);
+
+    &::placeholder {
+        color: cssvar(disable);
+    }
+
+    &:focus {
+        outline: none;
+        &:not(.invalid):not(:hover):not(:active):not(:read-only) {
+            box-shadow: 0 0 0 $control-focus-border-size cssvar(brand-20);
+        }
+    }
+
+    &:not(:disabled):not(.disabled):not(.invalid):not(:read-only) {
+        &:hover {
+            border: $control-normal-border-size solid cssvar(brand-base);
+        }
+
+        //default values
+        &:hover,
+        &:active {
+            width: 100%;
+            margin: 0;
+        }
+
+        &:active {
+            border: #{$control-normal-border-size} solid cssvar(brand-base);
+        }
+    }
+
+    &.invalid {
+        border: #{$control-normal-border-size} solid cssvar(error-base) !important;
+    }
+
+    &.disabled,
+    &:disabled {
+        background: rgba(0, 0, 0, 0.04);
+        color: cssvar(disable);
+    }
+
+    &.disabled,
+    &:disabled,
+    &:read-only {
+        cursor: default;
+    }
+
+    &.with-icon {
+        padding: 15px calc(#{$input-padding-x} + #{$icon-offset}) !important;
+    }
+}
+
+.icon {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    color: cssvar(brand-base);
+}
+
+.password-toggle {
+    cursor: pointer;
+    margin-left: -24px;
+    margin-top: 6px;
+}
+
+:host.lib-input--left {
+    align-items: center;
+
+    .input-content {
+        flex-grow: 1;
+        margin-left: 5px;
+    }
+
+    .label {
+        margin-bottom: 0;
+    }
+}
+
+:host {
+    &.size-s::ng-deep {
+        .clear-btn {
+            top: 0.25rem !important;
+        }
+    }
+
+    &.size-l::ng-deep {
+        .clear-btn {
+            top: 1rem !important;
+        }
+    }
+
+    .clear-btn {
+        position: absolute;
+        padding: 0 !important;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 16px;
+
+        border: none !important;
+        background: none !important;
+        color: cssvar(secondary-text-and-icons);
+
+        .icon {
+            font-size: 16px !important;
+        }
+
+        &:focus {
+            outline: none !important;
+        }
+    }
+}
+
+.max-length {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    top: 0;
+}
+
+$close-icon-width: 16px;
+$close-icon-margin: 12px;
+$margin: 12px;
+
+$max-length-width: 50px;
+.with-max-length {
+    padding-right: calc(#{$max-length-width} + #{$margin});
+}
+
+$copyable-length-width: 40px;
+.with-copyable-length {
+    padding-right: $copyable-length-width;
+
+    &.with-max-length {
+        padding-right: calc(#{$max-length-width} + #{$margin} + #{$copyable-length-width});
+    }
+}
+
+.clearable {
+    padding-right: calc(#{$close-icon-width} + #{$close-icon-margin});
+
+    &.with-copyable-length:not(.with-max-length) {
+        padding-right: calc(#{$close-icon-width} + #{$close-icon-margin} + #{$copyable-length-width});
+    }
+
+    &.with-max-length:not(.with-copyable-length) {
+        padding-right: calc(#{$close-icon-width} + #{$close-icon-margin} + #{$max-length-width} + #{$margin});
+    }
+
+    &.with-copyable-length.with-max-length {
+        padding-right: calc(#{$close-icon-width} + #{$close-icon-margin} + #{$max-length-width} + #{$copyable-length-width} + #{$margin});
+    }
+}

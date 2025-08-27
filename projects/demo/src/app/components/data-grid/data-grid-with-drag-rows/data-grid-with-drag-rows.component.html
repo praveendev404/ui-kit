@@ -1,0 +1,31 @@
+<div cdkDropListGroup class="d-flex">
+    <lib-data-grid
+        [dataSource]="gridData"
+        [columns]="gridColumns"
+        [pageable]="pageable"
+        [allowDraggingRows]="true"
+        (rowItemDropped)="onDrop($event, 1)"
+    >
+        <ng-template rowTemplate let-data="item">
+            <td [style.width]="gridColumns[0].width">
+                {{ data.headerName }}
+            </td>
+            <td [style.width]="gridColumns[1].width">{{ data.value }}</td>
+        </ng-template>
+    </lib-data-grid>
+    <lib-data-grid
+        class="ml-2"
+        [dataSource]="gridData2"
+        [columns]="gridColumns"
+        [pageable]="pageable"
+        [allowDraggingRows]="true"
+        (rowItemDropped)="onDrop($event, 2)"
+    >
+        <ng-template rowTemplate let-data="item">
+            <td [style.width]="gridColumns[0].width">
+                {{ data.headerName }}
+            </td>
+            <td [style.width]="gridColumns[1].width">{{ data.value }}</td>
+        </ng-template>
+    </lib-data-grid>
+</div>

@@ -1,0 +1,8 @@
+<ng-container *ngIf="hasDisplayableError">
+    <div *ngFor="let errorDirective of displayedErrors" class="error-message-container mb-3">
+        <ng-container *ngTemplateOutlet="errorDirective!.templateRef; context: {
+      $implicit: label,
+      error: formControl?.errors![errorDirective.valError]
+    }"></ng-container>
+    </div>
+</ng-container>

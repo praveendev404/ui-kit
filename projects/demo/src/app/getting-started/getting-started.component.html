@@ -1,0 +1,145 @@
+<perfect-scrollbar style="width: 100vw; height: calc(100vh - 50px)">
+    <div class="container-fluid" style="width: 75%">
+        <h1 class="mt-4">Getting started</h1>
+        <h2 class="mt-4 mb-2">Installation</h2>
+        <div class="font-14px">
+            In order to install the lib, first credentials needs to be added to
+            .npmrc file. Execute the following command in your terminal for
+            getting the credentials:
+            <div class="code-container">
+                <code class="code-text">
+                    curl -u"username":"password"
+                    https://artifactory.dagility.com/artifactory/api/npm/npm-local/auth/dagility-ui
+                    <br />
+                    <span class="comment-text"
+                        >// Contact administrator for username and
+                        password</span
+                    >
+                </code>
+            </div>
+        </div>
+        <div class="font-14px mt-2">
+            For installation of this lib, execute the following command:
+            <div class="code-container">
+                <code class="code-text">
+                    npm i &#64;dagility-ui/kit
+                    <span class="comment-text"
+                        >// To access the repository, contact the
+                        administrator</span
+                    >
+                </code>
+            </div>
+        </div>
+
+        <h2 class="mt-4 mb-2">Styles</h2>
+        <div class="font-14px">
+            For import styles you must add the following line in your
+            stylesheet:
+            <div class="code-container">
+                <code class="code-text">
+                    &#64;import "~&#64;dagility-ui/kit/styles/styles";
+                </code>
+            </div>
+        </div>
+
+        <h2 class="mt-4 mb-2">UiKitModule</h2>
+        <div class="font-14px">
+            To use components from the library, you must import the UiKitModule
+            into your.module.ts. You can do it in a similar way:
+            <div class="code-container">
+                <div>
+                    <code class="code-text">
+                        {{ "import { UiKitModule } from '@dagility-ui/kit';" }}
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        {{ "..." }}
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        <span> &#64;NgModule({{ "{ " }} </span>
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        <span>
+                            imports: [UiKitModule],
+                        </span>
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        <span>
+                            {{ " })" }}
+                        </span>
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        <span>
+                            export class YourModule
+                        </span>
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mt-4 mb-2">Update UI Kit</h2>
+        <div class="font-14px">
+            For updating UI Kit you need to make changes, then in
+            <code class="code-text">projects/kit/package.json </code>find next line:
+            <div class="code-container">
+                <code class="code-text">
+                    "version": "0.0.1",
+                </code>
+            </div>
+            And you need to increment version value by 1 like this:
+            <div class="code-container">
+                <code class="code-text">
+                    "version": "0.0.2",
+                </code>
+            </div>
+            Then do commit and push. <br />
+            Next you need to increment version in application in package.json
+            like this:
+            <div class="code-container">
+                <div>
+                    <code class="code-text">
+                        {{ '"dependencies": {' }}
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        ...
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        {{ '"@dagility-ui/kit": "0.0.2",' }}
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        ...
+                    </code>
+                </div>
+
+                <div>
+                    <code class="code-text">
+                        {{ "\}" }}
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
+</perfect-scrollbar>

@@ -1,0 +1,19 @@
+<ng-container *ngIf="loading">
+    <ng-template
+        [ngIf]="loaderTemplate"
+        [ngIfElse]="defaultLoadingTemplate"
+        [ngTemplateOutlet]="loaderTemplate"
+    ></ng-template>
+
+    <ng-template #defaultLoadingTemplate>
+        <div
+            *ngIf="loading"
+            class="spinner-border text-light mr-2"
+            role="status"
+        >
+            <span class="sr-only">{{ loadingText }}</span>
+        </div>
+    </ng-template>
+</ng-container>
+
+<ng-content></ng-content>

@@ -1,0 +1,19 @@
+<ngb-accordion class="custom-accordion">
+    <ngb-panel *ngFor="let accordionRow of accordionRows">
+        <ng-template ngbPanelHeader>
+            <div class="d-flex align-items-center">
+                <button
+                    [ngbPanelToggle]
+                    class="header-button btn btn-link"
+                ></button>
+                <div class="d-flex flex-1">
+                    <span class="col">{{ accordionRow.accordionName }}</span>
+                    <span class="col">{{ accordionRow.value }}</span>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+            Some Panel Content
+        </ng-template>
+    </ngb-panel>
+</ngb-accordion>

@@ -1,0 +1,69 @@
+{
+    "root": true,
+    "ignorePatterns": ["projects/demo/**/*"],
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@angular-eslint/recommended",
+                "plugin:@angular-eslint/template/process-inline-templates"
+            ],
+            "plugins": ["import"],
+            "rules": {
+                "import/order": "error",
+                "@angular-eslint/no-host-metadata-property": "off",
+                "@angular-eslint/directive-selector": [
+                    "error",
+                    {
+                        "type": "attribute",
+                        "prefix": "lib",
+                        "style": "camelCase"
+                    }
+                ],
+                "@angular-eslint/component-selector": [
+                    "error",
+                    {
+                        "type": "element",
+                        "prefix": "lib",
+                        "style": "kebab-case"
+                    }
+                ],
+                "@typescript-eslint/no-unused-vars": [
+                    "error",
+                    {
+                        "varsIgnorePattern": "^_",
+                        "argsIgnorePattern": "^_"
+                    }
+                ],
+                "@typescript-eslint/member-ordering": [
+                    "warn",
+                    {
+                        "default": [
+                            "private-static-field",
+                            "public-static-field",
+                            "static-field",
+                            "instance-field",
+                            "constructor",
+                            "public-instance-method",
+                            "private-instance-method"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "extends": [
+                "plugin:@angular-eslint/template/recommended",
+                "plugin:@angular-eslint/template/accessibility"
+            ],
+            "rules": {}
+        }
+    ]
+}

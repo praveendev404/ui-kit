@@ -1,0 +1,6 @@
+@use 'mixins' as *;
+
+.error-message-container {
+    color: cssvar(error-base);
+    margin-top: 7px;
+}

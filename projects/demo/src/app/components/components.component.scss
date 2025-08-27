@@ -1,0 +1,17 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+.perfect-scrollbar {
+    overflow-x: hidden;
+    height: calc(
+        100vh - #{$default-header-height} - 125px
+    ); // header and 125px is component title
+}
+
+.header-color {
+    background-color: cssvar(cards-and-blocks);
+    height: 125px;
+}
+
+.section {
+    overflow-x: hidden;
+}

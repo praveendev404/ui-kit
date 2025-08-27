@@ -1,0 +1,113 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+:host {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.header-item-image {
+    ::ng-deep svg {
+        width: 16px;
+        height: 16px;
+
+        path {
+            stroke: cssvar(secondary-text-and-icons);
+        }
+    }
+}
+
+.fa-icon {
+    font-size: 14px !important;
+}
+
+.navbar-nav-scroll {
+    height: $default-header-height;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: auto auto auto 0;
+
+    .navbar-nav {
+        .nav-item {
+            a.nav-link {
+                margin: auto 16px;
+                padding: 6px 0;
+                color: cssvar(primary-text);
+
+                &.link-without-pic {
+                    padding: 15px 0 !important;
+                }
+
+                fa-icon {
+                    margin-right: 0 !important;
+                }
+
+                &:hover {
+                    color: cssvar(brand-base);
+
+                    fa-icon {
+                        color: cssvar(brand-base);
+                    }
+
+                    .header-item-image {
+                        ::ng-deep svg {
+                            path {
+                                stroke: cssvar(brand-base);
+                            }
+                        }
+                    }
+                }
+            }
+
+            a.nav-link-with-icon {
+                height: 60px;
+                padding-top: 22px;
+            }
+        }
+
+        .nav-item {
+            a.nav-link {
+                &.active,
+                &:focus {
+                    border-bottom: 2px solid cssvar(brand-base) !important;
+                    color: cssvar(brand-base);
+
+                    .fa-icon {
+                        color: cssvar(brand-base);
+                    }
+
+                    .header-item-image {
+                        ::ng-deep svg {
+                            path {
+                                stroke: cssvar(brand-base);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dropdown-toggle:empty::after {
+    display: none;
+}
+
+.collapsed-menu {
+    display: flex;
+    align-items: center;
+}
+
+:host ::ng-deep {
+    .dropdown {
+        &-menu {
+            margin-top: 8px;
+        }
+
+        .dropdown-item.collapsed-item {
+            color: cssvar(primary-text);
+            display: flex !important;
+            overflow: hidden;
+        }
+    }
+}

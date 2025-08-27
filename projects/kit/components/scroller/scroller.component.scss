@@ -1,0 +1,183 @@
+@use 'mixins' as *;
+
+:host {
+    position: relative;
+    overflow: hidden;
+}
+
+.scroller-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    max-width: inherit;
+    width: 100%;
+}
+
+:host[libScrollerDir="vertical"] .scroller-container {
+    flex-direction: column;
+    max-height: inherit;
+    height: 100%;
+}
+
+.scroller-container--start + div .start-arrow,
+.scroller-container--end + div .end-arrow {
+    display: none;
+}
+
+.scroller-container ::ng-deep > * {
+    flex-shrink: 0;
+}
+
+.scroller-actions {
+    font-size: var(--size);
+}
+.start-arrow,
+.end-arrow {
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: cssvar(brand-base);
+    font-size: var(--size);
+    z-index: 1;
+
+    &:before,
+    &:after {
+        content: "";
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        background: cssvar(cards-and-blocks);
+        pointer-events: none;
+    }
+}
+
+.start-arrow {
+    left: 0;
+
+    ::ng-deep svg {
+        transform: rotate(-90deg);
+    }
+
+    &:before {
+        right: .7em;
+        left: -0.7em;
+    }
+
+    &:after {
+        left: calc(100% - 0.7em);
+        right: -0.7em;
+        background: linear-gradient(
+                90deg,
+                cssvar(cards-and-blocks) 0%,
+                transparent 97.78%
+        );
+    }
+}
+
+.end-arrow {
+    right: 0;
+
+    ::ng-deep svg {
+        transform: rotate(-90deg);
+    }
+
+    &:before {
+        right: calc(100% - 0.7em);
+        left: -0.7em;
+        background: linear-gradient(
+                270deg,
+                cssvar(cards-and-blocks) 0%,
+                transparent 97.78%
+        );
+    }
+
+    &:after {
+        left: 0.7em;
+        right: 0;
+    }
+}
+
+fa-icon {
+    position: relative;
+    z-index: 1;
+    width: calc(var(--size) + 1.4em);
+    height: calc(var(--size) + 1.4em);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    ::ng-deep svg {
+        position: relative;
+        z-index: 1;
+    }
+
+    &:before {
+        content: "";
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        border-radius: 4px;
+    }
+
+    &:hover:before {
+        background: cssvar(brand-base);
+        opacity: 0.12;
+        z-index: 1;
+    }
+}
+
+:host[libScrollerDir="vertical"] {
+    .start-arrow,
+    .end-arrow {
+        left: 0;
+        right: 0;
+
+        &:before,
+        &:after {
+            left: 0;
+            right: 0;
+        }
+    }
+
+    .start-arrow {
+        top: 0;
+        bottom: auto;
+
+        &:before {
+            bottom: .7em;
+        }
+
+        &:after {
+            top: calc(100% - 0.7em);
+            background: linear-gradient(180deg, cssvar(cards-and-blocks) 0%, transparent 97.78%);
+        }
+
+        ::ng-deep svg {
+            transform: rotate(0deg);
+        }
+    }
+
+    .end-arrow {
+        top: auto;
+        bottom: 0;
+
+        &:before {
+            top: 0;
+            bottom: calc(100% - 0.7em);
+            background: linear-gradient(0deg, cssvar(cards-and-blocks) 0%, transparent 97.78%);
+        }
+
+        &:after {
+            top: .7em;
+            bottom: 0;
+        }
+
+        ::ng-deep svg {
+            transform: rotate(0deg);
+        }
+    }
+}

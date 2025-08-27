@@ -1,0 +1,149 @@
+@use 'mixins' as *;
+
+ul {
+    margin-bottom: 0;
+}
+
+ul li {
+    padding: 3px;
+}
+
+ul li a,
+span,
+button {
+    color: cssvar(primary-text);
+    text-decoration: none;
+    padding: 4px 8px;
+    cursor: pointer;
+
+    &.first,
+    &.last,
+    &.next,
+    &.previous {
+        padding: 0;
+    }
+
+    &.disabled {
+        opacity: 0;
+        cursor: default !important;
+
+        * {
+            cursor: default !important;
+        }
+
+        i {
+            color: cssvar(disable);
+        }
+    }
+}
+
+ul li a {
+    color: cssvar(brand-base);
+}
+
+i {
+    color: cssvar(primary-text);
+    padding: 3px;
+    margin: 0 5px;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.active {
+    background: cssvar(brand-base);
+    color: cssvar(white) !important;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.splitter {
+    border: 1px solid cssvar(disable);
+    margin: 0 10px;
+    padding: 0;
+    cursor: default;
+}
+
+.pagination {
+    display: inline-flex;
+}
+
+nav {
+    float: right;
+}
+
+.pagination-ellipsis {
+    margin: 0;
+    cursor: default;
+}
+
+.dropdown-menu {
+    z-index: 1000;
+    font-size: 0.7rem;
+    color: cssvar(primary-text);
+    min-width: 1rem;
+    text-align: left;
+    list-style: none;
+    background-color: cssvar(cards-and-blocks);
+    background-clip: padding-box;
+    border: 1px solid cssvar(border-and-dividers);
+}
+
+.nav-link {
+    margin: 0 8px;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    user-select: none;
+    background-color: cssvar(cards-and-blocks);
+    border: 1px solid cssvar(border-and-dividers);
+    padding: 0.275rem 0.65rem;
+    font-size: 0.7rem !important;
+    line-height: 1.5;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn:focus {
+    border-color: cssvar(border-and-dividers) !important;
+}
+
+.dropdown-item {
+    padding: 0 1.25rem !important;
+}
+
+.jump-to-input {
+    border-radius: 4px;
+    display: inline-block !important;
+    width: 95px;
+}
+.jump-to-button {
+    padding: 2px 8px;
+    height: 24px;
+    margin-left: -26px;
+    position: absolute;
+    border-radius: 0 4px 4px 0;
+    border: none;
+
+    i {
+        color: cssvar(white);
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+@media (max-width: 1360px) {
+    .col {
+        padding: 0 !important;
+    }
+
+    .last {
+        display: none;
+    }
+}

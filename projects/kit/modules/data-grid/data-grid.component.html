@@ -1,0 +1,113 @@
+<div class="table-wrapper">
+    <table
+        #tableRef
+        class="table data-grid w-100 fixed-layout"
+        [class.sticky]="sticky"
+        [libResizeObserverDisable]="!adjustHorizontalScroll"
+        (libResizeObserver)="onResize()"
+    >
+        <thead>
+        <ng-container *ngIf="useHeader">
+            <ng-container
+                *ngTemplateOutlet="
+                        headerTemplate ? headerTemplate.template : defaultHeader
+                    "
+            ></ng-container>
+            <ng-template #defaultHeader>
+                <tr class="table-border">
+                    <th
+                        *ngFor="let c of gridColumns"
+                        [ngClass]="{ 'sort-field': c.sortingField }"
+                        [style.width]="c.width"
+                        (click)="changeSort(c.sortingField)"
+                    >
+                            <span class="column-header"
+                            >{{ c.title }}
+                                <fa-icon
+                                    *ngIf="
+                                        c.sortingField &&
+                                        (!pageable ||
+                                            !pageable.sorted(c.sortingField))
+                                    "
+                                    class="fa sort-icon ml-5px"
+                                    icon="chevron-down"
+                                >
+                                </fa-icon>
+                                <fa-icon
+                                    *ngIf="
+                                        pageable &&
+                                        pageable.sorted(c.sortingField) as s
+                                    "
+                                    icon="{{
+                                        s === 'ASC'
+                                            ? 'chevron-up'
+                                            : 'chevron-down'
+                                    }}"
+                                    class="fa sort-icon-active ml-5px"
+                                >
+                                </fa-icon>
+                            </span>
+                    </th>
+                </tr>
+            </ng-template>
+        </ng-container>
+        </thead>
+
+        <tbody
+            appScroll
+            [appScrollDisabled]="!wheelUsing && !scrollCallback"
+            [scrollCallback]="scrollCallback"
+            [checkLog]="checkLog"
+            [wheelUpCallback]="wheelUpCallback"
+            [wheeledDownCallback]="wheeledDownCallback"
+            [style.max-height]="bodyHeight ? bodyHeight : ''"
+            perfectScrollbar
+            [disabled]="!usePerfectScrollbar"
+            (psScrollDown)="onPsScrollDown($event)"
+            cdkDropList
+            [cdkDropListData]="dataSource"
+            [cdkDropListDisabled]="!allowDraggingRows"
+            (cdkDropListDropped)="rowItemDropped.emit($event)"
+        >
+            @if (dataSource?.length) {
+                <tr
+                    *ngFor="
+                    let item of dataSource;
+                    let i = index;
+                    trackBy: trackByItem
+                "
+                    class="body-row"
+                    cdkDrag
+                    (click)="handleRowClick(item)"
+                    (dblclick)="handleDoubleClick(item)"
+                >
+                    <ng-container
+                        *ngTemplateOutlet="
+                        rowTemplate ? rowTemplate.template : defaultCell;
+                        context: { item: item, items: dataSource, index: i }
+                    "
+                    >
+                    </ng-container>
+                    <ng-template #defaultCell>
+                        <td *ngFor="let c of gridColumns" [style.width]="c.width">
+                            {{ item[c.field] }}
+                        </td>
+                    </ng-template>
+                </tr>
+            } @else if (noDataRow) {
+                <ng-container *ngTemplateOutlet="noDataRow.template; context: {$implicit: gridColumns}" />
+            }
+        </tbody>
+    </table>
+</div>
+
+<lib-pagination
+    *ngIf="pagination"
+    [metaData]="pagination"
+    (pagerdata)="onPageChange($event)"
+    [placement]="placement"
+    [pageSizeContainer]="pageSizeContainer"
+    [sortOptions]="sortOptions"
+    [noDataText]="noDataText"
+    [translatedText]="translatedText"
+></lib-pagination>

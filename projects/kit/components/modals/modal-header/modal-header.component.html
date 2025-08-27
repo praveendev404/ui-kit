@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <div>
+        <h2 id="modal-title" class="mt-0">
+            <ng-content></ng-content>
+        </h2>
+        <h4 class="subtitle primary-text my-0">
+            <ng-content select="[subtitle]"></ng-content>
+        </h4>
+    </div>
+    <button
+        type="button"
+        class="close"
+        aria-label="Close button"
+        aria-describedby="modal-title"
+        (click)="onDismiss()"
+    >
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

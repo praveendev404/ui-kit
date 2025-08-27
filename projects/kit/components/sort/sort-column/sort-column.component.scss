@@ -1,0 +1,5 @@
+@use 'mixins' as *;
+
+:host.sort-active {
+    color: cssvar(brand-base);
+}

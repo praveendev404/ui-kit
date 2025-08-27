@@ -1,0 +1,78 @@
+@use 'mixins' as *;
+
+:host {
+    display: inline-block;
+    position: relative;
+    padding: 8px 16px;
+    color: cssvar(white);
+    border-radius: 4px;
+    cursor: pointer;
+
+    &.primary {
+        background: cssvar(brand-base);
+        &.active:before {
+            border-top-color: cssvar(brand-base);
+        }
+    }
+
+    &.success {
+        background: cssvar(success-base);
+        &.active:before {
+            border-top-color: cssvar(success-base);
+        }
+    }
+
+    &.warning {
+        background: cssvar(warning-base);
+        &.active:before {
+            border-top-color: cssvar(warning-base);
+        }
+    }
+
+    &.danger {
+        background: cssvar(error-base);
+        &.active:before {
+            border-top-color: cssvar(error-base);
+        }
+    }
+
+    &.active {
+        filter: drop-shadow(0px 8px 20px rgba(15, 38, 68, 0.16));
+    }
+
+    &.active:before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 10px solid;
+    }
+
+    &.active,
+    &.disabled {
+        cursor: default;
+    }
+
+    &:hover:not(.active):not(.disabled) {
+        &.primary {
+            background: cssvar(brand-hover);
+        }
+
+        &.success {
+            background: cssvar(success-hover);
+        }
+
+        &.warning {
+            background: cssvar(warning-hover);
+        }
+
+        &.danger {
+            background: cssvar(error-hover);
+        }
+    }
+}

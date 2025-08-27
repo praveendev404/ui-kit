@@ -1,0 +1,32 @@
+<label
+    *ngIf="!buttonView"
+    class="checkbox-item"
+    [class.loading]="loading || blueCheckEnabled"
+    [class.disabled]="disabled"
+    [attr.data-test-id]="id"
+    (click)="preventBubblingFromCheckbox($event)"
+>
+    <input
+        #checkbox
+        class="native-checkbox"
+        type="checkbox"
+        [checked]="value"
+        [disabled]="disabled || loading || blueCheckEnabled"
+        [indeterminate]="isUndefinedState()"
+        (change)="preventCheckboxChangeEvent($event)"
+        (click)="onChange()"
+    />
+    <div class="checkbox-item__icon mr-2">
+        <fa-icon class="icon" *ngIf="icon as icon" [icon]="icon"></fa-icon>
+    </div>
+    <div class="checkbox-item__label"><ng-content></ng-content></div>
+</label>
+
+<button
+    class="button-item btn btn-outline-secondary"
+    *ngIf="buttonView"
+    [ngClass]="{ 'btn-primary': value }"
+    (click)="onChange()"
+>
+    {{ label }}
+</button>

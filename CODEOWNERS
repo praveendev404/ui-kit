@@ -1,0 +1,5 @@
+* @maintainers
+
+Jenkinsfile @devops
+Dockerfile  @devops
+CODEOWNERS  @devops

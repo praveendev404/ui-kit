@@ -1,0 +1,14 @@
+<lib-context-menu class="context-menu" [menuItems]="menuItems">
+    <ng-template buttonTemplate>
+        <fa-icon class="fa-icon mr-10px" [icon]="icons.facCheck"></fa-icon>
+    </ng-template>
+
+    <ng-template specialItems>
+        <a class="dropdown-item cursor-pointer" (click)="handleClick()">
+            <fa-icon class="fa-icon" [icon]="icons.facCheck"></fa-icon>
+            <div class="item-text">
+                Logout
+            </div>
+        </a>
+    </ng-template>
+</lib-context-menu>

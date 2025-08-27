@@ -1,0 +1,155 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.rating-star {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.brand-star,
+.empty-star,
+.my-rate-star {
+    font-size: 14px;
+    margin-right: 3px;
+}
+
+::ng-deep {
+    .brand-star svg {
+        stroke: cssvar(brand-base) !important;
+        fill: cssvar(brand-12) !important;
+    }
+
+    .empty-star svg {
+        stroke: cssvar(disable) !important;
+    }
+
+    .my-rate-star svg {
+        stroke: cssvar(warning-base) !important;
+        fill: cssvar(warning-base-12) !important;
+    }
+}
+
+.custom-badge {
+    height: 14px !important;
+    display: flex;
+    align-items: center;
+    margin: 2px 0 0 6px !important;
+    padding: 1px 6px;
+    background-color: cssvar(warning-base);
+}
+
+.rating-content {
+    display: flex;
+
+    .rating-label-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center !important;
+        margin-bottom: 6px;
+
+        .rating-value {
+            display: flex;
+            margin: 1px 0 0 8px;
+
+            span {
+                font-size: 14px;
+            }
+        }
+
+        .rate-button {
+            margin-left: 4px;
+            cursor: pointer;
+
+            span {
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+.color-gray {
+    color: cssvar(disable) !important;
+}
+
+.downloads-label {
+    font-size: 12px;
+    color: cssvar(disable);
+}
+
+.rates-label {
+    float: left;
+    color: cssvar(primary-text);
+    font-size: 12px;
+}
+
+.rate-button {
+    width: 100%;
+    color: $white;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.my-rating {
+    height: 14px;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    border-radius: 2px;
+    border: 1px solid cssvar(brand-base);
+    font-size: 11px;
+    padding: 0 3px;
+    background-color: cssvar(brand-base);
+    color: cssvar(white);
+}
+
+.rating-row-label {
+    font-size: 10px;
+    color: cssvar(brand-base);
+    text-align: right;
+}
+
+.rating-row-value {
+    font-size: 10px;
+    color: cssvar(primary-text);
+}
+
+::ng-deep ngb-progressbar {
+    background-color: cssvar(border-and-dividers) !important;
+
+    .progress-bar {
+        background-color: cssvar(brand-base) !important;
+    }
+}
+
+::ng-deep .tooltip-small-rating {
+    margin-left: 5px;
+}
+
+::ng-deep .rating-modal-container {
+    max-width: 330px;
+    left: 45% !important;
+}
+
+::ng-deep .rating-for-tooltip {
+    .rating-value {
+        color: cssvar(brand-base);
+    }
+}
+
+:host ::ng-deep .rating-tooltip {
+    opacity: 1 !important;
+
+    .tooltip-inner {
+        font-weight: 600 !important;
+        min-width: 180px;
+        box-shadow: $dropdown-box-shadow;
+        border-radius: 2px;
+        background: linear-gradient(
+                to bottom,
+                white 0%,
+                white 78%,
+                rgba(97, 97, 97, 1) 78%
+        );
+    }
+}

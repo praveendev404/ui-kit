@@ -1,0 +1,30 @@
+@use 'mixins' as *;
+
+.tile {
+    flex-shrink: 0;
+    width: 120px;
+    line-height: 60px;
+    text-align: center;
+    border: 1px solid cssvar(border);
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.vertical-container {
+    display: inline-block;
+    min-width: 250px;
+    max-height: 200px;
+
+    div {
+        margin-bottom: 5px;
+        line-height: 60px;
+        text-align: center;
+        border: 1px solid cssvar(border);
+        border-radius: 4px;
+    }
+}
+
+.horizontal-scroll-container {
+    width: 75vw;
+}
+

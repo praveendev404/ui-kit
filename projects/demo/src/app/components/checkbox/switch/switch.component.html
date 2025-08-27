@@ -1,0 +1,41 @@
+<div class="mb-20px mr-20px">
+    <trigger [value]="true">Switch label</trigger>
+</div>
+<div class="mb-20px mr-20px">
+    <trigger [value]="false">Switch label</trigger>
+</div>
+<div class="mb-20px mr-20px"><trigger [value]="true"></trigger></div>
+<div class="mb-20px mr-20px"><trigger [value]="false"></trigger></div>
+<div class="mb-20px mr-20px">
+    <trigger [value]="true" type="icon">Switch label</trigger>
+</div>
+<div class="mb-20px mr-20px">
+    <trigger [value]="false" type="icon">Switch label</trigger>
+</div>
+
+<div class="button-toggle-group">
+    <input
+        id="horizontal-selector"
+        type="radio"
+        name="selector"
+        value="horizontal"
+        [(ngModel)]="layout"
+    />
+    <label for="horizontal-selector" class="button-toggle">
+        <fa-icon icon="grid2Horizontal"></fa-icon>
+    </label>
+    <input
+        id="grid-selector"
+        type="radio"
+        name="selector"
+        value="grid"
+        [(ngModel)]="layout"
+    />
+    <label for="grid-selector" class="button-toggle">
+        <fa-icon icon="grid"></fa-icon>
+    </label>
+</div>
+<div class="mt-2">
+    Layout: {{ layout }}
+</div>
+

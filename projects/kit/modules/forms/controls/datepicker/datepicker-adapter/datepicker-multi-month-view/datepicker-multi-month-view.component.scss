@@ -1,0 +1,45 @@
+@use 'mixins' as *;
+
+.selected,
+.item:active {
+    background: cssvar(cards-and-blocks);
+    color: cssvar(brand-base);
+}
+
+.item {
+    &:hover {
+        background: cssvar(background);
+        color: cssvar(title);
+    }
+
+    color: cssvar(primary-text);
+    border-radius: 2px;
+    cursor: pointer;
+    height: 30%;
+    font-size: 11px;
+    line-height: 15px;
+}
+
+.month-content,
+.years-content {
+    background: cssvar(cards-and-blocks);
+    height: 150px;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2), 0 3px 16px rgba(0, 0, 0, 0.12),
+        0 9px 12px rgba(0, 0, 0, 0.14);
+    border-radius: 0 0 4px 4px;
+
+    .month,
+    .year {
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+            background: cssvar(brand-base);
+            color: white;
+        }
+    }
+}
+
+.header-cursor {
+    cursor: default !important;
+}

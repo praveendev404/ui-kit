@@ -1,0 +1,150 @@
+.flex-1 {
+    flex: 1;
+}
+
+.min-width-0 {
+    min-width: 0;
+}
+
+.input-height {
+    height: cssvar(input-height);
+}
+
+.line-height-1 {
+    line-height: 1;
+}
+
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden;
+}
+
+.table-layout-fixed {
+    table-layout: fixed;
+}
+
+.cursor-default {
+    cursor: default;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-move {
+    cursor: move;
+}
+
+.img-responsive {
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.action-disabled {
+    cursor: none;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.no-animation {
+    animation: none !important;
+}
+
+.lh-13px {
+    line-height: 13px;
+}
+
+.lh-10px {
+    line-height: 10px;
+}
+
+.lh-12px {
+    line-height: 12px;
+}
+
+.lh-15px {
+    line-height: 15px;
+}
+
+/* Font size */
+.font-7px {
+    font-size: 7px;
+}
+
+.font-9px {
+    font-size: 9px;
+}
+
+.font-10px {
+    font-size: 10px;
+}
+
+.font-11px {
+    font-size: 11px;
+}
+
+.font-12px {
+    font-size: 12px;
+}
+
+.font-13px {
+    font-size: 13px;
+}
+
+.font-14px {
+    font-size: 14px;
+}
+
+.font-16px {
+    font-size: 16px;
+}
+
+.font-18px {
+    font-size: 18px;
+}
+
+.font-28px {
+    font-size: 28px;
+}
+
+.font-32px {
+    font-size: 32px;
+}
+
+.font-38px {
+    font-size: 38px;
+}
+
+.color-red {
+    color: cssvar(error-base);
+}
+
+.color-brand {
+    color: cssvar(brand-base);
+}
+
+.color-font-4 {
+    color: cssvar(color-font-4);
+}
+
+.color-line-9 {
+    color: cssvar(color-line-9);
+}
+
+.not-allowed {
+    cursor: not-allowed !important;
+}

@@ -1,0 +1,35 @@
+@use 'mixins' as *;
+
+:host {
+    display: inline-block;
+    background: cssvar(border-and-dividers);
+    border-radius: 4px;
+    color: cssvar(secondary-text-and-icons);
+    outline: none;
+
+    &.hoverable, &.removable {
+        &:hover {
+            color: cssvar(link-hover);
+        }
+
+        &:active {
+            color: cssvar(brand-base);
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 4px rgb(50 125 226 / 20%) !important;
+        }
+    }
+
+    &[disabled] {
+        background: cssvar(blackout);
+        color: cssvar(disable);
+        pointer-events: none;
+    }
+
+    .tag {
+        display: flex;
+        align-items: center;
+        padding: 1px 4px;
+    }
+}

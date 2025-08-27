@@ -1,0 +1,47 @@
+<button
+    class="dropdown context-menu default-size"
+    ngbDropdown
+    container="body"
+    [placement]="placement"
+    display="dynamic"
+    (openChange)="isOpened = $event"
+>
+    <a
+        class="dropdown-button cursor-pointer"
+        id="navbarAditionDropdown"
+        ngbDropdownToggle
+    >
+        <ng-container
+            *ngIf="buttonTemplate"
+            [ngTemplateOutlet]="buttonTemplate.template"
+        ></ng-container>
+        <fa-icon
+            class="fa-icon chevron-icon"
+            [class.active]="isOpened"
+            [icon]="isOpened ? 'chevron-up' : 'chevron-down'"
+        ></fa-icon>
+    </a>
+    <div aria-labelledby="navbarAditionDropdown" ngbDropdownMenu>
+        <a
+            *ngFor="let menu of menuItems"
+            [href]="menu.link ? menu.link : null"
+            [routerLink]="menu.routerLink ? menu.routerLink : null"
+            class="dropdown-item cursor-pointer"
+            (click)="itemClicked.emit(menu)"
+        >
+            <fa-icon
+                *ngIf="menu.icon"
+                class="fa-icon"
+                [icon]="menu.icon"
+            ></fa-icon>
+            <div class="item-text">
+                {{ menu.name }}
+            </div>
+        </a>
+        <ng-container
+            *ngIf="contextSpecialItemsTemplate"
+            [ngTemplateOutlet]="contextSpecialItemsTemplate.template"
+        >
+        </ng-container>
+    </div>
+</button>

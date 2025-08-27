@@ -1,0 +1,12 @@
+<lib-data-grid
+    [dataSource]="gridData"
+    [columns]="gridColumns"
+    [pageable]="pageable"
+    (sort)="sortGrid($event)">
+    <ng-template rowTemplate let-data="item">
+        <td [style.width]="gridColumns[0].width">
+            {{ data.headerName }}
+        </td>
+        <td [style.width]="gridColumns[1].width">{{ data.value }}</td>
+    </ng-template>
+</lib-data-grid>

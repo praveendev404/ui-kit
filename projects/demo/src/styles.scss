@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@use '_styles';
+
+@use 'ngx-toastr/toastr';
+
+// Imports the standard PrismJS theme
+@use 'prismjs/themes/prism.css';
+
+html, body {
+    min-width: 320px;
+}

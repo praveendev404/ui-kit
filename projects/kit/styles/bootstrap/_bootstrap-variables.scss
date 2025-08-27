@@ -1,0 +1,42 @@
+@import "../mixins";
+/*
+   Overrides for bootstrap variables
+ */
+$h1-font-size: 18px;
+$h2-font-size: 16px;
+$h3-font-size: 14px;
+$h4-font-size: 13px;
+
+$btn-padding-y: 0;
+$btn-padding-x: 20px;
+$btn-line-height: 26px;
+$btn-font-size: 11px;
+$btn-border-radius: 4px;
+
+$input-btn-focus-box-shadow: 0 0 0 4px cssvar(brand-20);
+
+$link-decoration: none;
+$link-hover-decoration: none;
+
+$body-bg: cssvar(body-bg);
+$body-color: cssvar(body-color);
+$card-bg: cssvar(card-bg);
+
+$blue: cssvar(brand-base);
+
+$green: $color-4-normal;
+$red: $color-0-normal;
+$light: $gray-4;
+
+$secondary: $white;
+
+$link-color: cssvar(link-color);
+$link-hover-color: cssvar(link-hover);
+
+$modal-content-bg: cssvar(modal-content-bg);
+
+$modal-xl: 1664px;
+$modal-lg: 960px;
+$modal-sm: 720px;
+
+$modal-footer-margin-between: 0rem;

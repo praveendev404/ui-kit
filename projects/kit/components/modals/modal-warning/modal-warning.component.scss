@@ -1,0 +1,10 @@
+@use '../styles/modals';
+
+.centered-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-warning-content {
+    color: cssvar(title) !important;
+}

@@ -1,0 +1,25 @@
+<div class="row no-gutters w-100 my-2">
+    <lib-dropdown class="col"
+                  [(ngModel)]="selectedFruit"
+                  [items]="items"
+                  [placeholder]="'Select Fruit'"
+                  [clearable]="true"
+                  label="Fruit"
+                  appendTo="body"
+                  [labelRemovable]="true"
+                  [optionTemplateRef]="optionTemplateRef"
+                  [labelTemplateRef]="labelTemplateRef">
+    </lib-dropdown>
+</div>
+
+<ng-template #optionTemplateRef let-item="item" let-item$="item$" let-labelKey="labelKey">
+    <div class="color-red">
+        <span>{{ item[labelKey] }}</span>
+    </div>
+</ng-template>
+
+<ng-template #labelTemplateRef let-item="item" let-labelKey="labelKey">
+    <div class="color-brand font-weight-bold">
+        <span>{{ item[labelKey] }}</span>
+    </div>
+</ng-template>

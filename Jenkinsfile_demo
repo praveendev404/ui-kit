@@ -1,0 +1,23 @@
+@Library('jenkins-shared-lib') _
+
+  def working_directory = 'dagility-ui-kit'
+  def module_name = 'dagility-ui-kit'
+
+  properties([
+    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')),
+    parameters([
+        booleanParam(name: 'build', defaultValue: true, description: ''),
+        booleanParam(name: 'deploy', defaultValue: true, description: ''),
+        choice(choices: ['CI'], description: '', name: 'jobtype'),
+        string(defaultValue: 'dagility-ui-kit', description: '', name: 'working_directory'),
+        string(defaultValue: 'https://github.com/UST-PACE/dagility-ui-kit.git', description: '', name: 'git_url'),
+        choice(name: 'environment', choices: ['dev', 'demo'], description: ''),
+        string(defaultValue: 'latest', description: '', name: 'image_tag'),
+        string(defaultValue: 'master', description: '', name: 'branch'),
+        string(defaultValue: 'master', description: '', name: 'secondaryBranch', trim: true),
+        string(defaultValue: 'coverage/', description: '', name: 'report_dir', trim: false),
+        booleanParam(name: 'sca', defaultValue: false, description: '')
+    ])
+  ])
+
+  EdgeopsUIPipeline(branch: "${branch}", secondaryBranch:"${secondaryBranch}", build: "${build}", deploy: "${deploy}", environment: "${environment}", image_tag: "${image_tag}", module_name: "${module_name}", working_directory: "${working_directory}", report_dir: "${report_dir}", git_url: "${git_url}")

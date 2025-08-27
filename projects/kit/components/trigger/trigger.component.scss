@@ -1,0 +1,100 @@
+@use 'mixins' as *;
+
+$disable-color: cssvar(disable);
+$main-background: cssvar(brand-base);
+$main-inactive-background: cssvar(toggle-off-background);
+$main-color: cssvar(cards-and-blocks);
+$trigger-width: cssvar(trigger-width);
+$trigger-height: cssvar(trigger-height);
+$circle-diameter: calc(#{$trigger-height} - 6px);
+$circle-radius: calc(#{$circle-diameter} / 2);
+
+.trigger {
+    height: inherit;
+    display: flex;
+    align-items: center;
+
+    &-label {
+        display: block;
+        margin-left: 5px;
+        height: inherit;
+        color: cssvar(primary-text);
+    }
+
+    &-button {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: $trigger-width;
+        min-width: $trigger-width;
+        height: $trigger-height;
+        background: $main-inactive-background;
+        border-radius: calc(#{$trigger-height} / 2);
+        justify-content: flex-start;
+        transition: background 0.1s linear;
+
+        &.checked {
+            background: $main-background;
+
+            .trigger-button-circle {
+                right: 2px;
+                left: auto;
+                background: cssvar(white);
+            }
+        }
+
+        &.disabled {
+            background: $main-inactive-background !important;
+            cursor: auto;
+            pointer-events: none;
+        }
+
+        &-circle {
+            position: absolute;
+            left: 2px;
+            right: auto;
+            width: $circle-diameter;
+            height: $circle-diameter;
+            margin: 2px;
+            border-radius: $circle-radius;
+            background: cssvar(toggle-off-circle);
+            transition: margin 0.1s linear;
+        }
+    }
+}
+
+.trigger-label-on {
+    color: cssvar(white);
+    margin-left: $circle-radius;
+    margin-right: 1px;
+}
+
+fa-icon.trigger-label-on {
+    position: relative;
+    top: -1px;
+}
+
+.trigger-label-off {
+    color: $disable-color;
+    position: absolute;
+    right: 4px;
+}
+
+fa-icon.trigger-label-off {
+    right: 5px;
+    top: .5px;
+}
+
+.trigger-label-on,
+.trigger-label-off {
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+:host.size-s {
+    .trigger-label-on,
+    .trigger-label-off {
+        font-size: 9px;
+    }
+}

@@ -1,0 +1,112 @@
+<button
+    #element
+    ngbDropdown
+    #dropdown="ngbDropdown"
+    container="body"
+    autoClose="outside"
+    class="three-dot-btn btn p-0 {{ btnClasses }}"
+    (openChange)="resetDropdown(element, dropdown)"
+    data-test-id="menu-dropdown-container"
+>
+    <fa-icon
+        [icon]="openIcon"
+        type="button"
+        class="btn btn-outline-primar"
+        [ngStyle]="openIconStyles"
+        data-test-id="menu-dropdown-button"
+        ngbDropdownToggle
+    ></fa-icon>
+    <div
+        ngbDropdownMenu
+        aria-labelledby="dropdown-container"
+        [style.minWidth.px]="minWidth"
+        [style.maxWidth.px]="maxWidth"
+        [style.maxHeight.px]="maxHeight"
+        [style.minHeight.px]="minHeight"
+    >
+        <perfect-scrollbar
+            class="treelike-menu-scrollbar"
+            [style.maxHeight.px]="maxHeight"
+            [style.minHeight.px]="minHeight"
+        >
+            <ng-container
+                *ngFor="
+                    let itemGroup of currentTreeItems;
+                    first as isFirstGroup
+                "
+            >
+                <div *ngIf="!isFirstGroup" class="dropdown-divider"></div>
+                <div [class.return-button]="!isFirstLevel && isFirstGroup">
+                    <div
+                        *ngIf="itemGroup.label"
+                        class="d-flex mr-36px group-name align-items-center"
+                        [class.ml-3]="isFirstLevel"
+                        [class.first-group]="isFirstLevel"
+                        (click)="handleReturnClick(itemGroup)"
+                    >
+                        <fa-icon
+                            *ngIf="!isFirstLevel && isFirstGroup"
+                            [icon]="returnIcon"
+                            data-test-id="returnButton"
+                            class="color-brand px-10px text-nowrap font-16px"
+                        ></fa-icon>
+
+                        <h3
+                            class="d-inline-block mt-0 text-truncate"
+                            [class.ml-4]="!isFirstLevel && !isFirstGroup"
+                        >
+                            {{ itemGroup.label }}
+                        </h3>
+                    </div>
+                </div>
+
+                <div
+                    type="button"
+                    *ngFor="let groupItem of itemGroup.items"
+                    ngbDropdownItem
+                    [ngClass]="
+                        groupItem.hidden
+                            ? 'd-none'
+                            : 'd-flex text-left text-start align-items-center'
+                    "
+                    [disabled]="groupItem.disabled"
+                    (click)="handleItemClick(groupItem, $event)"
+                    data-test-id="item"
+                >
+                    <div
+                        [ngClass]="
+                            isFirstGroup && !isFirstLevel
+                                ? 'mx-36px'
+                                : !isFirstLevel
+                                ? 'mx-4'
+                                : 'mx-3'
+                        "
+                        class="text-truncate"
+                    >
+                        <ng-container *ngIf="groupItem.template">
+                            <ng-template
+                                [ngTemplateOutlet]="groupItem.template"
+                                [ngTemplateOutletContext]="{
+                                    $implicit: groupItem
+                                }"
+                            ></ng-template>
+                        </ng-container>
+                        <ng-container *ngIf="!groupItem.template">
+                            <fa-icon
+                                *ngIf="groupItem.icon"
+                                [icon]="groupItem.icon"
+                                class="mr-2"
+                            ></fa-icon>
+                            {{ groupItem.label }}
+                        </ng-container>
+                    </div>
+                    <fa-icon
+                        *ngIf="groupItem.children && !groupItem.disabled"
+                        [icon]="nextIcon"
+                        class="ml-auto mr-0 color-brand font-16px"
+                    ></fa-icon>
+                </div>
+            </ng-container>
+        </perfect-scrollbar>
+    </div>
+</button>

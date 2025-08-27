@@ -1,0 +1,31 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+header.navbar {
+    height: $default-header-height;
+    padding: 0;
+    background-color: cssvar(cards-and-blocks);
+    border-bottom: 1px solid cssvar(border-and-dividers);
+    box-shadow: 0px -19px 15px 6px #000;
+
+    width: 100%;
+    z-index: 3;
+    position: fixed;
+}
+
+.app-header-logo {
+    width: 120px;
+    height: $default-header-height;
+}
+
+.app-header-navbar {
+    font-size: 0.825rem;
+    line-height: 50px;
+    text-align: center;
+    height: $default-header-height;
+}
+
+.logo {
+    height: 41px;
+    margin: 0 0 6px 0.75rem;
+}

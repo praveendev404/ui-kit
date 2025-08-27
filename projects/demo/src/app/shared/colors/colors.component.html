@@ -1,0 +1,23 @@
+<div *ngFor="let group of colors" class="mb-20px">
+    <ng-template
+        [ngTemplateOutlet]="colorBlockTmpl"
+        [ngTemplateOutletContext]="{ $implicit: group.colors, title: group.title }"
+    ></ng-template>
+</div>
+
+<ng-template #colorBlockTmpl let-colors let-title="title">
+    <div class="d-inline-flex mb-20px">
+        <div class="color-title-block d-flex align-items-center">
+            <h4 class="mr-20px">{{ title }}</h4>
+        </div>
+        <div *ngFor="let color of colors">
+            <div
+                class="color-block font-14px"
+                [ngStyle]="{ background: color.value, color: color.textColor }"
+            >
+                <div>{{ color.name }}</div>
+                <div>{{ color.value }}</div>
+            </div>
+        </div>
+    </div>
+</ng-template>

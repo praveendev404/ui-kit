@@ -1,0 +1,9 @@
+<div style="position: relative">
+    <div #contentContainer class="content-container">
+        <ng-content select="[libTextElement]"></ng-content>
+    </div>
+    <ng-content select="[libInlineInput]"></ng-content>
+</div>
+<button *ngIf="showPencilButton" (click)="handleEdit()" class="btn btn-link px-2 ml-1">
+    <fa-icon class="font-16px" icon="facEdit"></fa-icon>
+</button>

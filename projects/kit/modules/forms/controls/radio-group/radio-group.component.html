@@ -1,0 +1,4 @@
+<label *ngFor="let option of options" class="d-flex a-align-center">
+    <input type="radio" [attr.data-test-id]="testId" class="mr-1" [value]="option.value" [name]="name" [attr.disabled]="option.disabled" [formControl]="control"> {{ option.label }}
+</label>
+<ng-template #controlContainer></ng-template>

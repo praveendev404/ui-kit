@@ -1,0 +1,245 @@
+<perfect-scrollbar *ngIf="hasScrollbar; else sidenav" class="sidenav-scrollbar">
+    <ng-container [ngTemplateOutlet]="sidenav"></ng-container>
+</perfect-scrollbar>
+
+<ng-template #sidenav>
+    <div
+        *ngIf="!disableCollapseMode"
+        class="expand-control"
+        [class.expanded]="expanded"
+        (click)="handlePinToggle()"
+    >
+        <button
+            class="btn btn-secondary"
+            [ngbTooltip]="(mode !== 'push' ? 'Pin' : 'Unpin') + ' Side Menu'"
+            container="body"
+            placement="right"
+        >
+            <fa-icon
+                icon="open"
+                [ngStyle]="{
+                    transform: !expanded ? 'scalex(-1)' : 'none'
+                }"
+            ></fa-icon>
+        </button>
+    </div>
+
+    <ng-container *ngIf="!loading; else loaderTmpl">
+        <ng-container *ngIf="headerTemplate">
+            <ng-template
+                [ngTemplateOutlet]="headerTemplate.template"
+                [ngTemplateOutletContext]="{
+                    expanded: expanded,
+                    isHovered: isHovered
+                }"
+            ></ng-template>
+        </ng-container>
+        <ng-template
+            [ngTemplateOutlet]="menu"
+            [ngTemplateOutletContext]="{ $implicit: items, level: 0 }"
+        ></ng-template>
+        <ng-container *ngIf="footerTemplate">
+            <ng-template
+                [ngTemplateOutlet]="footerTemplate.template"
+                [ngTemplateOutletContext]="{
+                    expanded: expanded,
+                    isHovered: isHovered
+                }"
+            >
+            </ng-template>
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template #menu let-items let-level="level" let-fromFlat="fromFlat">
+    <ng-container *ngFor="let item of items; index as index">
+        <ng-container *ngIf="isSidenavItem(item) as menuItem">
+            <ng-container
+                *ngIf="menuItem.routerLink || menuItem.withoutRouterLink"
+            >
+                <ng-template
+                    [ngTemplateOutlet]="itemTemplate"
+                    [ngTemplateOutletContext]="{
+                        $implicit: menuItem,
+                        i: index,
+                        leaf: true,
+                        level: level,
+                        withoutRouterLink: menuItem.withoutRouterLink
+                    }"
+                ></ng-template>
+            </ng-container>
+
+            <ng-container *ngIf="menuItem.children">
+                <ng-template
+                    [ngTemplateOutlet]="itemTemplate"
+                    [ngTemplateOutletContext]="{
+                        $implicit: menuItem,
+                        i: index,
+                        leaf: false,
+                        level: level
+                    }"
+                ></ng-template>
+            </ng-container>
+
+            <ng-container *ngIf="menuItem.items">
+                <div *ngIf="index" class="border-top my-2"></div>
+
+                <lib-sidenav-group
+                    [class.mt-2]="index === 0"
+                    [item]="menuItem"
+                    [level]="level"
+                    [menuTemplate]="menu"
+                    [expanded]="expanded"
+                    [isHovered]="isHovered"
+                    (expand)="handleExpand(true)"
+                ></lib-sidenav-group>
+            </ng-container>
+
+            <ng-container *ngIf="menuItem.children && (expanded || isHovered)">
+                <ng-template
+                    [ngTemplateOutlet]="menu"
+                    [ngTemplateOutletContext]="{
+                        $implicit: menuItem.children,
+                        level: level + 1
+                    }"
+                >
+                </ng-template>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+<ng-template
+    #itemTemplate
+    let-item
+    let-i="i"
+    let-leaf="leaf"
+    let-level="level"
+    let-withoutRouterLink="withoutRouterLink"
+>
+    <ng-container *ngIf="isSidenavItem(item) as menuItem">
+        <a
+            libTooltipWhenOverflow
+            [hoverElementSelectorFn]="hoverElementSelectorFn"
+            [textElementSelectorFn]="textElementSelectorFn"
+            [overflowEnabled]="expanded || isHovered"
+            [id]="menuItem.id ? menuItem.id : menuItem.title"
+            class="sidenav-item d-flex py-xl-3 py-2 pr-3"
+            [class.sidenav-item--compact]="!expanded"
+            [class.sidenav-item-without-children]="!menuItem.children?.length"
+            [style.padding-left.px]="
+                expanded || isHovered ? 16 + 24 * (level || 0) : 16
+            "
+            [attr.sidenav-parent]="
+                menuItem.sidenavParent ? menuItem.sidenavParent : null
+            "
+            [attr.sidenav-parent-id]="
+                menuItem.sidenavParentId ? menuItem.sidenavParentId : null
+            "
+            [routerLink]="
+                !withoutRouterLink
+                    ? menuItem.routerLink
+                        ? menuItem.routerLink
+                        : menuItem.children?.length
+                          ? menuItem.children[0].routerLink
+                          : null
+                    : null
+            "
+            [routerLinkActive]="
+                !withoutRouterLink ? 'sidenav-item--active' : ''
+            "
+            [routerLinkActiveOptions]="{ exact: !!exactLinkActive }"
+            [ngbTooltip]="menuItem.title"
+            [tooltipClass]="
+                expanded ? 'sidenav-expanded-tooltip' : 'sidenav-tooltip'
+            "
+            container="body"
+            [openDelay]="200"
+            placement="right"
+            triggers="manual"
+            (click)="
+                leaf
+                    ? handleSideNavItemClicked(menuItem)
+                    : handleSideNavItemGroupClicked(
+                          menuItem,
+                          menuItem.id ? menuItem.id : i,
+                          $event
+                      )
+            "
+        >
+            <fa-icon
+                [class.sidenav-item--preview]="!expanded && !isHovered"
+                *ngIf="menuItem.icon"
+                [icon]="menuItem.icon[0]"
+                class="mr-1"
+                [style.width.px]="menuItem.icon[1][0]"
+                [style.height.px]="menuItem.icon[1][1]"
+            ></fa-icon>
+
+            <div
+                *ngIf="!menuItem.icon && !expanded && !isHovered"
+                [class.sidenav-item--preview]="!expanded"
+            >
+                {{ $any(menuItem.title | slice: 0 : 2) | uppercase }}
+            </div>
+
+            <div
+                id="text-container"
+                class="text-truncate mr-1"
+                [style.opacity]="expanded || isHovered ? 1 : 0"
+                [style.max-width]="expanded || isHovered ? '150px' : '0'"
+                [style.margin-left]="expanded || isHovered ? '8px' : '0'"
+                [style.visibility]="
+                    expanded || isHovered ? 'visible' : 'hidden'
+                "
+            >
+                {{ menuItem.title }}
+            </div>
+            <ng-container *ngIf="itemPostfixTemplate">
+                <ng-template
+                    [ngTemplateOutlet]="itemPostfixTemplate.template"
+                    [ngTemplateOutletContext]="{
+                        expanded: expanded,
+                        item: menuItem
+                    }"
+                ></ng-template>
+            </ng-container>
+
+            <fa-icon
+                *ngIf="
+                    !leaf &&
+                    (expanded || isHovered) &&
+                    menuItem.children?.length
+                "
+                class="ml-auto"
+                [icon]="
+                    menuItem.isCollapsed === false
+                        ? 'chevron-right'
+                        : 'chevron-down'
+                "
+            >
+            </fa-icon>
+        </a>
+    </ng-container>
+</ng-template>
+
+<ng-template #loaderTmpl>
+    <div
+        [ngStyle]="{
+            width: expanded || isHovered ? '200px' : '48px'
+        }"
+        class="mt-2"
+    >
+        <ngx-skeleton-loader
+            [ngClass]="{
+                'd-flex flex-column align-items-center': expanded || isHovered
+            }"
+            count="10"
+            [appearance]="expanded || isHovered ? 'line' : 'circle'"
+            [theme]="{
+                width: expanded || isHovered ? '180px' : '38px',
+                height: expanded || isHovered ? '30px' : '38px'
+            }"
+        ></ngx-skeleton-loader>
+    </div>
+</ng-template>

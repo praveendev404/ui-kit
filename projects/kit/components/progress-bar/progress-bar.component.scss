@@ -1,0 +1,34 @@
+:host {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+
+    &::-webkit-progress-value {
+        background-color: var(--progress-color, currentColor);
+        border-radius: inherit;
+    }
+
+    &::-moz-progress-bar {
+        background-color: var(--progress-color, currentColor);
+        border-radius: inherit;
+    }
+
+    display: block;
+    width: 100%;
+    height: 0.75rem;
+    background: var(--da-border-and-dividers);
+    color: var(--da-brand-base);
+    overflow: hidden;
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+
+    &::-webkit-progress-inner-element {
+        border-radius: inherit;
+    }
+
+    &::-webkit-progress-bar {
+        background: transparent;
+        border-radius: inherit;
+    }
+}

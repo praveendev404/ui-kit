@@ -1,0 +1,40 @@
+@use 'mixins' as *;
+
+@mixin active-header-color {
+    color: cssvar(brand-base);
+
+    [aria-expanded]:before {
+        color: cssvar(brand-base);
+    }
+}
+
+ngb-accordion[secondlevel] {
+    & > .card {
+        box-shadow: none;
+        margin-bottom: 0;
+        border-radius: 0;
+
+        [role="tabpanel"] .card-body > & {
+            border-right: 0;
+            border-left: 0;
+        }
+
+        &:not(:last-of-type) {
+            border-bottom: 0 !important;
+        }
+    }
+
+    & > .card {
+        & > .card-header[role="tab"] {
+            background-color: cssvar(table-header);
+
+            &:hover {
+                @include active-header-color;
+            }
+        }
+        &.opened-panel > .card-header[role="tab"] {
+            background: cssvar(cards-and-blocks);
+            @include active-header-color;
+        }
+    }
+}

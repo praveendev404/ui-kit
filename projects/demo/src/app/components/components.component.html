@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <lib-side-menu
+            [hasSearch]="true"
+            [menuItems]="menu"
+            style="width: 250px; height: calc(100vh - 50px)"
+        >
+            <ng-template sideMenuItemTemplate let-menuItem>
+                {{ menuItem.title }}
+            </ng-template>
+
+            <ng-template sideMenuChildItemTemplate let-menuItem>
+                {{ menuItem.title }}
+            </ng-template>
+        </lib-side-menu>
+
+        <div class="w-100 col">
+            <header class="p-4 header-color">
+                <h1 class="mb-4 mr-auto">
+                    {{ component | titlecase }}
+                </h1>
+            </header>
+
+            <perfect-scrollbar #perfectScrollbar class="perfect-scrollbar pr-1">
+                <section class="py-5 px-2 px-lg-4 section">
+                    <router-outlet></router-outlet>
+                </section>
+            </perfect-scrollbar>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<button *ngIf="closeButton" (click)="onClose()" class="close toastr-close-button" aria-label="Close"
+        tabindex="-1">
+    <span aria-hidden="true">&times;</span>
+</button>
+<div *ngIf="showIcon" class="toastr-icon" [ngClass]="'toastr-icon-' + toastType">
+    <fa-icon icon="{{messageIcon}}"></fa-icon>
+</div>
+<div class="toastr-content">
+    <div *ngIf="title" class="toastr-title" [ngClass]="{'toastr-title-notification': isNotification}" [attr.aria-label]="title">
+        {{ title }}
+    </div>
+
+    <ng-container *ngIf="message">
+        <ng-container [ngTemplateOutlet]="htmlBodyContent ? htmlBody : defaultBody"></ng-container>
+    </ng-container>
+
+    <ng-container [ngTemplateOutlet]="addDefaultFooter ? defaultFooter : customFooter"></ng-container>
+</div>
+
+<ng-template #htmlBody>
+    <div aria-live="polite"
+         class="toastr-message"
+         [innerHTML]="getMessage()"
+    ></div>
+</ng-template>
+
+<ng-template #defaultBody>
+    <div aria-live="polite"
+         class="toastr-message"
+         [attr.aria-label]="message"
+    >
+        {{getMessage()}}
+        <ng-container *ngIf="bodyTemplate"
+                      [ngTemplateOutlet]="bodyTemplate.template"
+                      [ngTemplateOutletContext]="{$implicit: message}"
+        ></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #customFooter>
+    <ng-container *ngIf="footerTemplate"
+                  [ngTemplateOutlet]="footerTemplate.template"
+                  [ngTemplateOutletContext]="{$implicit: message}"
+    ></ng-container>
+</ng-template>
+
+<ng-template #defaultFooter>
+    <div class="float-right">
+        <button type="button" class="btn btn-link size-s" (click)="onClose()">{{ closeButtonText }}</button>
+    </div>
+</ng-template>
